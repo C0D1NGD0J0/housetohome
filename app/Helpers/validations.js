@@ -5,11 +5,11 @@ const validate = {
 	signup: (req, res, next) =>{
 		let errors = {};
 		let data = req.body;
-		
+
 		data.email = !isEmpty(data.email) ? data.email : "";
 		data.phone = !isEmpty(data.phone) ? data.phone : "";
 		data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
-		data.lastName = !isEmpty(data.lastName) ? data.firstName : "";
+		data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
 		data.password = !isEmpty(data.password) ? data.password : "";
 
 		if(Validator.isEmpty(data.firstName)){
@@ -52,15 +52,11 @@ const validate = {
 			errors.password = "Phone must be at least 10 characters long.";
 		};
 
-		if(!Validator.isMobilePhone(data.phone, {min: 10, max: 15})){
-			errors.password = "Phone must be at least 10 characters long.";
+		if(!isEmpty(errors)){
+			return res.status(400).json(errors);
 		};
-		
-		if(isEmpty(errors)){
-			return res.staus(400).json(errors);
-		} else {
-			next();
-		};
+
+		next();
 	}
 };
 
@@ -73,4 +69,4 @@ function isEmpty(value){
 	);
 };
 
-module.exports = validate;
+module.exports = {validate};

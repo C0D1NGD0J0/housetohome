@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { validate } = require("../../Helpers/validations");
 const authCntrl = require("../../Controllers/authController");
 
 /* Routes:
@@ -10,6 +11,6 @@ const authCntrl = require("../../Controllers/authController");
 	POST 	/api/auth/reset_password/:token
 */
 
-router.post("/add_new_employee", authCntrl.signup);
+router.post("/add_new_employee", validate.signup, authCntrl.signup);
 
 module.exports = router;

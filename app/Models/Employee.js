@@ -22,7 +22,6 @@ const EmployeeSchema = new Schema({
 	email: {
 		type: String,
 		unique: true,
-		index: true,
 		lowercase: true,
 		required: [true, "Email is required!"]
 	},
@@ -46,6 +45,13 @@ const EmployeeSchema = new Schema({
 	role: {type: String, default: "staff", lowercase: true},
 	avatar: {type: String, default: "http://lorempixel.com/400/200/people"},
 }, {timestamps: true});
+
+// defines indexes to help when searching
+EmployeeSchema.index({
+	email: "text",
+	firstName: "text",
+	lastName: "text"
+});
 
 EmployeeSchema.virtual("fullname").get(function(){
 	return this.firstName + " " + this.lastName;
