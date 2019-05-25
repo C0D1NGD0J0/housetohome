@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const authCntrl = require("../../Controllers/authController");
 
 /* Routes:
 	POST 	/api/auth/signup
@@ -8,4 +9,7 @@ const router = express.Router();
 	POST 	/api/auth/forgot_password
 	POST 	/api/auth/reset_password/:token
 */
+
+router.post("/add_new_employee", authCntrl.signup);
+
 module.exports = router;

@@ -27,7 +27,7 @@ require('./app/Database')();
 
 // Routes
 app.use('/api/auth', require('./app/Routes/api/auth'));
-app.use('/api/employess', require('./app/Routes/api/employees'));
+app.use('/api/employees', require('./app/Routes/api/employees'));
 app.use('/api/properties', require('./app/Routes/api/properties'));
 app.use('/api/bookings', require('./app/Routes/api/reservations'));
 

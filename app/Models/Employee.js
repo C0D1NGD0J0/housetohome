@@ -5,15 +5,22 @@ const Schema = mongoose.Schema;
 const EmployeeSchema = new Schema({
 	firstName: {
 		type: String,
-		required: true
+		required: true,
+		lowercase: true,
+		maxlength: 25,
+		minlength: 3,
+		trim: true
 	},
 	lastName: {
 		type: String,
-		required: true
+		required: true,
+		lowercase: true,
+		maxlength: 25,
+		minlength: 3,
+		trim: true
 	},
 	email: {
 		type: String,
-		required: true,
 		unique: true,
 		index: true,
 		lowercase: true,
