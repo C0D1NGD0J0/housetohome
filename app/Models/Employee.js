@@ -68,7 +68,7 @@ EmployeeSchema.methods.isAdmin = function(){
 
 EmployeeSchema.methods.detailsToJSON = function(){
 	const employeeInfo = {
-		_id: this._id,
+		id: this._id,
 		email: this.email,
 		firstName: this.firstName,
 		lastName: this.lastName,

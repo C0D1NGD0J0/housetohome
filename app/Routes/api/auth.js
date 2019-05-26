@@ -13,4 +13,6 @@ const authCntrl = require("../../Controllers/authController");
 
 router.post("/add_new_employee", validate.signup, authCntrl.signup);
 
+router.post("/login", validate.login, authCntrl.login);
+
 module.exports = router;
