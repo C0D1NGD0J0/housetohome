@@ -28,16 +28,15 @@ const sendRegistrationEmail = async function(req, receiver, token){
 			<h4><a href="https://${req.headers.host}/account_activation/${token}">Confirm Email to Activate Account</a></h4><br>
 			<h5>Thank You.</h5>`
 	};
-
-	await smtpTransport.sendMail(mailOptions, function(err){
-		if(!err){
-			console.log(`Account activation email has been sent to ${receiver.fullname}`);
-			return (`Account activation email has been sent to ${receiver.fullname}`);
-		};
-		return errors.mailError = err;
-	});
-
-	return errors;
+	
+	console.log(mailOptions);
+	// await smtpTransport.sendMail(mailOptions, function(err){
+	// 	if(!err){
+	// 		console.log(`Account activation email has been sent to ${receiver.fullname}`);
+	// 		return (`Account activation email has been sent to ${receiver.fullname}`);
+	// 	};
+	// 	return errors.mailError = err;
+	// });
 };
 
 module.exports = {

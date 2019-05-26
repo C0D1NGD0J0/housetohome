@@ -62,19 +62,16 @@ EmployeeSchema.virtual('gravatar').get(function(){
 	return `https://gravatar.com/avatar/${hash}?s=200`;
 });
 
-EmployeeSchema.methods.isAdmin = function(){
-	return this.role === "admin";
-};
-
 EmployeeSchema.methods.detailsToJSON = function(){
 	const employeeInfo = {
 		id: this._id,
 		email: this.email,
 		firstName: this.firstName,
 		lastName: this.lastName,
-		phone: this.phone
+		phone: this.phone,
+		isAdmin: this.role === 'admin' ? true : false
 	};
-
+	
 	return employeeInfo;
 };
 
