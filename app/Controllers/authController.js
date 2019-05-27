@@ -1,7 +1,7 @@
 "use strict";
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
-const { sendRegistrationEmail, tokenGenerator } = require("../Helpers/utils");
+const { sendEmail, tokenGenerator } = require("../Helpers/utils");
 const Employee = require('../Models/Employee');
 
 const authCntrl = {
@@ -26,7 +26,7 @@ const authCntrl = {
 				employee.activationToken = token;
 				employee.activationTokenExpires = (Date.now() + (3600000 * 2)); //expires in 2hrs
 				await employee.save();
-				await sendRegistrationEmail(req, employee, token);
+				sendEmail(req, "acctActivation", employee, token);
 
 				return res.status(200).json("Employee has been added.");
 			};
@@ -87,6 +87,49 @@ const authCntrl = {
 		} catch(err) {
 			errors.msg = err.message;
 			return res.status(400).json(errors);
+		}
+	},
+
+	forgotPwd: async (req, res, next) =>{
+		const token = await tokenGenerator();
+		const { email } = req.body;
+		try {
+			const employee = await Employee.findOne({ email });
+			if(employee){
+				employee.passwordResetToken = token;
+				employee.passwordResetExpires = Date.now() + 7200000; //2hrs
+
+				await employee.save();
+				sendEmail(req, "pwdReset", employee, token);
+
+				return res.status(200).json({msg: "kindly check your email for further instructions."});
+			};		
+			throw new Error("Invalid email provided, contact web administrator.");
+		} catch(e) {
+			errors.msg = e.message;
+			return res.status(404).json(errors);
+		};
+	},
+
+	resetPwd: async (req, res, next) =>{
+		const { token } = req.params;
+		const errors = {};
+		const { password } = req.body;
+		
+		try {
+			const employee = await Employee.findOne({ passwordResetToken: token, passwordResetExpires: {$gt: Date.now()}});
+			if(employee){
+				employee.password = bcrypt.hashSync(password, 10);
+				employee.passwordResetToken = "";
+				employee.passwordResetExpires = "";
+				
+				await employee.save();
+				return res.status(200).json({msg: "Password reset was successful."});
+			};
+			throw new Error("invalid reset token, please generate a new token.");
+		} catch(err) {
+			errors.msg = e.message;
+			return res.status(404).json(errors);
 		}
 	}
 };

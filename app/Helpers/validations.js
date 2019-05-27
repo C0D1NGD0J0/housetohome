@@ -83,6 +83,55 @@ const validate = {
 		};
 
 		next();
+	},
+
+	emailAddress: (req, res, next) =>{
+		const errors = {};
+		const data = req.body;
+
+		if(!Validator.isEmail(data.email)){
+			errors.email = "Email format is invalid.";
+		};
+
+		if(isEmpty(data.email)){
+			errors.email = "Email needs to be provided.";
+		};
+
+		if(!isEmpty(errors)){
+			return res.status(400).json(errors);
+		};
+
+		next();
+	},
+
+	pwdReset: (req, res, next) =>{
+		const errors = {};
+		const data = req.body;
+
+		data.password = !isEmpty(data.password) ? data.password : "";
+		data.password2 = !isEmpty(data.password2) ? data.password2 : "";
+
+		if(Validator.isEmpty(data.password)){
+			errors.password = "Password field is required";
+		}
+
+		if(!Validator.isLength(data.password, {min: 6, max: 15})){
+			errors.password = "Password must be at least 6 characters";
+		}
+
+		if(Validator.isEmpty(data.password2)){
+			errors.password2 = "Confirm password field is required";
+		}
+
+		if(!Validator.equals(data.password, data.password2)){
+			errors.password2 = "Passwords must match.";
+		}
+
+		if(!isEmpty(errors)){
+			return res.status(400).json(errors);
+		};
+
+		next();
 	}
 };
 
