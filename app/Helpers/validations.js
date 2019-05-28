@@ -132,6 +132,57 @@ const validate = {
 		};
 
 		next();
+	},
+
+	property: (req, res, next) =>{
+		const errors = {};
+		const data = req.body;
+
+		data.description = !isEmpty(data.description) ? data.description : "" ;
+		data.propertyType = !isEmpty(data.propertyType) ? data.propertyType : "" ;
+		data.size = !isEmpty(data.size) ? data.size : "" ;
+		data.yearBuilt = !isEmpty(data.yearBuilt) ? data.yearBuilt : "" ;
+		data.price = !isEmpty(data.price) ? data.price : "" ;
+
+		if(Validator.isEmpty(data.description)){
+			errors.description = "Property description needs to be provided.";
+		};
+
+		if(!Validator.isLength(data.description, {min: 20})){
+			errors.description = "Property description is too short.";
+		};
+
+		if(Validator.isEmpty(data.propertyType)){
+			errors.propertyType = "Property type value needs to be provided.";
+		};
+
+		if(Validator.isEmpty(data.size)){
+			errors.size = "Property size value needs to be provided.";
+		};
+
+		if(!Validator.isNumeric(data.size)){
+			errors.size = "Property size value needs to be number.";
+		};
+
+		if(Validator.isEmpty(data.yearBuilt)){
+			errors.yearBuilt = "Year property was built needs to be provided.";
+		};
+
+		if(Validator.isEmpty(data.price)){
+			errors.price = "Property price needs to be provided.";
+		};
+
+		if(!Validator.isCurrency(data.price,{
+			decimal_separator: ".", allow_negatives: false, require_symbol: false, digits_after_decimal: [2]
+			})){
+			errors.price = "Property price is not a valid format.";
+		};
+
+		if(!isEmpty(errors)){
+			return res.status(400).json(errors);
+		};
+
+		next();
 	}
 };
 
@@ -145,3 +196,14 @@ function isEmpty(value){
 };
 
 module.exports = {validate};
+
+
+
+// address: {
+// 	postCode
+// 	unitNo
+// 	state
+// 	street
+// 	city
+// 	country
+// }

@@ -1,20 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const { validate } = require("../../Helpers/validations");
+const { isAuthorized, isAuthorizedAsAdmin } = require("../../Helpers/middlewares");
 const propertyCntrl = require("../../Controllers/propertyCntrl");
 
-/* Routes:
-	GET 		/api/properties
-	GET 		/api/properties/:id
-	GET 		/api/properties/:listing_type
-	GET 		/api/properties?city={CITY_NAME}&price={}...
-	PUT 		/api/properties/:id {UPDATE}
-	POST  	/api/properties/
-	DELETE 	/api/properties/:id
-*/
+// router.get("/", propertyCntrl.index);
 
-router.get("/", propertyCntrl.index);
+// router.get("/:id", propertyCntrl.show);
 
-router.get("/:id", propertyCntrl.show);
+router.post("/", isAuthorized, validate.property, propertyCntrl.create);
 
-router.get("/")
+// router.put("/:id", validate.property, isAuthorized, propertyCntrl.update);
+
+// router.delete("/:id", isAuthorizedAsAdmin, propertyCntrl.delete);
+
 module.exports = router;

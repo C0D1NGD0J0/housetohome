@@ -10,6 +10,7 @@ const PropertySchema = new Schema({
 		required: [true, "Listing description is required."]
 	},
 	propertyType: {type: String, required: true},
+	listingType: {type: String, required: true},
 	size: { type: Number, required: true },
 	slug: {type: String},
 	yearBuilt: {type: String, required: true},
