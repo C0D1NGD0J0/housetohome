@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const propertyCntrl = require("../../Controllers/propertyCntrl");
 
 /* Routes:
 	GET 		/api/properties
@@ -10,4 +11,10 @@ const router = express.Router();
 	POST  	/api/properties/
 	DELETE 	/api/properties/:id
 */
+
+router.get("/", propertyCntrl.index);
+
+router.get("/:id", propertyCntrl.show);
+
+router.get("/")
 module.exports = router;
