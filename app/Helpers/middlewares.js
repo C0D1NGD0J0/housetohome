@@ -33,4 +33,4 @@ const isAuthorizedAsAdmin = function(req, res, next){
 	return res.status(401).json({msg: "Access Denied!!"});
 };
 
-module.exports = { isAuthorized };
+module.exports = { isAuthorized, isAuthorizedAsAdmin };
