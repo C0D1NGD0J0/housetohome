@@ -76,6 +76,21 @@ const propertyCntrl = {
 			errors.msg = e.message;
 			return res.status(404).json(errors);
 		};
+	},
+
+	delete: async (req, res, next) =>{
+		const errors = {};
+		const { propertyId } = req.params;
+		try {
+			let property = await Property.findById(propertyId).exec();
+			if(!property) return res.status(404).json("Property not found.");
+			
+			property = await Property.findOneAndRemove({_id: propertyId});
+			return res.status(200).json(property);
+		} catch(e) {
+			errors.msg = e.message;
+			return res.status(404).json(errors);
+		};
 	}
 };
 

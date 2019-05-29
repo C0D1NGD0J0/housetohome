@@ -25,6 +25,7 @@ const isAuthorizedAsAdmin = function(req, res, next){
 	if(!token){
 		return res.status(401).json({msg: "Authorization denied!, token not provided."});
 	};
+	
 	const decoded = jwt.verify(token, process.env.SECRET_KEY);
 	req.currentuser = { ...decoded };
 	if(req.currentuser.isAdmin) next();
