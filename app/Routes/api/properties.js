@@ -4,14 +4,14 @@ const { validate } = require("../../Helpers/validations");
 const { isAuthorized, isAuthorizedAsAdmin } = require("../../Helpers/middlewares");
 const propertyCntrl = require("../../Controllers/propertyCntrl");
 
-// router.get("/", propertyCntrl.index);
+router.get("/all", propertyCntrl.index);
 
-// router.get("/:id", propertyCntrl.show);
+router.get("/:propertyId", propertyCntrl.show);
 
 router.post("/", isAuthorized, validate.property, propertyCntrl.create);
 
-// router.put("/:id", validate.property, isAuthorized, propertyCntrl.update);
+router.put("/:propertyId", validate.property, isAuthorized, propertyCntrl.update);
 
-// router.delete("/:id", isAuthorizedAsAdmin, propertyCntrl.delete);
+// router.delete("/:propertyId", isAuthorizedAsAdmin, propertyCntrl.delete);
 
 module.exports = router;

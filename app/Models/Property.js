@@ -46,9 +46,12 @@ const PropertySchema = new Schema({
 		coordinates: [{type: Number}]
 	},
 	author: {type: Schema.Types.ObjectId, ref: "Employee"},
-	status: {type: String, default: 'pending'},
 	photos: [{String}],
 }, {timestamps: true});
+
+PropertySchema.virtual("full_address").get(function(){
+	return `${this.address.unitNo} ${this.address.street} street, ${this.address.city.toUpperCase()}, ${this.address.state.toUpperCase()}, ${this.address.postCode.toUpperCase()}.`
+});
 
 const property = mongoose.model("Property", PropertySchema);
 
