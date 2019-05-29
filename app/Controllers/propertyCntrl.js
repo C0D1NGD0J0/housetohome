@@ -67,14 +67,12 @@ const propertyCntrl = {
 			updateData.lastUpdatedBy = req.currentuser;
 			if(property.author._id.equals(req.currentuser.id)){
 				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true });
-				console.log(property);
 				return res.status(200).json(property);
 			} else{
 				errors.msg = "You are not permitted to perform this action.";
 				return res.status(401).json(errors);
 			};
 		} catch(e) {
-			console.log(e)
 			errors.msg = e.message;
 			return res.status(404).json(errors);
 		};
