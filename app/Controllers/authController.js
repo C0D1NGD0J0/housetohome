@@ -69,6 +69,10 @@ const authCntrl = {
 	
 		try {
 			const employee = await Employee.findOne({ email });
+			if(!employee){
+				errors.msg = "Invalid email/password combination.";
+				return res.status(401).json(errors);
+			};
 			
 			if(!employee.active){
 				errors.msg = "Please activate your account to access employee portal.";
@@ -82,8 +86,6 @@ const authCntrl = {
 				
 				return res.status(200).json({ token });
 			};
-
-			throw new Error("Invalid email/password combination.");
 		} catch(err) {
 			errors.msg = err.message;
 			return res.status(400).json(errors);

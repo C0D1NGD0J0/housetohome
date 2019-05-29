@@ -47,6 +47,7 @@ const PropertySchema = new Schema({
 	},
 	author: {type: Schema.Types.ObjectId, ref: "Employee"},
 	photos: [{String}],
+	meta: {}
 }, {timestamps: true});
 
 PropertySchema.virtual("full_address").get(function(){

@@ -57,14 +57,14 @@ const propertyCntrl = {
 
 		try {
 			let property = await Property.findById(propertyId).exec();
-			const updateData = { description, propertyType, listingType, size, featured, yearBuilt, price, address, features, extras };
+			const updateData = { description, propertyType, listingType, size, featured, yearBuilt, price, address, features, extras, meta: {} };
 
 			if(req.currentuser.isAdmin){
 				updateData.handler = handler;
 				updateData.active = active;
 			};
 
-			updateData.lastUpdatedBy = req.currentuser;
+			updateData.meta.lastUpdatedBy = req.currentuser.id;
 			if(property.author._id.equals(req.currentuser.id)){
 				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true });
 				return res.status(200).json(property);

@@ -5,10 +5,10 @@ mongoose.Promise = global.Promise;
 const connectDB = async () =>{
 	try {
 		if(isProduction){
-			await mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useCreateIndex: true});
+			await mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
 			return console.log("Connected to remote database");
 		} else{
-			await mongoose.connect(process.env.LOCALDB_URI, {useNewUrlParser: true, useCreateIndex: true});
+			await mongoose.connect(process.env.LOCALDB_URI, {useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
 			return console.log("Connected to local database");
 		}		
 	} catch(err) {
