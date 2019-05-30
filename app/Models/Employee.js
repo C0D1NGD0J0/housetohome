@@ -53,14 +53,14 @@ EmployeeSchema.index({
 	lastName: "text"
 });
 
-EmployeeSchema.virtual("fullname").get(function(){
+EmployeeSchema.methods.fullname = function(){
 	return this.firstName + " " + this.lastName;
-});
+};
 
-EmployeeSchema.virtual('gravatar').get(function(){
+EmployeeSchema.methods.getGravatar = function(){
 	const hash = md5(this.email);
 	return `https://gravatar.com/avatar/${hash}?s=200`;
-});
+};
 
 EmployeeSchema.methods.detailsToJSON = function(){
 	const employeeInfo = {
@@ -69,6 +69,7 @@ EmployeeSchema.methods.detailsToJSON = function(){
 		firstName: this.firstName,
 		lastName: this.lastName,
 		phone: this.phone,
+		avatar: this.avatar,
 		isAdmin: this.role === 'admin' ? true : false
 	};
 	

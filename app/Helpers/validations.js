@@ -183,6 +183,54 @@ const validate = {
 		};
 
 		next();
+	},
+
+	employeeInfo: (req, res, next) =>{
+		let errors = {};
+		let data = req.body;
+
+		data.email = !isEmpty(data.email) ? data.email : "";
+		data.phone = !isEmpty(data.phone) ? data.phone : "";
+		data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
+		data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
+
+		if(Validator.isEmpty(data.firstName)){
+			errors.firstName = "Employee first name is required";
+		};
+
+		if(Validator.isEmpty(data.lastName)){
+			errors.firstName = "Employee last name is required";
+		};
+
+		if(!Validator.isLength(data.firstName, {min: 3, max: 20})){
+			errors.firstName = `${data.firstName} must be between 3-20 characters.`;
+		};
+
+		if(!Validator.isLength(data.lastName, {min: 3, max: 20})){
+			errors.lastName = `${data.lastName} must be between 3-20 characters.`;
+		};
+
+		if(Validator.isEmpty(data.email)){
+			errors.email = "Email is required.";
+		};
+
+		if(!Validator.isEmail(data.email)){
+			errors.email = "Email format is invalid.";
+		};
+
+		if(Validator.isEmpty(data.phone)){
+			errors.phone = "Phone number is required.";
+		};
+
+		if(!Validator.isLength(data.phone, {min: 10, max: 15})){
+			errors.phone = "Phone must be at least 10 characters long.";
+		};
+		
+		if(!isEmpty(errors)){
+			return res.status(400).json(errors);
+		};
+
+		next();
 	}
 };
 
