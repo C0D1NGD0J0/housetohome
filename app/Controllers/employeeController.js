@@ -35,7 +35,7 @@ const employeeCntrl = {
 			};
 			
 			employee = await Employee.findOneAndUpdate({_id: employee}, {$set: updateData}, {new: true});
-			return res.status(200).json(employee);
+			return res.status(200).json(employee.detailsToJSON());
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(400).json(errors);

@@ -12,6 +12,4 @@ router.post("/", isAuthorized, validate.property, propertyCntrl.create);
 
 router.put("/:propertyId", validate.property, isAuthorized, propertyCntrl.update);
 
-router.delete("/:propertyId", isAuthorizedAsAdmin, propertyCntrl.destroy);
-
 module.exports = router;

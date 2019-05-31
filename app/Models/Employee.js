@@ -62,7 +62,7 @@ EmployeeSchema.methods.getGravatar = function(){
 	return `https://gravatar.com/avatar/${hash}?s=200`;
 };
 
-EmployeeSchema.methods.detailsToJSON = function(){
+EmployeeSchema.methods.detailsToJSON = function(user){
 	const employeeInfo = {
 		id: this._id,
 		email: this.email,
@@ -71,6 +71,10 @@ EmployeeSchema.methods.detailsToJSON = function(){
 		phone: this.phone,
 		avatar: this.avatar,
 		isAdmin: this.role === 'admin' ? true : false
+	};
+
+	if(user && user.id === this._id.toString()){
+		employeeInfo['password'] = this.password;
 	};
 	
 	return employeeInfo;
