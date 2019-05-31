@@ -78,12 +78,12 @@ const propertyCntrl = {
 		};
 	},
 
-	destroy: async (req, res, next) =>{
+	delete: async (req, res, next) =>{
 		const errors = {};
 		const { propertyId } = req.params;
 
 		try {
-			const property = await Property.findOneAndRemove({_id: propertyId});
+			const property = await Property.findOneAndRemove({_id: propertyId}).exec();
 			if(!property) return res.status(404).json({msg: "Property not found."});
 			
 			return res.status(200).json(property);

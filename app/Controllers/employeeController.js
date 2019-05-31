@@ -40,6 +40,19 @@ const employeeCntrl = {
 			errors.msg = e.message;
 			return res.status(400).json(errors);
 		};
+	},
+
+	delete: async (req, res, next) =>{
+		const errors = {};
+		const { employeeId } = req.params;
+
+		try {
+			const employee = await Employee.findOneAndRemove({_id: employeeId}).exec();
+			return res.status(200).json(employee);
+		} catch(e) {
+			errors.msg = e.message;
+			return res.status(404).json(errors);
+		};
 	}
 };
 

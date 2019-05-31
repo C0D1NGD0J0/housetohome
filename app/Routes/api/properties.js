@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { validate } = require("../../Helpers/validations");
 const { isAuthorized, isAuthorizedAsAdmin } = require("../../Helpers/middlewares");
-const propertyCntrl = require("../../Controllers/propertyCntrl");
+const propertyCntrl = require("../../Controllers/propertyController");
 
 router.get("/all", propertyCntrl.index);
 

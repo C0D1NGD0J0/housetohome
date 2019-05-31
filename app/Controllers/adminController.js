@@ -3,6 +3,10 @@ const Employee = require('../Models/Employee');
 const Property = require('../Models/Property');
 
 const adminCntrl = {
+	dashboard: async (req, res, next) =>{
+		const errors = {};
+	},
+
 	employees: async (req, res, next) =>{
 		const errors = {};
 		try {
@@ -26,6 +30,27 @@ const adminCntrl = {
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(400).json(errors);
+		};
+	},
+
+	updateEmployeeRole: async (req, res, next) =>{
+		const errors = {};
+		const roles = ['staff', 'admin'];
+		const { employeeId } = req.params;
+
+		try {
+			let employee = await Employee.findOne({_id: employeeId}).exec();
+			if(employee.role === 'admin') {
+				employee.role = 'staff';
+			} else if (employee.role === 'staff') {
+				employee.role = 'admin';
+			};
+
+			await employee.save();
+			return res.status(200).json(employee.detailsToJSON());
+		} catch(e) {
+			errors.msg = e.message;
+			return res.status(404).json(errors);
 		};
 	}
 };
