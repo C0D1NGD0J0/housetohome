@@ -16,17 +16,22 @@ const propertyCntrl = {
 
 	create: async (req, res, next) =>{
 		const errors = {};
-		const {description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, address, features, extras, active, } = req.body;
+		const {description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, location, features, extras, active, } = req.body;
 		
 		try {			
-			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, address, features, extras });
-
+			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {}, features, extras });
+			
+			property.location.address = location.address;
+			property.location.coordinates[0] = location.coordinates[0];
+			property.location.coordinates[1] = location.coordinates[1];
+			
 			if(req.currentuser.isAdmin){
 				property.active = active;
 				property.featured = featured;
 				property.handler = req.currentuser.id;
 			};
-
+			
+			// console.log(property);
 			property = await property.save();
 			return res.status(200).json(property);
 		} catch(err) {
@@ -40,7 +45,7 @@ const propertyCntrl = {
 		const { propertyId } = req.params;
 
 		try {
-			const property = await Property.findById(propertyId);
+			const property = await Property.findById(propertyId).exec();
 			errors.msg = "Property not found!";
 			if(!porperty) return res.status(400).json(errors);
 			return res.status(200).json(property);
@@ -53,11 +58,11 @@ const propertyCntrl = {
 	update: async (req, res, next) =>{
 		const errors = {};
 		const propertyId = ObjectId(req.params.propertyId);
-		const {description, propertyType, listingType, size, featured, yearBuilt, price, author, address, features, extras, handler, active } = req.body;
+		const {description, propertyType, listingType, size, featured, yearBuilt, price, author, features, extras, handler, active, location } = req.body;
 
 		try {
 			let property = await Property.findById(propertyId).exec();
-			const updateData = { description, propertyType, listingType, size, featured, yearBuilt, price, address, features, extras, meta: {} };
+			const updateData = { description, propertyType, listingType, size, featured, yearBuilt, price, location, features, extras, meta: {} };
 
 			if(req.currentuser.isAdmin){
 				updateData.handler = handler;
@@ -66,7 +71,7 @@ const propertyCntrl = {
 
 			updateData.meta.lastUpdatedBy = req.currentuser.id;
 			if(property.author._id.equals(req.currentuser.id)){
-				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true });
+				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true, runValidators: true }).exec();
 				return res.status(200).json(property);
 			} else{
 				errors.msg = "You are not permitted to perform this action.";

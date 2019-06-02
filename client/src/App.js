@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import './App.css';
 
 const App = () =>{
-  <Fragment>
+  return (<Fragment>
     <h1>App</h1>
-  </Fragment>
+  </Fragment>)
 };
 
 export default App;

@@ -33,17 +33,13 @@ const PropertySchema = new Schema({
 		is_internet: {type: Boolean, default: false},
 		pets: {type: Boolean, default: false}
 	},
-	address: {
-		postCode: {type: String, required: true},
-		unitNo: {type: String, required: true},
-		state: {type: String, required: true},
-		street: {type: String, required: true},
-		city: {type: String, required: true},
-		country: {type: String, required: true}
-	},
 	location: {
 		type: {type: String, default: 'Point'},
-		coordinates: [{type: Number}]
+		coordinates: [{type: Number, required: [true, "You must supply coordinates."]}],
+		address: {
+			type: String,
+			required: [true, 'Property address must be provided.']
+		}
 	},
 	author: {type: Schema.Types.ObjectId, ref: "Employee"},
 	photos: [{String}],

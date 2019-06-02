@@ -69,7 +69,6 @@ EmployeeSchema.methods.detailsToJSON = function(user){
 		firstName: this.firstName,
 		lastName: this.lastName,
 		phone: this.phone,
-		avatar: this.avatar,
 		isAdmin: this.role === 'admin' ? true : false
 	};
 
