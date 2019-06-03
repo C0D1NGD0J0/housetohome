@@ -6,7 +6,7 @@ const ReservationSchema = new Schema({
 	endDate: {type: Date, required: true},
 	guestsCount: {type: Number, required: true},
 	status: {type: String, default: 'pending'},
-	guest: {type: Schema.Types.ObjectId, ref: 'Guest'},
+	guest: {type: Schema.Types.ObjectId, ref: 'User'},
 	totalPrice: {type: Number, required: true},
 	property: {type: Schema.Types.ObjectId, ref: 'Property'}
 }, {timestamps: true});

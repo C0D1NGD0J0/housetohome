@@ -2,18 +2,18 @@ const express = require("express");
 const router = express.Router();
 const adminCntrl = require("../../Controllers/adminController");
 const propertyCntrl = require("../../Controllers/propertyController");
-const employeeCntrl = require("../../Controllers/employeeController");
+const userCntrl = require("../../Controllers/userController");
 const { isAuthorizedAsAdmin } = require("../../Helpers/middlewares");
 
 router.get("/dashboard", isAuthorizedAsAdmin, adminCntrl.dashboard);
 
-router.get("/employees", isAuthorizedAsAdmin, adminCntrl.employees);
+router.get("/users", isAuthorizedAsAdmin, adminCntrl.users);
 
-router.get("/employees/:employeeId", isAuthorizedAsAdmin, adminCntrl.employee);
+router.get("/users/:userId", isAuthorizedAsAdmin, adminCntrl.user);
 
-router.put("/employees/:employeeId/update_role", isAuthorizedAsAdmin, adminCntrl.updateEmployeeRole);
+router.put("/users/:userId/update_role", isAuthorizedAsAdmin, adminCntrl.updateUserRole);
 
-router.delete("/employees/:employeeId", isAuthorizedAsAdmin, employeeCntrl.delete);
+router.delete("/users/:userId", isAuthorizedAsAdmin, userCntrl.delete);
 
 router.delete("/properties/:propertyId", isAuthorizedAsAdmin, propertyCntrl.delete);
 

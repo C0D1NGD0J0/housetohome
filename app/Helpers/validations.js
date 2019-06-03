@@ -13,11 +13,11 @@ const validate = {
 		data.password = !isEmpty(data.password) ? data.password : "";
 
 		if(Validator.isEmpty(data.firstName)){
-			errors.firstName = "Employee first name is required";
+			errors.firstName = "First name is required";
 		};
 
 		if(Validator.isEmpty(data.lastName)){
-			errors.firstName = "Employee last name is required";
+			errors.firstName = "Last name is required";
 		};
 
 		if(!Validator.isLength(data.firstName, {min: 3, max: 20})){
@@ -185,7 +185,7 @@ const validate = {
 		next();
 	},
 
-	employeeInfo: (req, res, next) =>{
+	userInfo: (req, res, next) =>{
 		let errors = {};
 		let data = req.body;
 
@@ -195,11 +195,11 @@ const validate = {
 		data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
 
 		if(Validator.isEmpty(data.firstName)){
-			errors.firstName = "Employee first name is required";
+			errors.firstName = "First name is required";
 		};
 
 		if(Validator.isEmpty(data.lastName)){
-			errors.firstName = "Employee last name is required";
+			errors.firstName = "Fast name is required";
 		};
 
 		if(!Validator.isLength(data.firstName, {min: 3, max: 20})){

@@ -2,31 +2,63 @@
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const { sendEmail, tokenGenerator } = require("../Helpers/utils");
-const Employee = require('../Models/Employee');
+const User = require('../Models/User');
+const ROLES = ["admin", "staff", "guest"];
 
 const authCntrl = {
-	signup: async (req, res, next) =>{
+	signupGuest: async (req, res, next) =>{
 		const errors = {};
 		const token = tokenGenerator();
 		const { firstName, lastName, email, password, phone } = req.body;
 		
 		try {
-			let foundEmployee = await Employee.findOne({ email });
+			let foundUser = await User.findOne({ email });
 			
-			if(foundEmployee){
-				errors.mgs = `An employee with this email ${email} has already been registered.`;
+			if(foundUser){
+				errors.mgs = `This email ${email} has already been taken.`;
+				return res.status(400).json(errors);
+			};
+			
+			const user = new User({firstName, lastName, email, phone, password});
+			const salt = await bcrypt.genSalt(10);
+				
+			user.password = await bcrypt.hash(password, salt);
+			user.activationToken = token;
+			user.activationTokenExpires = (Date.now() + (3600000 * 2)); //expires in 2hrs
+			await user.save();
+			sendEmail(req, "acctActivation", user, token);
+
+			return res.status(200).json("Registration Successful...");
+			
+			return res.status(401).json(errors);
+		} catch(err) {
+			errors.msg = err.message;
+			return res.status(500).json(errors);
+		};
+	},
+
+	signupEmployee: async (req, res, next) =>{
+		const errors = {};
+		const token = tokenGenerator();
+		const { firstName, lastName, email, password, phone } = req.body;
+		
+		try {
+			let foundUser = await User.findOne({ email });
+			
+			if(foundUser){
+				errors.mgs = `This email ${email} has already been taken.`;
 				return res.status(400).json(errors);
 			};
 			
 			if(req.currentuser.isAdmin){
-				const employee = new Employee({firstName, lastName, email, phone, password});
+				const user = new User({firstName, lastName, email, phone, password, role: ROLES[1]});
 				const salt = await bcrypt.genSalt(10);
 					
-				employee.password = await bcrypt.hash(password, salt);
-				employee.activationToken = token;
-				employee.activationTokenExpires = (Date.now() + (3600000 * 2)); //expires in 2hrs
-				await employee.save();
-				sendEmail(req, "acctActivation", employee, token);
+				user.password = await bcrypt.hash(password, salt);
+				user.activationToken = token;
+				user.activationTokenExpires = (Date.now() + (3600000 * 2)); //expires in 2hrs
+				await user.save();
+				sendEmail(req, "acctActivation", user, token);
 
 				return res.status(200).json("Employee has been added.");
 			};
@@ -44,19 +76,19 @@ const authCntrl = {
 		const { token } = req.params;
 
 		try {
-			const employee = await Employee.findOne({ activationToken: token, activationTokenExpires: {$gt: Date.now() }
+			const user = await User.findOne({ activationToken: token, activationTokenExpires: {$gt: Date.now() }
 			});			
 			
-			if(employee){
-				employee.active = true;
-				employee.activationToken = "";
-				employee.activationTokenExpires = "";
+			if(user){
+				user.active = true;
+				user.activationToken = "";
+				user.activationTokenExpires = "";
 								
-				await employee.save();
+				await user.save();
 				return res.status(200).json({msg: "Your account has been activated."});
 			};
 
-			throw new Error("Oops!!, invalid token/email combination provided, contact HR department.");
+			throw new Error("Oops!!, invalid token/email combination provided, contact IT department.");
 		} catch(err) {
 			errors.msg = err.message;
 			return res.status(404).json(errros);
@@ -68,20 +100,20 @@ const authCntrl = {
 		const { email, password } = req.body;
 	
 		try {
-			const employee = await Employee.findOne({ email });
-			if(!employee){
+			const user = await User.findOne({ email });
+			if(!user){
 				errors.msg = "Invalid email/password combination.";
 				return res.status(401).json(errors);
 			};
 			
-			if(!employee.active){
-				errors.msg = "Please activate your account to access employee portal.";
+			if(!user.active){
+				errors.msg = "Please activate your account!.";
 				return res.status(401).json(errors);
 			};
 
-			const isMatch = await bcrypt.compare(password, employee.password);
+			const isMatch = await bcrypt.compare(password, user.password);
 			if(isMatch){
-				const payload = { ...employee.detailsToJSON() };
+				const payload = { ...user.detailsToJSON() };
 				const token = await jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: "4h"});
 				
 				return res.status(200).json({ token });
@@ -96,13 +128,13 @@ const authCntrl = {
 		const token = await tokenGenerator();
 		const { email } = req.body;
 		try {
-			const employee = await Employee.findOne({ email });
-			if(employee){
-				employee.passwordResetToken = token;
-				employee.passwordResetExpires = Date.now() + 7200000; //2hrs
+			const user = await User.findOne({ email });
+			if(user){
+				user.passwordResetToken = token;
+				user.passwordResetExpires = Date.now() + 7200000; //2hrs
 
-				await employee.save();
-				sendEmail(req, "pwdReset", employee, token);
+				await user.save();
+				sendEmail(req, "pwdReset", user, token);
 
 				return res.status(200).json({msg: "kindly check your email for further instructions."});
 			};		
@@ -119,13 +151,13 @@ const authCntrl = {
 		const { password } = req.body;
 		
 		try {
-			const employee = await Employee.findOne({ passwordResetToken: token, passwordResetExpires: {$gt: Date.now()}});
-			if(employee){
-				employee.password = bcrypt.hashSync(password, 10);
-				employee.passwordResetToken = "";
-				employee.passwordResetExpires = "";
+			const user = await User.findOne({ passwordResetToken: token, passwordResetExpires: {$gt: Date.now()}});
+			if(user){
+				user.password = bcrypt.hashSync(password, 10);
+				user.passwordResetToken = "";
+				user.passwordResetExpires = "";
 				
-				await employee.save();
+				await user.save();
 				return res.status(200).json({msg: "Password reset was successful."});
 			};
 			throw new Error("invalid reset token, please generate a new token.");

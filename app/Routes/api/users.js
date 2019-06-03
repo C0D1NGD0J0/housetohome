@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const { validate } = require("../../Helpers/validations");
 const { isAuthorized, isAuthorizedAsAdmin } = require("../../Helpers/middlewares");
-const employeeCntrl = require("../../Controllers/employeeController");
+const userCntrl = require("../../Controllers/userController");
 
-router.get("/currentuser", isAuthorized, employeeCntrl.currentuser);
+router.get("/currentuser", isAuthorized, userCntrl.currentuser);
 
-router.put("/currentuser", validate.employeeInfo, isAuthorized, employeeCntrl.update);
+router.put("/currentuser", validate.userInfo, isAuthorized, userCntrl.update);
 
 module.exports = router;
 

@@ -19,7 +19,7 @@ const propertyCntrl = {
 		const {description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, location, features, extras, active, } = req.body;
 		
 		try {			
-			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {}, features, extras });
+			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {}, features, extras, handler: req.currentuser.id });
 			
 			property.location.address = location.address;
 			property.location.coordinates[0] = location.coordinates[0];
@@ -28,10 +28,9 @@ const propertyCntrl = {
 			if(req.currentuser.isAdmin){
 				property.active = active;
 				property.featured = featured;
-				property.handler = req.currentuser.id;
+				property.handler = handler;
 			};
 			
-			// console.log(property);
 			property = await property.save();
 			return res.status(200).json(property);
 		} catch(err) {
@@ -58,7 +57,7 @@ const propertyCntrl = {
 	update: async (req, res, next) =>{
 		const errors = {};
 		const propertyId = ObjectId(req.params.propertyId);
-		const {description, propertyType, listingType, size, featured, yearBuilt, price, author, features, extras, handler, active, location } = req.body;
+		const {description, propertyType, listingType, size, featured, yearBuilt, price, features, extras, handler, active, location } = req.body;
 
 		try {
 			let property = await Property.findById(propertyId).exec();

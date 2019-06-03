@@ -1,5 +1,5 @@
 "use strict";
-const Employee = require('../Models/Employee');
+const User = require('../Models/User');
 const Property = require('../Models/Property');
 
 const adminCntrl = {
@@ -7,43 +7,43 @@ const adminCntrl = {
 		const errors = {};
 	},
 
-	employees: async (req, res, next) =>{
+	users: async (req, res, next) =>{
 		const errors = {};
 		try {
-			let employees = await Employee.find({}).exec();
-			employees = employees.map((item, i) => item.detailsToJSON());
-			return res.status(200).json(employees);
+			let users = await User.find({}).exec();
+			users = users.map((item, i) => item.detailsToJSON());
+			return res.status(200).json(users);
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(404).json(errors);
 		};
 	},
 
-	employee: async (req, res, next) =>{
+	user: async (req, res, next) =>{
 		const errors = {};
-		const { employeeId } = req.params;
+		const { userId } = req.params;
 		try {
-			let employee = await Employee.findById(employeeId).exec();
-			let properties = await Property.find({author: employee.id}).exec();
+			let user = await User.findById(userId).exec();
+			let properties = await Property.find({author: user.id}).exec();
 
-			return res.status(200).json({info: employee.detailsToJSON(), properties});
+			return res.status(200).json({info: user.detailsToJSON(), properties});
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(400).json(errors);
 		};
 	},
 
-	updateEmployeeRole: async (req, res, next) =>{
+	updateUserRole: async (req, res, next) =>{
 		const errors = {};
 		const roles = ['staff', 'admin'];
-		const { employeeId } = req.params;
+		const { userId } = req.params;
 
 		try {
-			let employee = await Employee.findOne({_id: employeeId}).exec();
-			if(employee.role === 'admin') {
-				employee.role = 'staff';
-			} else if (employee.role === 'staff') {
-				employee.role = 'admin';
+			let user = await User.findOne({_id: userId}).exec();
+			if(user.role === 'admin') {
+				user.role = 'staff';
+			} else if (user.role === 'staff') {
+				user.role = 'admin';
 			};
 
 			await employee.save();

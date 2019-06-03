@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { validate } = require("../../Helpers/validations");
-const { isAuthorized } = require("../../Helpers/middlewares");
+const { isAuthorized, isAuthorizedAsAdmin } = require("../../Helpers/middlewares");
 const authCntrl = require("../../Controllers/authController");
 
-router.post("/add_new_employee", isAuthorized, validate.signup, authCntrl.signup);
+router.post("/signup", validate.signup, authCntrl.signupGuest);
+
+router.post("/add_new_employee", isAuthorizedAsAdmin, validate.signup, authCntrl.signupEmployee);
 
 router.post("/login", validate.login, authCntrl.login);
 

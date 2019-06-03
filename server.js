@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 require('./app/Database')();
 
 // Models
-require('./app/Models/Employee');
+require('./app/Models/User');
 require('./app/Models/Property');
 require('./app/Models/Reservation');
 // require('./app/Models/Report');
@@ -33,7 +33,7 @@ require('./app/Models/Reservation');
 app.use(require('./app/Routes/index'));
 app.use('/api/auth', require('./app/Routes/api/auth'));
 app.use('/api/admin', require('./app/Routes/api/admin'));
-app.use('/api/employees', require('./app/Routes/api/employees'));
+app.use('/api/users', require('./app/Routes/api/users'));
 app.use('/api/properties', require('./app/Routes/api/properties'));
 app.use(require('./app/Routes/api/reservations'));
 

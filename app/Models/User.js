@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const md5 = require("md5");
 
-const EmployeeSchema = new Schema({
+const UserSchema = new Schema({
 	firstName: {
 		type: String,
 		required: true,
@@ -42,28 +42,28 @@ const EmployeeSchema = new Schema({
 	activationTokenExpires: {type: Date, default: ""},
 	passwordResetToken: {type: String, default:""},
 	passwordResetExpires: {type: Date, default: ""},
-	role: {type: String, default: "staff", lowercase: true},
+	role: {type: String, default: "guest", lowercase: true},
 	avatar: {type: String, default: "http://lorempixel.com/400/200/people"},
 }, {timestamps: true});
 
 // defines indexes to help when searching
-EmployeeSchema.index({
+UserSchema.index({
 	email: "text",
 	firstName: "text",
 	lastName: "text"
 });
 
-EmployeeSchema.methods.fullname = function(){
+UserSchema.methods.fullname = function(){
 	return this.firstName + " " + this.lastName;
 };
 
-EmployeeSchema.methods.getGravatar = function(){
+UserSchema.methods.getGravatar = function(){
 	const hash = md5(this.email);
 	return `https://gravatar.com/avatar/${hash}?s=200`;
 };
 
-EmployeeSchema.methods.detailsToJSON = function(user){
-	const employeeInfo = {
+UserSchema.methods.detailsToJSON = function(user){
+	const userinfo = {
 		id: this._id,
 		email: this.email,
 		firstName: this.firstName,
@@ -73,12 +73,29 @@ EmployeeSchema.methods.detailsToJSON = function(user){
 	};
 
 	if(user && user.id === this._id.toString()){
-		employeeInfo['password'] = this.password;
+		userinfo['password'] = this.password;
 	};
 	
-	return employeeInfo;
+	return userinfo;
 };
 
-const employee = mongoose.model("Employee", EmployeeSchema);
+UserSchema.methods.guestDetailsToJSON = function(user){
+	const userinfo = {
+		id: this._id,
+		email: this.email,
+		firstName: this.firstName,
+		lastName: this.lastName,
+		phone: this.phone,
+		isGuest: this.role === 'guest' ? true : false
+	};
 
-module.exports = employee;
+	if(user && user.id === this._id.toString()){
+		userinfo['password'] = this.password;
+	};
+	
+	return userinfo;
+};
+
+const user = mongoose.model("User", UserSchema);
+
+module.exports = user;

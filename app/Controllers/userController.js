@@ -1,17 +1,17 @@
 "use strict";
-const Employee = require('../Models/Employee');
+const User = require('../Models/User');
 const Property = require('../Models/Property');
 
-const employeeCntrl = {
+const userCntrl = {
 	currentuser: async (req, res, next) =>{
 		const errors = {};
-		const employeeId = req.currentuser.id;
+		const userId = req.currentuser.id;
 
 		try {
-			const employee = await Employee.findById(employeeId);
-			const properties = await Property.find({author: employeeId});
+			const user = await User.findById(userId);
+			const properties = await Property.find({author: userId});
 			
-			return res.status(200).json({info: employee.detailsToJSON(), properties});
+			return res.status(200).json({info: user.detailsToJSON(), properties});
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(400).json(errors);
@@ -21,7 +21,7 @@ const employeeCntrl = {
 	update: async (req, res, next) =>{
 		const updateData = {};
 		const errors = {};
-		let employee = req.currentuser.id;
+		let user = req.currentuser.id;
 		const { email, phone, firstName, lastName, password } = req.body;
 
 		try {
@@ -34,8 +34,8 @@ const employeeCntrl = {
 				updateData.password = password;
 			};
 			
-			employee = await Employee.findOneAndUpdate({_id: employee}, {$set: updateData}, {new: true});
-			return res.status(200).json(employee.detailsToJSON());
+			user = await User.findOneAndUpdate({_id: user}, {$set: updateData}, {new: true});
+			return res.status(200).json(user.detailsToJSON());
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(400).json(errors);
@@ -44,11 +44,11 @@ const employeeCntrl = {
 
 	delete: async (req, res, next) =>{
 		const errors = {};
-		const { employeeId } = req.params;
+		const { userId } = req.params;
 
 		try {
-			const employee = await Employee.findOneAndRemove({_id: employeeId}).exec();
-			return res.status(200).json(employee);
+			const user = await User.findOneAndRemove({_id: userId}).exec();
+			return res.status(200).json(user);
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(404).json(errors);
@@ -56,4 +56,4 @@ const employeeCntrl = {
 	}
 };
 
-module.exports = employeeCntrl;
+module.exports = userCntrl;
