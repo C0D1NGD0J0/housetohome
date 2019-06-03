@@ -35,7 +35,7 @@ app.use('/api/auth', require('./app/Routes/api/auth'));
 app.use('/api/admin', require('./app/Routes/api/admin'));
 app.use('/api/employees', require('./app/Routes/api/employees'));
 app.use('/api/properties', require('./app/Routes/api/properties'));
-app.use('/api/bookings', require('./app/Routes/api/reservations'));
+app.use(require('./app/Routes/api/reservations'));
 
 app.listen(port, () =>{
 	console.log(`Server is live on port ${port}`);

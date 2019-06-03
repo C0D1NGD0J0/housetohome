@@ -41,8 +41,8 @@ const PropertySchema = new Schema({
 			required: [true, 'Property address must be provided.']
 		}
 	},
-	author: {type: Schema.Types.ObjectId, ref: "Employee"},
 	photos: [{String}],
+	author: {type: Schema.Types.ObjectId, ref: "Employee"},
 	reservations: [{type: Schema.Types.ObjectId, ref: 'Reservation'}],
 	meta: {}
 }, {timestamps: true});

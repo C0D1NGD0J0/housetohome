@@ -11,6 +11,6 @@ const ReservationSchema = new Schema({
 	property: {type: Schema.Types.ObjectId, ref: 'Property'}
 }, {timestamps: true});
 
-const property = mongoose.model("Property", ReservationSchema);
+const reservation = mongoose.model("Reservation", ReservationSchema);
 
-module.exports = property;
+module.exports = reservation;
