@@ -26,8 +26,8 @@ require('./app/Database')();
 // Models
 require('./app/Models/Employee');
 require('./app/Models/Property');
+require('./app/Models/Reservation');
 // require('./app/Models/Report');
-// require('./app/Models/Reservation');
 
 // Routes
 app.use(require('./app/Routes/index'));

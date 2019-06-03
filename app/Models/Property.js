@@ -43,6 +43,7 @@ const PropertySchema = new Schema({
 	},
 	author: {type: Schema.Types.ObjectId, ref: "Employee"},
 	photos: [{String}],
+	reservations: [{type: Schema.Types.ObjectId, ref: 'Reservation'}],
 	meta: {}
 }, {timestamps: true});
 
