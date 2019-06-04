@@ -17,7 +17,7 @@ const PropertySchema = new Schema({
 	price: {type: Number, required: true, maxlength: 255},
 	active: {type: Boolean, default: false},
 	featured: {type: Boolean, default: false},
-	handler: {type: Schema.Types.ObjectId, ref: 'Employee'},
+	handler: {type: Schema.Types.ObjectId, ref: 'User'},
 	features: {
 		bedroom:{type: Number, default: 1},
 		bathroom: {type: Number, default: 1},
@@ -42,7 +42,7 @@ const PropertySchema = new Schema({
 		}
 	},
 	photos: [{String}],
-	author: {type: Schema.Types.ObjectId, ref: "Employee"},
+	author: {type: Schema.Types.ObjectId, ref: "User"},
 	reservations: [{type: Schema.Types.ObjectId, ref: 'Reservation'}],
 	meta: {}
 }, {timestamps: true});
