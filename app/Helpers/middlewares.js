@@ -48,4 +48,4 @@ const isAuthorizedAsStaff = function(req, res, next){
 	return res.status(401).json({msg: "Access Denied!!"});
 };
 
-module.exports = { isAuthorized, isAuthorizedAsAdmin };
+module.exports = { isAuthorized, isAuthorizedAsAdmin, isAuthorizedAsStaff };

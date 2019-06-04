@@ -28,7 +28,7 @@ const authCntrl = {
 			await user.save();
 			sendEmail(req, "acctActivation", user, token);
 
-			return res.status(200).json("Registration Successful...");
+			return res.status(200).json({msg: "Registration Successful...", user: user.guestDetailsToJSON()});
 			
 			return res.status(401).json(errors);
 		} catch(err) {

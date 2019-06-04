@@ -1,5 +1,6 @@
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const moment = require("moment");
 
 const tokenGenerator = function(){
 	const token = crypto.randomBytes(20).toString('hex');
@@ -48,7 +49,19 @@ const sendEmail = async function(req, type, receiver, token){
 	// });
 };
 
+const subtractDates = function(startDate, endDate){
+	if(startDate === 'undefined' || endDate === 'undefined') return "No date values provided";
+
+	let date1, date2, noDays;
+
+	date1 = moment(startDate);
+	date2 = moment(endDate);
+	
+	return noDays = date2.diff(date1, 'days');
+};
+
 module.exports = {
 	tokenGenerator,
-	sendEmail
+	sendEmail,
+	subtractDates
 };

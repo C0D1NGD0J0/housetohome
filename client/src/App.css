@@ -806,6 +806,11 @@ h1, h2, h3, h4 {
   color: rgba(96, 110, 124, 0.4);
 }
 
+.booking_preview table.table td {
+  border: none;
+  border-bottom: 1px dashed #F4F4F4;
+}
+
 .property-features-list {
   list-style: none;
   padding-left: 0;
