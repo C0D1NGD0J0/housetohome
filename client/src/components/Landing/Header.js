@@ -18,7 +18,6 @@ const Header = ({ className }) => {
 	}
 
 	useEffect(() =>{
-		console.log("use effect");
 		 window.addEventListener("scroll", handleScroll);
 	}, []);
 
