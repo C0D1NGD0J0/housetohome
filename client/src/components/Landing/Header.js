@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classnames from "classnames";
+import { NavHashLink as NavLink } from 'react-router-hash-link';
 
 const Header = ({ className }) => {
 	const [prevScrollpos, setPosition] = useState(window.pageYOffset);
@@ -42,7 +43,7 @@ const Header = ({ className }) => {
 						<a href="#"><i className="fa fa-pinterest-p"></i></a>
 					</div>
 					<div className="header-top_auth">
-						<a href="login.html"><i className="fa fa-sign-in"></i> Login</a>
+						<NavLink to="/login"><i className="fa fa-sign-in"></i> Login</NavLink>
 					</div>
 				</div>
 			</div>
@@ -56,17 +57,18 @@ const Header = ({ className }) => {
 							<span className="icon-bar"></span>
 							<span className="icon-bar"></span>
 						</button>
-						<a href="#" className="navbar-brand">House<span className="green-text">to</span>Home</a>
+						<NavLink to="/" className="navbar-brand">House<span className="green-text">to</span>Home</NavLink>
 					</div>
 
 					<div className="header_menu collapse navbar-collapse" id="header_menu">
 						<ul className="nav navbar-nav navbar-right">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="properties.html">Properties</a></li>
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">Contact</a></li>
+							<li><NavLink smooth to="/#home">Home</NavLink></li>
+							<li><NavLink smooth to="/#services">Services</NavLink></li>
+							<li><NavLink smooth to="/#featured-properties">Properties</NavLink></li>
+							<li><NavLink smooth to="/#about">About Us</NavLink></li>
+							<li><NavLink smooth to="/#contact">Contact</NavLink></li>
+							<li><NavLink to="/register"><i className="fa fa-user-circle-o"></i></NavLink></li>
+							<li><NavLink to="/login"><i className="fa fa-key"></i></NavLink></li>
 						</ul>
 					</div>
 				</div>
