@@ -11,16 +11,22 @@ const App = () =>{
   return (
   	<Router>
 	  	<Fragment>
-	    	<Route exact path="/" component={Landing} />
 	    	<Switch>
-	    		<Navbar />
-		    	<Route exact path="/login" component={Login} />
-		    	<Route exact path="/register" component={Register} />
+	    		<Route exact path="/" component={Landing} />
+	    		<Route component={OtherRoutes} />
 	    	</Switch>
 	    	<Footer />
 	  	</Fragment>
 	  </Router>
   )
 };
+
+const OtherRoutes = () =>(
+	<Fragment>
+		<Navbar />
+		<Route path="/login" component={Login} />
+		<Route path="/register" component={Register} />
+	</Fragment>
+);
 
 export default App;
