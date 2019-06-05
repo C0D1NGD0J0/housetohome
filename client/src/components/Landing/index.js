@@ -5,6 +5,7 @@ import AboutUs from "./about";
 import FeaturedProperty from "./featured";
 import Cities from "./cities";
 import Contact from "./contact";
+import Header from "./Header";
 
 class HomePage extends Component {
 	render() {
@@ -12,6 +13,7 @@ class HomePage extends Component {
 
 		return (
 			<div className="landing">
+				<Header />
 				<HeroSection />
 				<Services propertyTypes={propertyTypes}/>
 				<FeaturedProperty />
