@@ -11,7 +11,7 @@ const Header = ({ className }) => {
 		let visibleBackdrop = prevScrollpos > currentScrollpos;
 		
 		setPosition(currentScrollpos);
-		if(currentScrollpos < 150){
+		if(currentScrollpos <= 150){
 			setBackdrop(!visibleBackdrop);
 		}else {
 			setBackdrop(visibleBackdrop);
