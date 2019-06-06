@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import { connect } from "react-redux";
 import ContentWrapper from "../layout/ContentWrapper";
 import InputField from "../../helpers/FormElements/inputField";
 import { Link } from "react-router-dom";
+import { setAlertAction } from "../../actions/alertAction";
 
-const Register = ({ className }) => {
+const Register = ({ setAlertAction }) => {
 	const [formData, updateFormData] = useState({fname: '', lname: '', email: '', phone: '', password: '', password2: ''});
 
 	const { fname, lname, email, phone, password, password2 } = formData;
 	const onFormFieldChange = e => updateFormData({ ...formData, [e.target.name]: e.target.value });
 	const onFormSubmit = e =>{
 		e.preventDefault();
-		if(password !== password2) return console.log("Passwords don't match");
+		if(password !== password2) setAlertAction("Passwords don't match", "danger");
 		console.log(formData);
 	}
 
@@ -114,4 +116,4 @@ const Register = ({ className }) => {
 Register.displayName = 'Register';
 
 
-export default Register;
+export default connect(null, { setAlertAction })(Register);

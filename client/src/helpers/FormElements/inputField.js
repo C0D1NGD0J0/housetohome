@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ElementWrapper from "./FormElementWrapper";
 
 const InputField = ({ name, placeholder, value, label, type, onChange }) => {

@@ -6,23 +6,29 @@ import ScrollToTop from "./helpers/ScrollToTop";
 import Register from "./components/Auth/Register";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import Alert from "./components/layout/Alert";
+import { Provider } from "react-redux";
+import store from "./store";
 import './App.css';
 
 const App = () =>{
   return (
-  	<Router>
-  		<ScrollToTop>
-		  	<Fragment>
-		    	<Switch>
-		    		<Route exact path="/" component={Landing} />
-		    		<Route exact path="/login" component={Login} />
-						<Route exact path="/register" component={Register} />
-		    		<Route component={OtherRoutes} />
-		    	</Switch>
-		    	<Footer />
-		  	</Fragment>
-		  </ScrollToTop>
-	  </Router>
+  	<Provider store={store}>
+	  	<Router>
+	  		<ScrollToTop>
+			  	<Fragment>
+			  		<Alert />
+			    	<Switch>
+			    		<Route exact path="/" component={Landing} />
+			    		<Route exact path="/login" component={Login} />
+							<Route exact path="/register" component={Register} />
+			    		<Route component={OtherRoutes} />
+			    	</Switch>
+			    	<Footer />
+			  	</Fragment>
+			  </ScrollToTop>
+		  </Router>
+	  </Provider>
   )
 };
 
