@@ -1,8 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ContentWrapper from "../layout/ContentWrapper";
+import InputField from "../../helpers/FormElements/inputField";
+import { Link } from "react-router-dom";
 
 const Login = ({ className }) => {
+	const [formData, updateFormData] = useState({ email: '', password: '' });
+
+	const { email, password } = formData;
+	const onFormFieldChange = e => updateFormData({ ...formData, [e.target.name]: e.target.value });
+	const onFormSubmit = e =>{
+		e.preventDefault();
+		console.log(formData);
+	}
+
   return (
-    <h1>LOGIN</h1>  
+    <ContentWrapper mainClass="login_bg-img" containerClass="login">
+			<div className="row">
+				<div className="section-title text-center">
+					<h3>Login</h3><hr/>
+				</div>
+				<div className="col-xs-6 col-xs-offset-3">
+		      <form onSubmit={onFormSubmit} className="form">
+						<InputField
+							type="email" 
+							className="form-control" 
+							placeholder="Enter Email..." 
+							value={email}
+							name="email"
+							label="Email"
+							onChange={onFormFieldChange} 
+						/>
+
+						<InputField
+							type="password" 
+							className="form-control" 
+							placeholder="Enter Password..." 
+							value={password}
+							name="password"
+							label="Password"
+							onChange={onFormFieldChange} 
+						/><br/>
+
+						<input type="submit" value="Register" className="btn btn-green btn-block" />
+
+						<div className="form_footer">
+							<Link to="/forgot_password">Forgot your password?</Link> <span>|</span>
+							<Link to="/register">Register</Link>
+						</div>
+					</form>
+		    </div>
+		  </div>
+		</ContentWrapper>  
   );
 };
 

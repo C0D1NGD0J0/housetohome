@@ -11,6 +11,7 @@ const validate = {
 		data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
 		data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
 		data.password = !isEmpty(data.password) ? data.password : "";
+		data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
 		if(Validator.isEmpty(data.firstName)){
 			errors.firstName = "First name is required";
@@ -50,6 +51,16 @@ const validate = {
 
 		if(!Validator.isLength(data.phone, {min: 10, max: 15})){
 			errors.password = "Phone must be at least 10 characters long.";
+		};
+		
+		if(data.password2){
+			if(Validator.isEmpty(data.password2)){
+				errors.password2 = "Confirm Password field is required.";
+			};
+
+			if(!Validator.equals(data.password, data.password2)){
+				errors.password2 = "Passwords must match.";
+			}
 		};
 
 		if(!isEmpty(errors)){

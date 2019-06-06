@@ -388,6 +388,21 @@ h1, h2, h3, h4 {
   border: 1px solid rgba(134, 194, 50, 0.6);
 }
 
+.form .form_footer{
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.form .form_footer a{
+  color: #fff;
+}
+
+.form .form_footer span{
+  color: #fff;
+  padding: 0 1rem;
+}
 .sidebar {
   width: 100%;
   padding: 0;
@@ -591,7 +606,7 @@ h1, h2, h3, h4 {
 }
 
 .login {
-  padding: 4rem 0 0 0;
+  padding: 0 0 2rem 0;
 }
 
 .login-page {
@@ -1263,7 +1278,7 @@ h1, h2, h3, h4 {
 
 #footer {
   color: #FFFFFF;
-  padding: 4rem 0;
+  padding: 2rem 0 1.5rem 0;
   background-color: #222629;
 }
 
