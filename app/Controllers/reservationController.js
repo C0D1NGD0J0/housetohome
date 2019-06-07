@@ -71,9 +71,9 @@ const reservationCntrl = {
 				reservation.totalPrice = property.price * days;
 				
 				reservation = await reservation.save();
-				property.reservations.push(reservation);
-				await property.save();
+				property.reservations.push({start: reservation.startDate, end: reservation.endDate});
 
+				await property.save();
 				return res.status(200).json(reservation);
 			};
 		} catch(e) {
@@ -134,8 +134,7 @@ const reservationCntrl = {
 				.where('startDate').gte(today)
 				.where('endDate').gte(today)
 				.select('startDate endDate').exec();
-
-			return res.status(200).json(reservations);
+			// return res.status(200).json(reservations);
 		} catch (e){
 			errors.msg = e.message;
 			return res.status(404).json(errors);
@@ -144,10 +143,3 @@ const reservationCntrl = {
 };
 
 module.exports = reservationCntrl;
-
-
-/* TODO:
-	-> date verification]
-	-> delete, edit reservations
-	-> admin view guest bookings
-*/

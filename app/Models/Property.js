@@ -34,7 +34,7 @@ const PropertySchema = new Schema({
 		pets: {type: Boolean, default: false}
 	},
 	location: {
-		type: {type: String, default: 'Point'},
+		_type: {type: String, default: 'Point'},
 		coordinates: [{type: Number, required: [true, "You must supply coordinates."]}],
 		address: {
 			type: String,
@@ -43,7 +43,7 @@ const PropertySchema = new Schema({
 	},
 	photos: [{String}],
 	author: {type: Schema.Types.ObjectId, ref: "User"},
-	reservations: [{type: Schema.Types.ObjectId, ref: 'Reservation'}],
+	reservations: [{id: Schema.Types.ObjectId, start: String, end: String}],
 	meta: {}
 }, {timestamps: true});
 
