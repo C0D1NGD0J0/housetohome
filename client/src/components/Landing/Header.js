@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import classnames from "classnames";
 import { NavHashLink as NavLink } from 'react-router-hash-link';
+import { connect } from "react-redux";
+import { logoutAction } from "../../actions/authAction";
 
-const Header = ({ className }) => {
+const Header = ({ auth: {isAuthenticated, loading}, logoutAction }) => {
+
 	const [prevScrollpos, setPosition] = useState(window.pageYOffset);
 	const [backdrop, setBackdrop] = useState(false);
 
@@ -24,6 +27,18 @@ const Header = ({ className }) => {
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, []);
+	
+	const authLinks = (
+		<Fragment>
+			{!isAuthenticated ?
+				<Fragment>
+					<li><NavLink to="/register"><i className="fa fa-user-circle-o"></i></NavLink></li>
+					<li><NavLink to="/login"><i className="fa fa-key"></i></NavLink></li>
+				</Fragment> :
+					<li><a onClick={logoutAction}><i className="fa fa-sign-out"></i></a></li>
+			}
+		</Fragment>
+	);
 
   return (
   	<header className="header" id="header">
@@ -70,8 +85,7 @@ const Header = ({ className }) => {
 							<li><NavLink smooth to="/#featured-properties">Properties</NavLink></li>
 							<li><NavLink smooth to="/#about">About Us</NavLink></li>
 							<li><NavLink smooth to="/#contact">Contact</NavLink></li>
-							<li><NavLink to="/register"><i className="fa fa-user-circle-o"></i></NavLink></li>
-							<li><NavLink to="/login"><i className="fa fa-key"></i></NavLink></li>
+							{authLinks}
 						</ul>
 					</div>
 				</div>
@@ -82,4 +96,7 @@ const Header = ({ className }) => {
 
 Header.displayName = 'Header';
 
-export default Header;
+const mapStateToProps = state =>({
+	auth: state.auth
+});
+export default connect(mapStateToProps, { logoutAction })(Header);

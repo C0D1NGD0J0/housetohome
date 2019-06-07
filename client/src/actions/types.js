@@ -1,4 +1,9 @@
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
-export const HANDLE_FORM_ERROR = "HANDLE_FORM_ERROR";
+export const HANDLE_ERRORS = "HANDLE_ERRORS";
+export const HANDLE_FORM_ERRORS = "HANDLE_FORM_ERRORS";
 export const CLEAR_ERROR = "CLEAR_ERROR";
+export const SET_TOKEN = "SET_TOKEN";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGOUT_CURRENTUSER = "LOGOUT_CURRENTUSER";
+export const LOAD_CURRENTUSER = "LOAD_CURRENTUSER";

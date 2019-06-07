@@ -115,6 +115,9 @@ const authCntrl = {
 				const token = await jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: "4h"});
 				
 				return res.status(200).json({ token });
+			} else {
+				errors.msg = "Invalid email/password combination.";
+				return res.status(400).json(errors);
 			};
 		} catch(err) {
 			errors.msg = err.message;

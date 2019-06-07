@@ -2,20 +2,23 @@ import React, { useState } from 'react';
 import { connect } from "react-redux";
 import ContentWrapper from "../layout/ContentWrapper";
 import InputField from "../../helpers/FormElements/inputField";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { setAlertAction } from "../../actions/alertAction";
 import { registerAction } from "../../actions/authAction";
 
-const Register = ({ setAlertAction, registerAction, errors, history }) => {
+const Register = ({ setAlertAction, registerAction, errors, history, isAuthenticated }) => {
 	const [formData, updateFormData] = useState({firstName: '', lastName: '', email: '', phone: '', password: '', password2: ''});
 	const { firstName, lastName, email, phone, password, password2 } = formData;
 
 	const onFormFieldChange = e => updateFormData({ ...formData, [e.target.name]: e.target.value });
 	const onFormSubmit = e =>{
 		e.preventDefault();
-		const isSuccess = registerAction(formData, history);
-		if(!isSuccess) return updateFormData({ ...formData });
+		return registerAction(formData, history);
 	};
+	
+	if(isAuthenticated){
+		return <Redirect to="/" />
+	}
 
   return (
   	<ContentWrapper mainClass="login_bg-img" containerClass="login">
@@ -123,7 +126,8 @@ const Register = ({ setAlertAction, registerAction, errors, history }) => {
 Register.displayName = 'Register';
 
 const mapStateToProps =(state) =>({
-	errors: state.errors
+	errors: state.errors,
+	isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { setAlertAction, registerAction })(Register);

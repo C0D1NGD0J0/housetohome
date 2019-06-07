@@ -69,15 +69,10 @@ UserSchema.methods.detailsToJSON = function(user){
 		firstName: this.firstName,
 		lastName: this.lastName,
 		phone: this.phone,
-		isAdmin: this.role === 'admin' ? true : false,
-		isStaff: this.role === 'staff' ? true : false,
+		isAdmin: this.role === 'admin' ? true : false
 	};
 
-	if(user && user.id === this._id.toString()){
-		userinfo['password'] = this.password;
-	};
-	
-	return userinfo;
+	return Object.freeze(userinfo);
 };
 
 UserSchema.methods.guestDetailsToJSON = function(user){
@@ -88,11 +83,9 @@ UserSchema.methods.guestDetailsToJSON = function(user){
 		lastName: this.lastName,
 		phone: this.phone
 	};
-
-	if(user && user.id === this._id.toString()){
-		userinfo['password'] = this.password;
-	};
 	
+	
+
 	return userinfo;
 };
 

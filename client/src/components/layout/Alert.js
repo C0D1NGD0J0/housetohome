@@ -9,7 +9,7 @@ const styleAlert = {
 	position: 'absolute',
 	borderRadius: 0,
 	top: "5rem",
-	opacity: "0.5",
+	opacity: ".9",
 	right: "5rem",
 	textTransform: 'uppercase'
 };

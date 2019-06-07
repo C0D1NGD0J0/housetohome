@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import ContentWrapper from "../layout/ContentWrapper";
 import InputField from "../../helpers/FormElements/inputField";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { loginAction } from "../../actions/authAction";
 
-const Login = ({ className }) => {
+const Login = ({ loginAction, isAuthenticated, errors }) => {
 	const [formData, updateFormData] = useState({ email: '', password: '' });
-
 	const { email, password } = formData;
+
 	const onFormFieldChange = e => updateFormData({ ...formData, [e.target.name]: e.target.value });
 	const onFormSubmit = e =>{
 		e.preventDefault();
-		console.log(formData);
+		loginAction(formData);
+	}
+
+	if(isAuthenticated){
+		return <Redirect to="/" />
 	}
 
   return (
@@ -28,6 +34,7 @@ const Login = ({ className }) => {
 							value={email}
 							name="email"
 							label="Email"
+							error={errors.email}
 							onChange={onFormFieldChange} 
 						/>
 
@@ -38,6 +45,7 @@ const Login = ({ className }) => {
 							value={password}
 							name="password"
 							label="Password"
+							error={errors.password}
 							onChange={onFormFieldChange} 
 						/><br/>
 
@@ -56,5 +64,9 @@ const Login = ({ className }) => {
 
 Login.displayName = 'Login';
 
+const mapStateToProps = (state) =>({
+	errors: state.errors,
+	isAuthenticated: state.auth.isAuthenticated
+});
 
-export default Login;
+export default connect(mapStateToProps, { loginAction })(Login);
