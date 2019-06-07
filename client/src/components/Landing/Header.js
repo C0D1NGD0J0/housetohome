@@ -61,7 +61,7 @@ const Header = ({ auth: {isAuthenticated, loading}, logoutAction }) => {
 						<a href="#"><i className="fa fa-pinterest-p"></i></a>
 					</div>
 					<div className="header-top_auth">
-						<NavLink to="/login"><i className="fa fa-sign-in"></i> Login</NavLink>
+						{ !isAuthenticated ? <NavLink to="/login"><i className="fa fa-sign-in"></i> Login</NavLink> : "" }
 					</div>
 				</div>
 			</div>
