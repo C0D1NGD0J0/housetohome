@@ -1,9 +1,9 @@
 import React from 'react';
 import ElementWrapper from "./FormElementWrapper";
 
-const InputField = ({ name, placeholder, value, label, type, onChange }) => {
+const InputField = ({ name, placeholder, value, label, type, onChange, error }) => {
   return (
-    <ElementWrapper error="">
+    <ElementWrapper error={error}>
 			<label htmlFor={name}>{label}</label>
 			<input
 				type={type}

@@ -8,7 +8,8 @@ const styleAlert = {
 	marginBottom: 0,
 	position: 'absolute',
 	borderRadius: 0,
-	top: "1rem",
+	top: "5rem",
+	opacity: "0.5",
 	right: "5rem",
 	textTransform: 'uppercase'
 };

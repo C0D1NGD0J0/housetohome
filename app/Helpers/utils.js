@@ -27,9 +27,15 @@ const sendEmail = async function(req, type, receiver, token){
 			<h5>Thank You.</h5>`,
 
 		pwdReset:`<h1>Click the provided link to Reset your Password</h1><hr>
-		<p>You are receiving this email becasue you requested to reset your password on HouseToHome employee portal.</p>
-		<h3><a href=http:${req.headers.host}/reset/${token}>Reset Password</a></h3>
-		<p>If you didn't request this, please kindly ignore this email and your password will remain unchanged"</p>`
+			<p>You are receiving this email becasue you requested to reset your password on HouseToHome employee portal.</p>
+			<h3><a href=http:${req.headers.host}/reset/${token}>Reset Password</a></h3>
+			<p>If you didn't request this, please kindly ignore this email and your password will remain unchanged"</p>`,
+
+		guestActivation: `<h1>Click the provided link to activate your Guest Account</h1><hr>
+			<h3>Welcome ${receiver.fullname},</h3>
+			<p>You recently registered on the number one property management compnay in the country. To have access to your bookings and reservations please click on the link below: </p>
+			<h4><a href="http://${req.headers.host}/account_activation/${token}">Confirm Email to Activate Account</a></h4><br>
+			<h5>Thank You.</h5>`,
 	};
 
 	let mailOptions = {

@@ -16,7 +16,7 @@ const authCntrl = {
 			
 			if(foundUser){
 				errors.mgs = `This email ${email} has already been taken.`;
-				return res.status(400).json(errors);
+				return res.status(404).json(errors);
 			};
 			
 			const user = new User({firstName, lastName, email, phone, password});
@@ -26,11 +26,9 @@ const authCntrl = {
 			user.activationToken = token;
 			user.activationTokenExpires = (Date.now() + (3600000 * 2)); //expires in 2hrs
 			await user.save();
-			sendEmail(req, "acctActivation", user, token);
+			sendEmail(req, "guestActivation", user, token);
 
-			return res.status(200).json({msg: "Registration Successful...", user: user.guestDetailsToJSON()});
-			
-			return res.status(401).json(errors);
+			return res.status(200).json({msg: "Check your email to complete signup process."});
 		} catch(err) {
 			errors.msg = err.message;
 			return res.status(500).json(errors);

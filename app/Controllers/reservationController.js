@@ -120,6 +120,7 @@ const reservationCntrl = {
 	verifyBookingDates: async (req, res, next) =>{
 		const errors = {};
 		const { propertyId } = req.params;
+		const { startDate, endDate } = req.body;
 		
 		try {
 			const property = await Property.findOne({_id: propertyId}).exec();
@@ -129,12 +130,11 @@ const reservationCntrl = {
 				return res.status(500).json(errors);
 			};
 			
-			const today = moment().format('YYYY-MM-DD');
 			const reservations = await Reservation.find({ property: propertyId })
-				.where('startDate').gte(today)
-				.where('endDate').gte(today)
+				.where('startDate').gte(startDate)
+				.where('endDate').lte(endDate)
 				.select('startDate endDate').exec();
-			// return res.status(200).json(reservations);
+			return res.status(200).json(reservations);
 		} catch (e){
 			errors.msg = e.message;
 			return res.status(404).json(errors);

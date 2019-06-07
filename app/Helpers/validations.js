@@ -18,7 +18,7 @@ const validate = {
 		};
 
 		if(Validator.isEmpty(data.lastName)){
-			errors.firstName = "Last name is required";
+			errors.lastName = "Last name is required";
 		};
 
 		if(!Validator.isLength(data.firstName, {min: 3, max: 20})){
@@ -50,7 +50,7 @@ const validate = {
 		};
 
 		if(!Validator.isLength(data.phone, {min: 10, max: 15})){
-			errors.password = "Phone must be at least 10 characters long.";
+			errors.phone = "Phone must be at least 10 characters long.";
 		};
 		
 		if(data.password2){

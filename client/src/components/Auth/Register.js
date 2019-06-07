@@ -4,17 +4,18 @@ import ContentWrapper from "../layout/ContentWrapper";
 import InputField from "../../helpers/FormElements/inputField";
 import { Link } from "react-router-dom";
 import { setAlertAction } from "../../actions/alertAction";
+import { registerAction } from "../../actions/authAction";
 
-const Register = ({ setAlertAction }) => {
-	const [formData, updateFormData] = useState({fname: '', lname: '', email: '', phone: '', password: '', password2: ''});
+const Register = ({ setAlertAction, registerAction, errors, history }) => {
+	const [formData, updateFormData] = useState({firstName: '', lastName: '', email: '', phone: '', password: '', password2: ''});
+	const { firstName, lastName, email, phone, password, password2 } = formData;
 
-	const { fname, lname, email, phone, password, password2 } = formData;
 	const onFormFieldChange = e => updateFormData({ ...formData, [e.target.name]: e.target.value });
 	const onFormSubmit = e =>{
 		e.preventDefault();
-		if(password !== password2) setAlertAction("Passwords don't match", "danger");
-		console.log(formData);
-	}
+		const isSuccess = registerAction(formData, history);
+		if(!isSuccess) return updateFormData({ ...formData });
+	};
 
   return (
   	<ContentWrapper mainClass="login_bg-img" containerClass="login">
@@ -30,9 +31,10 @@ const Register = ({ setAlertAction }) => {
 									type="text" 
 									className="form-control" 
 									placeholder="Enter First Name..." 
-									value={fname}
-									name="fname"
+									value={firstName}
+									name="firstName"
 									label="First Name"
+									error={errors.firstName}
 									onChange={onFormFieldChange} 
 								/>
 							</div>
@@ -42,9 +44,10 @@ const Register = ({ setAlertAction }) => {
 									type="text" 
 									className="form-control" 
 									placeholder="Enter Last Name..." 
-									value={lname}
-									name="lname"
+									value={lastName}
+									name="lastName"
 									label="Last Name"
+									error={errors.lastName}
 									onChange={onFormFieldChange} 
 								/>
 							</div>
@@ -57,6 +60,7 @@ const Register = ({ setAlertAction }) => {
 									value={email}
 									name="email"
 									label="Email"
+									error={errors.email}
 									onChange={onFormFieldChange} 
 								/>
 							</div>
@@ -69,6 +73,7 @@ const Register = ({ setAlertAction }) => {
 									value={phone}
 									name="phone"
 									label="Phone"
+									error={errors.phone}
 									onChange={onFormFieldChange} 
 								/>
 							</div>
@@ -81,6 +86,7 @@ const Register = ({ setAlertAction }) => {
 									value={password}
 									name="password"
 									label="Password"
+									error={errors.password}
 									onChange={onFormFieldChange} 
 								/>
 							</div>
@@ -92,6 +98,7 @@ const Register = ({ setAlertAction }) => {
 									placeholder="Enter Password Confirmation..." 
 									value={password2}
 									name="password2"
+									error={errors.password2}
 									label="Password Confirmation"
 									onChange={onFormFieldChange} 
 								/>
@@ -115,5 +122,8 @@ const Register = ({ setAlertAction }) => {
 
 Register.displayName = 'Register';
 
+const mapStateToProps =(state) =>({
+	errors: state.errors
+});
 
-export default connect(null, { setAlertAction })(Register);
+export default connect(mapStateToProps, { setAlertAction, registerAction })(Register);
