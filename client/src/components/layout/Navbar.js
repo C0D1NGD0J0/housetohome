@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutAction } from "../../actions/authAction";
 
 class Navbar extends Component {
 	render() {
@@ -19,16 +21,12 @@ class Navbar extends Component {
 			      <ul className="nav navbar-nav navbar-right">
 			        <li><Link to="/">Home</Link></li>
 			        <li><Link to="#!">Listings</Link></li>
-			        <li><Link to="#!">Reports</Link></li>
-			        <li><Link to="#!">Tenants</Link></li>
-			        <li><Link to="#!"><i className="fa fa-envelope"></i></Link></li>
 			        <li className="dropdown">
 			          <Link to="#!" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span className="caret"></span></Link>
 			          <ul className="dropdown-menu">
-			            <li><Link to="#!">Dashboard</Link></li>
-			            <li><Link to="#!">Update Details</Link></li>
-			            <li><Link to="#!">Reports</Link></li>
-			            <li><Link to="#!">Logout</Link></li>
+			            <li><Link to="/dashboard">Dashboard</Link></li>
+			            <li><Link to="/admin/dashboard">Update Details</Link></li>
+			            <li><a onClick={this.props.logoutAction}>Logout</a></li>
 			          </ul>
 			        </li>
 			      </ul>
@@ -39,4 +37,4 @@ class Navbar extends Component {
 	}
 };
 
-export default Navbar;
+export default connect(null, { logoutAction })(Navbar);

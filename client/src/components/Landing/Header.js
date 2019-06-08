@@ -35,7 +35,10 @@ const Header = ({ auth: {isAuthenticated, loading}, logoutAction }) => {
 					<li><NavLink to="/register"><i className="fa fa-user-circle-o"></i></NavLink></li>
 					<li><NavLink to="/login"><i className="fa fa-key"></i></NavLink></li>
 				</Fragment> :
-					<li><a onClick={logoutAction}><i className="fa fa-sign-out"></i></a></li>
+					<Fragment>
+						<li><NavLink to="/dashboard"><i className="fa fa-user-circle"></i></NavLink></li>
+						<li><a onClick={logoutAction}><i className="fa fa-sign-out"></i></a></li>
+					</Fragment>
 			}
 		</Fragment>
 	);
@@ -99,4 +102,5 @@ Header.displayName = 'Header';
 const mapStateToProps = state =>({
 	auth: state.auth
 });
+
 export default connect(mapStateToProps, { logoutAction })(Header);

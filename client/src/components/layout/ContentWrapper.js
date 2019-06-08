@@ -5,7 +5,7 @@ const Wrapper = (props) => {
 
   return (
    	<main id="wrapper" className={mainClass}>
-			<div className={`container ${containerClass}`}>
+			<div className={`${containerClass}`}>
 				{props.children}
 			</div>
 		</main> 

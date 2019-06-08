@@ -65,4 +65,6 @@ export const loadUserAction = () => async dispatch =>{
 
 export const logoutAction = () => async dispatch =>{
 	dispatch({type: LOGOUT_CURRENTUSER, payload: {}});
+	dispatch(setAlertAction("Logout successful...", "success"));
+	return window.location = "/";
 };

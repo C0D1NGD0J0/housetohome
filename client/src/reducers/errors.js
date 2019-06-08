@@ -10,7 +10,7 @@ export default function(state = initialState, action){
 			return payload;
 		
 		case HANDLE_ERRORS:
-			return payload.msg;
+			return payload;
 
 		case CLEAR_ERROR:
 			return payload;

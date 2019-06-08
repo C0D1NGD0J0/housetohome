@@ -7,12 +7,14 @@ import Register from "./components/Auth/Register";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Alert from "./components/layout/Alert";
-import GuestDashboard from "./components/User/GuestDashboard";
+import Dashboard from "./components/User/Dashboard";
+import AdminDashboard from "./components/User/admin/AdminDashboard";
 import { loadUserAction } from "./actions/authAction";
 import { clearErrors } from "./actions/utilAction";
 import { setAuthToken } from "./helpers/";
 import { Provider } from "react-redux";
 import PrivateRoute from "./helpers/PrivateRoute";
+import AdminPrivateRoute from "./helpers/EmployeePrivateRoute";
 import store from "./store";
 import './App.css';
 
@@ -32,9 +34,9 @@ const App = () =>{
 			  	<Fragment>
 			  		<Alert />
 			    	<Switch>
-			    		<Route exact path="/" component={Landing} />
 			    		<Route exact path="/login" component={Login} />
 							<Route exact path="/register" component={Register} />
+			    		<Route exact path="/" component={Landing} />
 			    		<Route component={OtherRoutes} />
 			    	</Switch>
 			    	<Footer />
@@ -46,10 +48,13 @@ const App = () =>{
 };
 
 const OtherRoutes = () =>(
-	<Fragment>
-		<Navbar />
-		<PrivateRoute exact path="/dashboard" component={GuestDashboard} />
-	</Fragment>
+	<Switch>
+		<Fragment>
+			<Navbar />
+			<Route exact path="/admin/dashboard" component={AdminDashboard} />
+			<PrivateRoute exact path="/dashboard" component={Dashboard} />
+		</Fragment>
+	</Switch>
 );
 
 export default App;

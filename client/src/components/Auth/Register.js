@@ -17,11 +17,11 @@ const Register = ({ setAlertAction, registerAction, errors, history, isAuthentic
 	};
 	
 	if(isAuthenticated){
-		return <Redirect to="/dashboard" />
+		return <Redirect to="/" />
 	}
 
   return (
-  	<ContentWrapper mainClass="login_bg-img" containerClass="login">
+  	<ContentWrapper mainClass="login_bg-img" containerClass="container login">
 			<div className="row">
 				<div className="section-title text-center">
 					<h3>Guest Registeration</h3><hr/>

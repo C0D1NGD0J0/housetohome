@@ -5,7 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginAction } from "../../actions/authAction";
 
-const Login = ({ loginAction, isAuthenticated, errors }) => {
+const Login = ({ loginAction, auth: {isAuthenticated, user}, errors }) => {
 	const [formData, updateFormData] = useState({ email: '', password: '' });
 	const { email, password } = formData;
 
@@ -16,11 +16,11 @@ const Login = ({ loginAction, isAuthenticated, errors }) => {
 	}
 
 	if(isAuthenticated){
-		return <Redirect to="/dashboard" />
-	}
+		return <Redirect to="/" />
+	};
 
   return (
-    <ContentWrapper mainClass="login_bg-img" containerClass="login">
+    <ContentWrapper mainClass="login_bg-img" containerClass="container login">
 			<div className="row">
 				<div className="section-title text-center">
 					<h3>Login</h3><hr/>
@@ -66,7 +66,7 @@ Login.displayName = 'Login';
 
 const mapStateToProps = (state) =>({
 	errors: state.errors,
-	isAuthenticated: state.auth.isAuthenticated
+	auth: state.auth
 });
 
 export default connect(mapStateToProps, { loginAction })(Login);

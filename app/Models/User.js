@@ -63,6 +63,19 @@ UserSchema.methods.getGravatar = function(){
 	return `https://gravatar.com/avatar/${hash}?s=200`;
 };
 
+UserSchema.methods.userRole = function(){
+	switch(this.role){
+		case 'admin':
+			return {isAdmin: true};
+		case 'staff':
+			return {isStaff: true};
+		case 'guest':
+			return {isGuest: true};
+		default:
+			return this.role;
+	}
+};
+
 UserSchema.methods.detailsToJSON = function(user){
 	const userinfo = {
 		id: this._id,
@@ -70,10 +83,10 @@ UserSchema.methods.detailsToJSON = function(user){
 		firstName: this.firstName,
 		lastName: this.lastName,
 		phone: this.phone,
-		isAdmin: this.role === 'admin' ? true : false
+		role: this.userRole()
 	};
 
-	return Object.freeze(userinfo);
+	return userinfo;
 };
 
 UserSchema.methods.guestDetailsToJSON = function(user){
