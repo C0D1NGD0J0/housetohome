@@ -71,9 +71,7 @@ const reservationCntrl = {
 				reservation.totalPrice = property.price * days;
 				
 				reservation = await reservation.save();
-				property.reservations.push({start: reservation.startDate, end: reservation.endDate});
-
-				await property.save();
+				
 				return res.status(200).json(reservation);
 			};
 		} catch(e) {
@@ -109,8 +107,8 @@ const reservationCntrl = {
 			};
 			
 			reservation.status = status;
-
-			return res.status(200).json(reservation);
+			// update later
+			// return res.status(200).json(reservation);
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(400).sjon(errors);

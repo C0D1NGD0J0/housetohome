@@ -43,7 +43,8 @@ const UserSchema = new Schema({
 	passwordResetToken: {type: String, default:""},
 	passwordResetExpires: {type: Date, default: ""},
 	role: {type: String, default: "guest", lowercase: true},
-	avatar: {type: String, default: "http://lorempixel.com/400/200/people"},
+	likedProperty: [{type: Schema.Types.ObjectId, ref: 'Property'}],
+	avatar: {type: String},
 }, {timestamps: true});
 
 // defines indexes to help when searching
