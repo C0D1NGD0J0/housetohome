@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { NavHashLink as NavLink } from 'react-router-hash-link';
 
 const Footer = (props) => {
   return (
@@ -23,10 +24,10 @@ const Footer = (props) => {
 	        <div className="col-xs-2 col-sm-2 col-md-2">
 	          <h5>Company</h5><hr/>
 	          <ul className="footer-list-links">
-	            <li><a href="#">About Us</a></li>
-	            <li><a href="#">FAQ</a></li>
-	            <li><a href="#">Careers</a></li>
-	            <li><a href="#">Contact</a></li>
+	            <li><NavLink to="/#about">About Us</NavLink></li>
+	            <li><NavLink to="#!">FAQ</NavLink></li>
+	            <li><NavLink to="#!">Careers</NavLink></li>
+	            <li><NavLink to="/contact">Contact</NavLink></li>
 	          </ul>
 	        </div>
 

@@ -7,9 +7,12 @@ import Register from "./components/Auth/Register";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Alert from "./components/layout/Alert";
+import GuestDashboard from "./components/User/GuestDashboard";
 import { loadUserAction } from "./actions/authAction";
+import { clearErrors } from "./actions/utilAction";
 import { setAuthToken } from "./helpers/";
 import { Provider } from "react-redux";
+import PrivateRoute from "./helpers/PrivateRoute";
 import store from "./store";
 import './App.css';
 
@@ -45,6 +48,7 @@ const App = () =>{
 const OtherRoutes = () =>(
 	<Fragment>
 		<Navbar />
+		<PrivateRoute exact path="/dashboard" component={GuestDashboard} />
 	</Fragment>
 );
 

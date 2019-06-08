@@ -17,7 +17,7 @@ const Register = ({ setAlertAction, registerAction, errors, history, isAuthentic
 	};
 	
 	if(isAuthenticated){
-		return <Redirect to="/" />
+		return <Redirect to="/dashboard" />
 	}
 
   return (
