@@ -51,7 +51,7 @@ const OtherRoutes = () =>(
 	<Switch>
 		<Fragment>
 			<Navbar />
-			<Route exact path="/admin/dashboard" component={AdminDashboard} />
+			<AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 		</Fragment>
 	</Switch>

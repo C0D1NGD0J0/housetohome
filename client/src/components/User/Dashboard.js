@@ -9,7 +9,7 @@ import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
 	componentDidMount(){
-		// if(!this.props.auth.isAuthenticated) return <Redirect to="/login" /> notworking
+		// if(!this.props.auth.isAuthenticated) return <Redirect to="/login" />
 	}
 
 	render() {

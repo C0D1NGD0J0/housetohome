@@ -10,7 +10,7 @@ import Table from "../../layout/Table";
 class AdminDashboard extends Component {
 	componentDidMount(){
 		if(this.props.auth.user && this.props.auth.user.role.isGuest){
-			return <Redirect to="/" />
+			return this.props.history.push('/')
 		}
 	}
 

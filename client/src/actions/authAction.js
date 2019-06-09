@@ -3,6 +3,7 @@ import { handleFormError, clearErrors, handleError, clearAuthErrors } from "./ut
 import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER } from "./types";
 import { setAlertAction } from "./alertAction";
 import { setAuthToken } from "../helpers/";
+import jwtDecode from "jwt-decode";
 
 export const registerAction = (userdata, history) => async dispatch =>{
 	const config = {
@@ -47,19 +48,18 @@ export const loginAction = (userdata) => async dispatch =>{
 	};
 };
 
-export const loadUserAction = () => async dispatch =>{
-	if(localStorage.token){
-		setAuthToken(localStorage.token);
-	};
 
+export const loadUserAction = () => async dispatch =>{
 	try {
-		const res = await axios.get("/api/users/currentuser");
-		return dispatch({
-			type: LOAD_CURRENTUSER,
-			payload: res.data.info
-		});
+		if(localStorage.token){
+			const info = jwtDecode(localStorage.token)
+			return dispatch({
+				type: LOAD_CURRENTUSER,
+				payload: info
+			});
+		};
 	} catch(err) {
-		return dispatch(handleError(err.response.data));
+		return dispatch(handleError(err.message));
 	};
 };
 
