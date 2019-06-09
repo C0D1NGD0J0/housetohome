@@ -11,7 +11,7 @@ import Dashboard from "./components/User/Dashboard";
 import AdminDashboard from "./components/User/admin/AdminDashboard";
 import { loadUserAction } from "./actions/authAction";
 import { clearErrors } from "./actions/utilAction";
-import { setAuthToken } from "./helpers/";
+import { setAuthHeaderToken } from "./helpers/";
 import { Provider } from "react-redux";
 import PrivateRoute from "./helpers/PrivateRoute";
 import AdminPrivateRoute from "./helpers/EmployeePrivateRoute";
@@ -19,7 +19,7 @@ import store from "./store";
 import './App.css';
 
 if(localStorage.token){
-	setAuthToken(localStorage.token);
+	setAuthHeaderToken(localStorage.token);
 };
 
 const App = () =>{

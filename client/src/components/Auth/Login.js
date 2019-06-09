@@ -5,7 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginAction } from "../../actions/authAction";
 
-const Login = ({ loginAction, auth: {isAuthenticated, user}, errors }) => {
+const Login = ({ loginAction, user: {isAuthenticated, user}, errors }) => {
 	const [formData, updateFormData] = useState({ email: '', password: '' });
 	const { email, password } = formData;
 
@@ -66,7 +66,7 @@ Login.displayName = 'Login';
 
 const mapStateToProps = (state) =>({
 	errors: state.errors,
-	auth: state.auth
+	user: state.user
 });
 
 export default connect(mapStateToProps, { loginAction })(Login);

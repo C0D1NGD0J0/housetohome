@@ -4,7 +4,7 @@ import { NavHashLink as NavLink } from 'react-router-hash-link';
 import { connect } from "react-redux";
 import { logoutAction } from "../../actions/authAction";
 
-const Header = ({ auth: {isAuthenticated, loading}, logoutAction }) => {
+const Header = ({ user: {isAuthenticated, loading}, logoutAction }) => {
 
 	const [prevScrollpos, setPosition] = useState(window.pageYOffset);
 	const [backdrop, setBackdrop] = useState(false);
@@ -100,7 +100,7 @@ const Header = ({ auth: {isAuthenticated, loading}, logoutAction }) => {
 Header.displayName = 'Header';
 
 const mapStateToProps = state =>({
-	auth: state.auth
+	user: state.user
 });
 
 export default connect(mapStateToProps, { logoutAction })(Header);

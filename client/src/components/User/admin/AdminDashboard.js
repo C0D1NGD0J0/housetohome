@@ -9,8 +9,8 @@ import Table from "../../layout/Table";
 
 class AdminDashboard extends Component {
 	componentDidMount(){
-		if(this.props.auth.user && this.props.auth.user.role.isGuest){
-			return this.props.history.push('/')
+		if(!this.props.user || this.props.user.info && this.props.user.info.role.isGuest){
+			return this.props.history.push('/dashboard');
 		}
 	}
 
@@ -87,7 +87,7 @@ class AdminDashboard extends Component {
 };
 
 const mapStateToProps = state =>({
-	auth: state.auth
+	user: state.user
 });
 
 export default connect(mapStateToProps)(AdminDashboard);

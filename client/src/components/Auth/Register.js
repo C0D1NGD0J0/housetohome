@@ -127,7 +127,7 @@ Register.displayName = 'Register';
 
 const mapStateToProps =(state) =>({
 	errors: state.errors,
-	isAuthenticated: state.auth.isAuthenticated
+	isAuthenticated: state.user.isAuthenticated
 });
 
 export default connect(mapStateToProps, { setAlertAction, registerAction })(Register);

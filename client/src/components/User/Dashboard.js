@@ -48,7 +48,7 @@ class Dashboard extends Component {
 };
 
 const mapStateToProps = state =>({
-	auth: state.auth
+	user: state.user
 });
 
 export default connect(mapStateToProps)(Dashboard);

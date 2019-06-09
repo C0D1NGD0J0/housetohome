@@ -4,6 +4,7 @@ import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER } from "./types";
 import { setAlertAction } from "./alertAction";
 import { setAuthToken } from "../helpers/";
 import jwtDecode from "jwt-decode";
+import moment from "moment";
 
 export const registerAction = (userdata, history) => async dispatch =>{
 	const config = {
@@ -48,15 +49,15 @@ export const loginAction = (userdata) => async dispatch =>{
 	};
 };
 
-
-export const loadUserAction = () => async dispatch =>{
+export const loadUserAction = () => dispatch =>{
 	try {
 		if(localStorage.token){
-			const info = jwtDecode(localStorage.token)
-			return dispatch({
-				type: LOAD_CURRENTUSER,
-				payload: info
-			});
+			const info = jwtDecode(localStorage.token);
+			const currentTime = Math.floor(Date.now().valueOf() / 1000);
+
+			if(info.exp < currentTime) return dispatch(logoutAction());
+
+			return dispatch({ type: LOAD_CURRENTUSER, payload: info });
 		};
 	} catch(err) {
 		return dispatch(handleError(err.message));

@@ -4,7 +4,7 @@ const initialState = {
 	token: localStorage.getItem('token'),
 	isAuthenticated: false,
 	loading: true,
-	user: null
+	info: null
 };
 
 export default function(state = initialState, action){
@@ -16,14 +16,13 @@ export default function(state = initialState, action){
 				...state,
 				isAuthenticated: true,
 				loading: false,
-				user: payload
+				info: payload
 			};
 
 		case SET_TOKEN:
 			localStorage.setItem('token', payload.token);
 			return {
 				...state,
-				...payload,
 				isAuthenticated: true,
 				loading: false
 			};

@@ -50,7 +50,7 @@ const Footer = ({ isAuthenticated }) => {
 Footer.displayName = 'Footer';
 
 const mapStateToProps = state =>({
-	isAuthenticated: state.auth.isAuthenticated
+	isAuthenticated: state.user.isAuthenticated
 });
 
 export default connect(mapStateToProps)(Footer);
