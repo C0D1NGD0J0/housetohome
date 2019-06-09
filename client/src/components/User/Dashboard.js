@@ -5,7 +5,6 @@ import UserSidebar from "../layout/Sidebar/userSidebar";
 import Panel from "../layout/Panel";
 import { connect } from "react-redux";
 import Table from "../layout/Table";
-import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
 	componentDidMount(){

@@ -8,6 +8,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Alert from "./components/layout/Alert";
 import Dashboard from "./components/User/Dashboard";
+import AccountUpdate from "./components/User/AccountUpdate";
 import AdminDashboard from "./components/User/admin/AdminDashboard";
 import { loadUserAction } from "./actions/authAction";
 import { clearErrors } from "./actions/utilAction";
@@ -53,6 +54,7 @@ const OtherRoutes = () =>(
 			<Navbar />
 			<AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
+			<PrivateRoute exact path="/account_update" component={AccountUpdate} />
 		</Fragment>
 	</Switch>
 );

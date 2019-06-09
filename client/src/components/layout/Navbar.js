@@ -5,6 +5,8 @@ import { logoutAction } from "../../actions/authAction";
 
 class Navbar extends Component {
 	render() {
+		const { isAuthenticated, info } = this.props.user;
+		
 		return (
 			<nav className="navbar navbar-inverse navbar-fixed-top">
 			  <div className="container">
@@ -21,14 +23,17 @@ class Navbar extends Component {
 			      <ul className="nav navbar-nav navbar-right">
 			        <li><Link to="/">Home</Link></li>
 			        <li><Link to="#!">Listings</Link></li>
-			        <li className="dropdown">
-			          <Link to="#!" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span className="caret"></span></Link>
-			          <ul className="dropdown-menu">
-			            <li><Link to="/dashboard">Dashboard</Link></li>
-			            <li><Link to="/admin/dashboard">Update Details</Link></li>
-			            <li><a onClick={this.props.logoutAction}>Logout</a></li>
-			          </ul>
-			        </li>
+			        { isAuthenticated ?
+			        	<li className="dropdown">
+				          <Link to="#!" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{info.firstName}<span className="caret"></span></Link>
+				          <ul className="dropdown-menu">
+				            <li><Link to="/dashboard">Dashboard</Link></li>
+				            <li><Link to="/account_update">Settings</Link></li>
+				            { info && !info.role.isGuest ? <li><Link to="/admin/dashboard">Admin</Link></li> : null }
+				            <li><a onClick={this.props.logoutAction}>Logout</a></li>
+				          </ul>
+				        </li> : null
+				      }
 			      </ul>
 			    </div>
 			  </div>
@@ -37,4 +42,8 @@ class Navbar extends Component {
 	}
 };
 
-export default connect(null, { logoutAction })(Navbar);
+const mapStateToProps = state =>({
+	user: state.user
+});
+
+export default connect(mapStateToProps, { logoutAction })(Navbar);

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const UserSidebar = ({ className }) => {
   return (
@@ -7,10 +7,10 @@ const UserSidebar = ({ className }) => {
 			<h4>User Dashboard</h4><hr/>
 
 			<ul className="sidebar_menu">
-				<li><Link to="#!"><i className="fa fa-user"></i> My Reservations</Link></li>
-				<li><Link to="/account/update"><i className="fa fa-pencil"></i> Update Account</Link></li>
-				<li><Link to="#!"><i className="fa fa-credit-card"></i> Billing</Link></li>
-				<li><Link to="#!"><i className="fa fa-envelope"></i> Mail</Link></li>
+				<li><NavLink activeClassName="active" to="#!"><i className="fa fa-user"></i> My Reservations</NavLink></li>
+				<li><NavLink activeClassName="active" to="/account_update"><i className="fa fa-pencil"></i> Update Account</NavLink></li>
+				<li><NavLink activeClassName="active" to="#!"><i className="fa fa-credit-card"></i> Billing</NavLink></li>
+				<li><NavLink activeClassName="active" to="#!"><i className="fa fa-envelope"></i> Mail</NavLink></li>
 			</ul>
 		</div>
   );
