@@ -16,7 +16,7 @@ class AdminDashboard extends Component {
 
 	render() {
 		return (
-			<ContentWrapper containerClass="container-fluid">
+			<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-sm-4 col-md-3">
 						<SidebarWrapper>

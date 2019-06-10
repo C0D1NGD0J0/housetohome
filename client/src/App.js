@@ -10,6 +10,8 @@ import Alert from "./components/layout/Alert";
 import Dashboard from "./components/User/Dashboard";
 import AccountUpdate from "./components/User/AccountUpdate";
 import AdminDashboard from "./components/User/admin/AdminDashboard";
+import NewEmployee from "./components/User/admin/NewEmployee";
+import NewListing from "./components/User/admin/NewListing";
 import { loadUserAction } from "./actions/authAction";
 import { clearErrors } from "./actions/utilAction";
 import { setAuthHeaderToken } from "./helpers/";
@@ -53,6 +55,8 @@ const OtherRoutes = () =>(
 		<Fragment>
 			<Navbar />
 			<AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
+			<AdminPrivateRoute exact path="/admin/new_employee" component={NewEmployee} />
+			<AdminPrivateRoute exact path="/new_listing" component={NewListing} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 			<PrivateRoute exact path="/account_update" component={AccountUpdate} />
 		</Fragment>
