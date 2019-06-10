@@ -1,6 +1,7 @@
 "use strict";
 const User = require('../Models/User');
 const Property = require('../Models/Property');
+const bcrypt = require("bcryptjs");
 
 const userCntrl = {
 	currentuser: async (req, res, next) =>{
@@ -9,9 +10,8 @@ const userCntrl = {
 
 		try {
 			const user = await User.findById(userId);
-			const properties = await Property.find({author: userId});
 			
-			return res.status(200).json({info: user.detailsToJSON(), properties});
+			return res.status(200).json({info: user.detailsToJSON()});
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(400).json(errors);
@@ -31,10 +31,11 @@ const userCntrl = {
 			updateData.lastName = lastName;
 
 			if(password){
-				updateData.password = password;
+				const salt = await bcrypt.genSalt(10);
+				updateData.password = await bcrypt.hash(password, salt);
 			};
 			
-			user = await User.findOneAndUpdate({_id: user}, {$set: updateData}, {new: true});
+			user = await User.findOneAndUpdate({_id: user}, {$set: updateData}, {new: true});	
 			return res.status(200).json(user.detailsToJSON());
 		} catch(e) {
 			errors.msg = e.message;
@@ -48,7 +49,7 @@ const userCntrl = {
 
 		try {
 			const user = await User.findOneAndRemove({_id: userId}).exec();
-			return res.status(200).json(user);
+			return res.status(200).json({msg: "Your account has been deleted..."});
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(404).json(errors);

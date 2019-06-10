@@ -1,4 +1,4 @@
-import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER, AUTH_ERROR } from "../actions/types";
+import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER, AUTH_ERROR, UPDATE_CURRENTUSER, DELETE_ACCOUNT } from "../actions/types";
 
 const initialState = {
 	token: localStorage.getItem('token'),
@@ -16,7 +16,7 @@ export default function(state = initialState, action){
 				...state,
 				isAuthenticated: true,
 				loading: false,
-				info: payload
+				info: {...payload}
 			};
 
 		case SET_TOKEN:
@@ -27,14 +27,23 @@ export default function(state = initialState, action){
 				loading: false
 			};
 
+		case UPDATE_CURRENTUSER:
+			return {
+				...state,
+				loading: false,
+				info: {...payload}
+			};
+
 		case LOGOUT_CURRENTUSER:
 		case AUTH_ERROR:
+		case DELETE_ACCOUNT:
 			localStorage.removeItem('token');
 			return {
 				...state,
 				token: null,
 				isAuthenticated: false,
-				loading: false
+				loading: false,
+				info: null
 			};
 		default: 
 			return state;

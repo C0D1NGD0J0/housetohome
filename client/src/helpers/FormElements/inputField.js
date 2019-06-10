@@ -1,7 +1,7 @@
 import React from 'react';
 import ElementWrapper from "./FormElementWrapper";
 
-const InputField = ({ name, placeholder, value, label, type, onChange, error }) => {
+const InputField = ({ name, placeholder, value, label, type, onChange, error, autocomplete }) => {
   return (
     <ElementWrapper error={error}>
 			<label htmlFor={name}>{label}</label>
@@ -12,7 +12,8 @@ const InputField = ({ name, placeholder, value, label, type, onChange, error }) 
 				placeholder={placeholder} 
 				value={value}
 				name={name}
-				onChange={onChange} 
+				onChange={onChange}
+				autoComplete={autocomplete}
 			/>
 		</ElementWrapper>  
   );
@@ -21,7 +22,8 @@ const InputField = ({ name, placeholder, value, label, type, onChange, error }) 
 InputField.displayName = 'InputField';
 
 InputField.defaultProps = {
-  type: "text"
+  type: "text",
+  autoComplete: "false"
 };
 
 export default InputField;

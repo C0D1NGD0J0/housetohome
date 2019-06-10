@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import TableHead from "./header";
 import TableBody from "./body";
 

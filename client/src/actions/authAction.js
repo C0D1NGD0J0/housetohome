@@ -1,10 +1,9 @@
 import axios from "axios";
-import { handleFormError, clearErrors, handleError, clearAuthErrors } from "./utilAction";
+import { handleFormError, clearErrors, handleError } from "./utilAction";
 import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER } from "./types";
 import { setAlertAction } from "./alertAction";
-import { setAuthToken } from "../helpers/";
+import { setAuthHeaderToken } from "../helpers/";
 import jwtDecode from "jwt-decode";
-import moment from "moment";
 
 export const registerAction = (userdata, history) => async dispatch =>{
 	const config = {
@@ -15,7 +14,7 @@ export const registerAction = (userdata, history) => async dispatch =>{
 
 	const data = JSON.stringify(userdata);
 	try {
-		const res = await axios.post("/api/auth/signup", userdata, config);
+		const res = await axios.post("/api/auth/signup", data, config);
 		dispatch(setAlertAction(res.data.msg, "success"));
 		dispatch(clearErrors());
 		return history.push("/login");
@@ -26,16 +25,11 @@ export const registerAction = (userdata, history) => async dispatch =>{
 };
 
 export const loginAction = (userdata) => async dispatch =>{
-	const config = {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
-
+	const config = { headers: { 'Content-Type': 'application/json' } };
 	const data = JSON.stringify(userdata);
 
 	try {
-		const res = await axios.post("/api/auth/login", userdata, config);
+		const res = await axios.post("/api/auth/login", data, config);
 		dispatch(setAlertAction("Login was successful", "success"));
 		dispatch({type: SET_TOKEN, payload: res.data});
 		return dispatch(loadUserAction());
@@ -49,13 +43,16 @@ export const loginAction = (userdata) => async dispatch =>{
 	};
 };
 
-export const loadUserAction = () => dispatch =>{
+export const loadUserAction = () => async dispatch =>{
 	try {
 		if(localStorage.token){
-			const info = jwtDecode(localStorage.token);
+			setAuthHeaderToken(localStorage.token);
+			const res = await axios.get("/api/users/currentuser");
+		
+			const { info } = res.data;
+			const decoded = jwtDecode(localStorage.token);
 			const currentTime = Math.floor(Date.now().valueOf() / 1000);
-
-			if(info.exp < currentTime) return dispatch(logoutAction());
+			if(decoded.exp < currentTime) return dispatch(logoutAction());
 
 			return dispatch({ type: LOAD_CURRENTUSER, payload: info });
 		};

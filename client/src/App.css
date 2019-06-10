@@ -1334,8 +1334,17 @@ h1, h2, h3, h4 {
   background-color: blue !important;
 }
 
-.has-error small{
+.login .has-error small{
   color: #fff !important;
+}
+
+.has-error small{
+  width: 80%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  color: #000 !important;
+  text-transform: uppercase;
 }
 
 .has-error input{

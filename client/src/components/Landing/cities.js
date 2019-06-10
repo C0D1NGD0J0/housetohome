@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import room_1 from "../../assets/img/room-1.jpeg";
 import room_2 from "../../assets/img/room-2.jpeg";
 import room_3 from "../../assets/img/room-3.jpeg";

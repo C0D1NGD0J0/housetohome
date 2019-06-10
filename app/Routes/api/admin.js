@@ -13,8 +13,6 @@ router.get("/users/:userId", isAuthorizedAsAdmin, adminCntrl.user);
 
 router.put("/users/:userId/update_role", isAuthorizedAsAdmin, adminCntrl.updateUserRole);
 
-router.delete("/users/:userId", isAuthorizedAsAdmin, userCntrl.delete);
-
 router.delete("/properties/:propertyId", isAuthorizedAsAdmin, propertyCntrl.delete);
 
 module.exports = router;

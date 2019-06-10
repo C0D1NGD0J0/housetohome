@@ -8,6 +8,8 @@ router.get("/currentuser", isAuthorized, userCntrl.currentuser);
 
 router.put("/currentuser", validate.userInfo, isAuthorized, userCntrl.update);
 
+router.delete("/:userId", isAuthorized, userCntrl.delete);
+
 module.exports = router;
 
 
