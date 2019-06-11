@@ -5,7 +5,9 @@ import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import TextAreaField from "../../../helpers/FormElements/textAreaField";
 import Panel from "../../layout/Panel";
 
-const StepFive = (props) => {
+const StepFive = ({ currentStep, onchange, value }) => {
+	if(currentStep !== 5) return null;
+
   return (
 		<Fragment>
 			<h4 style={{paddingLeft: "2rem", marginBottom: "0"}}>Admin Settings</h4>

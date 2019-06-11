@@ -5,7 +5,9 @@ import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import TextAreaField from "../../../helpers/FormElements/textAreaField";
 import Panel from "../../layout/Panel";
 
-const StepThree = (props) => {
+const StepThree = ({ currentStep, onchange, value }) => {
+	if(currentStep !== 3) return null;
+
   return (
 		<Fragment>
 			<div className="col-sm-12">

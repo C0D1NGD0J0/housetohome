@@ -6,7 +6,7 @@ const propertyCntrl = {
 	index: async (req, res, next) =>{
 		const errors = {};
 		try {
-			const properties = await Property.find({ active: true }).sort({ createdAt: -1});
+			const properties = await Property.find({ isActive: true }).sort({ createdAt: -1});
 			return res.status(200).json(properties);
 		} catch(err) {
 			errors.msg = err.message;
@@ -16,17 +16,20 @@ const propertyCntrl = {
 
 	create: async (req, res, next) =>{
 		const errors = {};
-		const {description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, location, features, extras, active, } = req.body;
+		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = req.body;
 		
 		try {			
-			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {}, features, extras, handler: req.currentuser.id });
+			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {}, features: {}, extras: {}, handler: ObjectId(handler) || req.currentuser.id });
 			
-			property.location.address = location.address;
-			property.location.coordinates[0] = location.coordinates[0];
-			property.location.coordinates[1] = location.coordinates[1];
+			property.location.address = address;
+			property.location.coordinates[0] = latitude;
+			property.location.coordinates[1] = longitude;
 			
+			property.features = { bedroom, bathroom, maxCapacity, floors, parking };
+			property.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets};
+
 			if(req.currentuser.isAdmin){
-				property.active = active;
+				property.isActive = isActive;
 				property.featured = featured;
 				property.handler = handler;
 			};
@@ -57,18 +60,28 @@ const propertyCntrl = {
 	update: async (req, res, next) =>{
 		const errors = {};
 		const propertyId = ObjectId(req.params.propertyId);
-		const {description, propertyType, listingType, size, featured, yearBuilt, price, features, extras, handler, active, location } = req.body;
+		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = req.body;
 
 		try {
 			let property = await Property.findById(propertyId).exec();
-			const updateData = { description, propertyType, listingType, size, featured, yearBuilt, price, location, features, extras, meta: {} };
+
+			const updateData = { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, meta: {} };
+			
+
+			updateData.location.address = address;
+			updateData.location.coordinates[0] = latitude;
+			updateData.location.coordinates[1] = longitude;
+			
+			updateData.features = { bedroom, bathroom, maxCapacity, floors, parking };
+			updateData.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets};
 
 			if(req.currentuser.isAdmin){
 				updateData.handler = handler;
-				updateData.active = active;
+				updateData.isActive = isActive;
 			};
 
 			updateData.meta.lastUpdatedBy = req.currentuser.id;
+
 			if(property.author._id.equals(req.currentuser.id)){
 				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true, runValidators: true }).exec();
 				return res.status(200).json(property);

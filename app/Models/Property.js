@@ -15,7 +15,7 @@ const PropertySchema = new Schema({
 	slug: {type: String},
 	yearBuilt: {type: String, required: true},
 	price: {type: Number, required: true, maxlength: 255},
-	active: {type: Boolean, default: false},
+	isActive: {type: Boolean, default: false},
 	featured: {type: Boolean, default: false},
 	handler: {type: Schema.Types.ObjectId, ref: 'User'},
 	features: {

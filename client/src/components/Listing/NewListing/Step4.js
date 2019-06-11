@@ -8,7 +8,9 @@ import Panel from "../../layout/Panel";
 import ImagePreview from "./ImgPreview";
 import house_1 from "../../../assets/img/house_1.jpg";
 
-const StepFour = (props) => {
+const StepFour = ({ currentStep, onchange, value }) => {
+	if(currentStep !== 4) return null;
+
   return (
 		<Fragment>
 			<div className="col-sm-3">

@@ -3,15 +3,17 @@ import InputField from "../../../helpers/FormElements/inputField";
 import SelectTag from "../../../helpers/FormElements/selectField";
 import Panel from "../../layout/Panel";
 
-const StepOne = (props) => {
+const StepOne = ({onchange, value, currentStep}) =>{
+	if(currentStep !== 1) return null;
+
   return (
   	<Fragment>
 	  	<div className="col-sm-6">
 				<SelectTag 
 					label="Listing Type" 
 					name="listingType" 
-					selectChange="" 
-					value="" 
+					selectChange={onchange}
+					value={value.listingType}
 					options={['rent', 'sale', 'lease']} 
 				/>
 	  	</div>
@@ -19,10 +21,9 @@ const StepOne = (props) => {
 	  	<div className="col-sm-6">
 				<SelectTag 
 					label="Property Type" 
-					name="propertyType" 
-					selectChange="" 
-					value=""
-					onChange=""
+					name="propertyType"  
+					value={value.propertyType}
+					selectChange={onchange}
 					options={['office', 'condo', 'house', 'land']} 
 				/>
 	  	</div>
@@ -32,10 +33,10 @@ const StepOne = (props) => {
 					type="number" 
 					className="form-control" 
 					placeholder="No. of Bedrooms..." 
-					value=""
+					value={value.bedroom}
 					name="bedroom"
 					label="Bedrooms"
-					onChange="" 
+					onChange={onchange}
 				/>
 	  	</div>
 			
@@ -44,10 +45,10 @@ const StepOne = (props) => {
 					type="number" 
 					className="form-control" 
 					placeholder="No. Bathrooms..." 
-					value=""
+					value={value.bathroom}
 					name="bathroom"
 					label="Bathrooms"
-					onChange="" 
+					onChange={onchange}
 				/>
 	  	</div>
 
@@ -56,10 +57,10 @@ const StepOne = (props) => {
 					type="number" 
 					className="form-control" 
 					placeholder="Max number of Occupants..." 
-					value=""
+					value={value.maxCapacity}
 					name="maxCapacity"
 					label="Max. Capacity"
-					onChange="" 
+					onChange={onchange}
 				/>
 	  	</div>
 
@@ -68,10 +69,10 @@ const StepOne = (props) => {
 					type="number" 
 					className="form-control" 
 					placeholder="Enter Listing Price..." 
-					value=""
+					value={value.price}
 					name="price"
 					label="Price"
-					onChange="" 
+					onChange={onchange}
 				/>
 	  	</div>
 
@@ -80,10 +81,10 @@ const StepOne = (props) => {
 					type="number" 
 					className="form-control" 
 					placeholder="Enter Built Year..." 
-					value=""
+					value={value.yearBuilt}
 					name="yearBuilt"
 					label="Year Built"
-					onChange="" 
+					onChange={onchange}
 				/>
 	  	</div>
 
@@ -92,10 +93,10 @@ const StepOne = (props) => {
 					type="text" 
 					className="form-control" 
 					placeholder="Enter Property Size..." 
-					value=""
+					value={value.size}
 					name="price"
 					label="Living Size (sqft)"
-					onChange="" 
+					onChange={onchange}
 				/>
 	  	</div>
 
@@ -104,10 +105,10 @@ const StepOne = (props) => {
 					type="number" 
 					className="form-control" 
 					placeholder="No. Floors..." 
-					value=""
+					value={value.floors}
 					name="floors"
 					label="No. Floors"
-					onChange="" 
+					onChange={onchange}
 				/>
 	  	</div>
 			
@@ -116,10 +117,10 @@ const StepOne = (props) => {
 					type="number" 
 					className="form-control" 
 					placeholder="No. Car Parking..." 
-					value=""
+					value={value.parking}
 					name="parking"
 					label="No. Car Parks"
-					onChange="" 
+					onChang={onchange}
 				/>
 	  	</div>
 	  </Fragment>	
