@@ -18,10 +18,10 @@ const StepThree = ({ currentStep, onchange, value }) => {
 				<InputField
 					className="form-control" 
 					placeholder="Property Address..." 
-					value=""
+					value={value.address}
 					name="address"
 					label="Address"
-					onChange="" 
+					onChange={onchange}
 				/>
 			</div>
 
@@ -29,10 +29,10 @@ const StepThree = ({ currentStep, onchange, value }) => {
 				<InputField
 					className="form-control" 
 					placeholder="Enter longitude..." 
-					value=""
+					value={value.longitude}
 					name="longitude"
 					label="Longitude"
-					onChange="" 
+					onChange={onchange}
 				/>
 			</div>
 
@@ -40,10 +40,10 @@ const StepThree = ({ currentStep, onchange, value }) => {
 				<InputField
 					className="form-control" 
 					placeholder="Enter Latitude..." 
-					value=""
+					value={value.latitude}
 					name="latitude"
 					label="Latitude"
-					onChange="" 
+					onChange={onchange}
 				/>
 			</div>
 		</Fragment>

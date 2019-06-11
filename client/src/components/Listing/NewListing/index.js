@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from "../../layout/Panel";
 import StepOne from "./Step1";
 import StepTwo from "./Step2";
@@ -98,7 +99,7 @@ class NewEmployee extends Component {
 
   render() {
 		const { errors } = this.props;
-		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler,bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = this.state;
+		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler,bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, currentStep } = this.state;
 
     return(
     	<ContentWrapper containerClass="container">
@@ -113,32 +114,54 @@ class NewEmployee extends Component {
 						<Panel title="New Listing">
 							<form onSubmit={this.onFormSubmit} className="form">
 								<div className="row">
-									<StepOne 
-										currentStep={this.state.currentStep}
-										onchange={this.onFormFieldChange}
-										value={bedroom, bathroom, maxCapacity, price, yearBuilt, price, floors, parking, listingType, propertyType}
-									/>
-
-									<StepTwo 
-										currentStep={this.state.currentStep}
-										onchange={this.onFormFieldChange}
-										value={description, is_tv, is_ac, is_heating, is_internet, is_kitchen, pets}
-									/>
-
-									<StepThree 
-										currentStep={this.state.currentStep}
-										onchange={this.onFormFieldChange}
-									/>
-
-									<StepFour 
-										currentStep={this.state.currentStep}
-										onchange={this.onFormFieldChange}
-									/>
-
-									<StepFive
-										currentStep={this.state.currentStep}
-										onchange={this.onFormFieldChange}
-									/>
+									<TransitionGroup component={null}>
+										<CSSTransition in={currentStep === 1} classNames="displayStep" timeout={500}>
+											<StepOne 
+												currentStep={this.state.currentStep}
+												onchange={this.onFormFieldChange}
+												value={bedroom, bathroom, maxCapacity, price, yearBuilt, price, floors, parking, listingType, propertyType}
+											/>
+										</CSSTransition>
+									</TransitionGroup>
+									
+									<TransitionGroup component={null}>
+										<CSSTransition in={currentStep === 2} classNames="displayStep" timeout={500}>
+											<StepTwo 
+												currentStep={this.state.currentStep}
+												onchange={this.onFormFieldChange}
+												value={description, is_tv, is_ac, is_heating, is_internet, is_kitchen, pets}
+											/>
+										</CSSTransition>
+									</TransitionGroup>
+									
+									<TransitionGroup component={null}>
+										<CSSTransition in={currentStep === 3} classNames="displayStep" timeout={500}>
+											<StepThree 
+												currentStep={this.state.currentStep}
+												onchange={this.onFormFieldChange}
+												value={address,longitude, latitude}
+											/>
+										</CSSTransition>
+									</TransitionGroup>
+									
+									<TransitionGroup component={null}>
+										<CSSTransition in={currentStep === 4} classNames="displayStep" timeout={500}>
+											<StepFour 
+												currentStep={this.state.currentStep}
+												onchange={this.onFormFieldChange}
+											/>
+										</CSSTransition>
+									</TransitionGroup>
+									
+									<TransitionGroup component={null}>
+										<CSSTransition in={currentStep === 5} classNames="displayStep" timeout={500}>
+											<StepFive
+												currentStep={this.state.currentStep}
+												onchange={this.onFormFieldChange}
+												deletePreviewImg={() => "hello"}
+											/>
+										</CSSTransition>
+									</TransitionGroup>
 
 									<div className="col-sm-12">
 							  		{this.prevStepButton()}
