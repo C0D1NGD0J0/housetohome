@@ -842,6 +842,10 @@ h1, h2, h3, h4 {
   padding-left: 2px;
 }
 
+.property-features-list li:first-child{
+  padding-left: 0;
+}
+
 .img-preview {
   width: 100%;
   position: relative;

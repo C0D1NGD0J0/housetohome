@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
-// import { } from "../../../actions/userAction";
-import InputField from "../../../helpers/FormElements/inputField";
-import SelectTag from "../../../helpers/FormElements/selectField";
 import Panel from "../../layout/Panel";
+import StepOne from "./Step1";
+import StepTwo from "./Step2";
+import StepThree from "./Step3";
+import StepFour from "./Step4";
+import StepFive from "./Step5";
 
 class NewEmployee extends Component {
   constructor(props) {
@@ -40,9 +42,27 @@ class NewEmployee extends Component {
 					</div>
 
 					<div className="col-xs-8 col-sm-9">
-						<form onSubmit={this.onFormSubmit} className="form">
-							
-						</form>
+						<Panel title="New Listing">
+							<form onSubmit={this.onFormSubmit} className="form">
+								<div className="row">
+									<StepOne />
+									<StepTwo />
+									<StepThree />
+									<StepFour />
+									<StepFive />
+
+									<div className="col-sm-12">
+							  		<button className="btn btn-success pull-right">
+							  			Next <i className="fa fa-arrow-right"></i>
+							  		</button>
+
+							  		<button className="btn btn-default pull-left">
+							  			<i className="fa fa-arrow-left"></i> PREV
+							  		</button>
+									</div>
+								</div>
+							</form>
+						</Panel>
 					</div>
 				</div>
 			</ContentWrapper>

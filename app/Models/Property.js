@@ -19,10 +19,10 @@ const PropertySchema = new Schema({
 	featured: {type: Boolean, default: false},
 	handler: {type: Schema.Types.ObjectId, ref: 'User'},
 	features: {
-		bedroom:{type: Number, default: 1},
-		bathroom: {type: Number, default: 1},
-		maxCapacity: {type: Number, default: 1},
-		floors: {type: Number, default: 1},
+		bedroom:{type: Number, default: 0},
+		bathroom: {type: Number, default: 0},
+		maxCapacity: {type: Number, default: 0},
+		floors: {type: Number, default: 0},
 		parking: {type: Number, default: 0},
 	},
 	extras: {

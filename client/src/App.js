@@ -11,7 +11,7 @@ import Dashboard from "./components/User/Dashboard";
 import AccountUpdate from "./components/User/AccountUpdate";
 import AdminDashboard from "./components/User/admin/AdminDashboard";
 import NewEmployee from "./components/User/admin/NewEmployee";
-import NewListing from "./components/User/admin/NewListing";
+import NewListing from "./components/Listing/NewListing/";
 import { loadUserAction } from "./actions/authAction";
 import { clearErrors } from "./actions/utilAction";
 import { setAuthHeaderToken } from "./helpers/";
