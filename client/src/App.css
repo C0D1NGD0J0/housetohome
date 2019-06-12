@@ -108,7 +108,8 @@ hr.hr {
   background-color: rgba(97, 137, 47, 0.4);
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -1386,4 +1387,12 @@ h1, h2, h3, h4 {
 .displayStep-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in;
+}
+
+.listing-info-overview li{
+  border: none !important;
+}
+
+.listing-info-overview h5{
+  display: inline-block;
 }

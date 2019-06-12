@@ -55,16 +55,13 @@ class NewListing extends Component {
 	
   onFormSubmit = (e) =>{
 		e.preventDefault();
-		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = this.state;
-		
-		const formData = { description, propertyType, listingType, size, featured, yearBuilt, price, handler, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude };
-		
-		console.log(this.state);
+		const { currentStep, ...formData } = this.state;		
+		console.log(formData);
   }
 
   nextStep = (e) =>{
   	e.preventDefault();
-  	let currentStep = this.state.currentStep;
+  	let { currentStep } =this.state;
   	currentStep = currentStep >= 4 ? 5 : currentStep + 1;
   	return this.setState({ currentStep });
   }
@@ -78,13 +75,13 @@ class NewListing extends Component {
 
   nextStepButton = () =>{
   	const { currentStep } = this.state;
-  	if(currentStep < 5){
+  	if(currentStep <= 4){
   		return(
 				<button className="btn btn-success pull-right" onClick={this.nextStep}>
 	  			Next <i className="fa fa-arrow-right"></i>
 	  		</button>
   		);
-  	}
+  	};
   	return null;
   }
 
@@ -102,10 +99,10 @@ class NewListing extends Component {
 
   render() {
 		const { errors } = this.props;
-		const { currentStep } = this.state;
+		const { photos, currentStep, ...values } = this.state;
 
     return(
-			<ContentWrapper containerClass="container">
+    	<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-xs-4 col-sm-3">
 						<SidebarWrapper>
@@ -120,9 +117,10 @@ class NewListing extends Component {
 									<TransitionGroup component={null}>
 										<CSSTransition in={currentStep === 1} classNames="displayStep" timeout={500}>
 											<StepOne 
-												currentStep={this.state.currentStep}
+												currentStep={currentStep}
 												onchange={this.onFormFieldChange}
 												value={this.state}
+												error={errors && errors}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -130,9 +128,10 @@ class NewListing extends Component {
 									<TransitionGroup component={null}>
 										<CSSTransition in={currentStep === 2} classNames="displayStep" timeout={500}>
 											<StepTwo 
-												currentStep={this.state.currentStep}
+												currentStep={currentStep}
 												onchange={this.onSelectChange}
 												value={this.state}
+												error={errors}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -140,9 +139,10 @@ class NewListing extends Component {
 									<TransitionGroup component={null}>
 										<CSSTransition in={currentStep === 3} classNames="displayStep" timeout={500}>
 											<StepThree 
-												currentStep={this.state.currentStep}
+												currentStep={currentStep}
 												onchange={this.onFormFieldChange}
 												value={this.state}
+												error={errors}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -151,8 +151,9 @@ class NewListing extends Component {
 										<CSSTransition in={currentStep === 4} classNames="displayStep" timeout={500}>
 											<StepFour
 												value={this.state.photos}
+												error={errors}
 												deletePreviewImg=""
-												currentStep={this.state.currentStep}
+												currentStep={currentStep}
 												onchange={this.onFormFieldChange}
 											/>
 										</CSSTransition>
@@ -160,11 +161,7 @@ class NewListing extends Component {
 									
 									<TransitionGroup component={null}>
 										<CSSTransition in={currentStep === 5} classNames="displayStep" timeout={500}>
-											<StepFive
-												currentStep={this.state.currentStep}
-												onchange={this.onSelectChange}
-												value={this.state}
-											/>
+											<StepFive currentStep={currentStep} values={values} />
 										</CSSTransition>
 									</TransitionGroup>
 

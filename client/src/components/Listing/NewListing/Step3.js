@@ -7,7 +7,8 @@ import Panel from "../../layout/Panel";
 
 const StepThree = ({ currentStep, onchange, value }) => {
 	if(currentStep !== 3) return null;
-
+	const error = {};
+	
   return (
 		<Fragment>
 			<div className="col-sm-12">
@@ -20,6 +21,7 @@ const StepThree = ({ currentStep, onchange, value }) => {
 					placeholder="Property Address..." 
 					value={value.address}
 					name="address"
+					error={error.address}
 					label="Address"
 					onChange={onchange}
 				/>
@@ -31,6 +33,7 @@ const StepThree = ({ currentStep, onchange, value }) => {
 					placeholder="Enter longitude..." 
 					value={value.longitude}
 					name="longitude"
+					error={error.longitude}
 					label="Longitude"
 					onChange={onchange}
 				/>
@@ -42,6 +45,7 @@ const StepThree = ({ currentStep, onchange, value }) => {
 					placeholder="Enter Latitude..." 
 					value={value.latitude}
 					name="latitude"
+					error={error.latitude}
 					label="Latitude"
 					onChange={onchange}
 				/>

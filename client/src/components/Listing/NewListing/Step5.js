@@ -5,45 +5,22 @@ import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import TextAreaField from "../../../helpers/FormElements/textAreaField";
 import Panel from "../../layout/Panel";
 
-const StepFive = ({ currentStep, onchange, value }) => {
+const StepFive = ({ currentStep, values }) => {
 	if(currentStep !== 5) return null;
-	const ischecked = (value) => (value === true ? true : false);
+	const liElement = Object.keys(values).map((key, i) =>(
+		<li key={i} className="list-group-item">
+			<h5>{key}:</h5> <span>{values[key]}</span>
+		</li>
+	));
 
   return (
-		<Fragment>
-			<h4 style={{paddingLeft: "2rem", marginBottom: "0"}}>Admin Settings</h4>
-			<div className="col-sm-12">
-				<ul className="property-features-list">
-					<li className="col-sm-4">
-						<CheckboxField 
-							name="featured"
-							label="Featured"
-							isChecked={ischecked(value.featured)}
-							onSelectChange={onchange}
-						/>
-					</li>
+		<div className="col-sm-12">
+			<ul className="list-group listing-info-overview">
+				{liElement}
+			</ul>
 
-					<li className="col-sm-4">
-						<CheckboxField 
-							name="isActive"
-							label="Publish"
-							isChecked={ischecked(value.isActive)}
-							onSelectChange={onchange}
-						/>
-					</li>
-				</ul>
-			</div>
-
-			{/*<div className="col-sm-12">
-				<SelectTag 
-					label="Property Handler" 
-					name="handler" 
-					onChange={onchange}
-					value={value.handler} 
-					options={['rent', 'sale', 'lease']} 
-				/>
-			</div>*/}
-		</Fragment>
+			<button className="btn btn-danger pull-right">Create New Listing</button>
+		</div>
   );
 };
 
