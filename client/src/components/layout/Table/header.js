@@ -1,13 +1,16 @@
 import React from 'react';
 
-const Header = ({ headerTitles }) => {
+const Header = ({ headers }) => {
+  
   return (
     <thead>
       <tr>
-        {headerTitles.map((title, i) =>{
-        	return <th key={i}>{title.toUpperCase()}</th>
+        {headers && headers.map((title, i) =>{
+        	return <th key={i} className="text-capitalize">{title}</th>
         })}
+        <th>Action</th>
       </tr>
+
     </thead>  
   );
 };

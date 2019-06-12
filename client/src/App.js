@@ -10,6 +10,8 @@ import Alert from "./components/layout/Alert";
 import Dashboard from "./components/User/Dashboard";
 import AccountUpdate from "./components/User/AccountUpdate";
 import AdminDashboard from "./components/User/admin/AdminDashboard";
+import ManageListings from "./components/User/admin/ManageListings";
+import ManageUsers from "./components/User/admin/ManageUsers";
 import NewEmployee from "./components/User/admin/NewEmployee";
 import NewListing from "./components/Listing/NewListing/";
 import { loadUserAction } from "./actions/authAction";
@@ -56,6 +58,9 @@ const OtherRoutes = () =>(
 			<Navbar />
 			<AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
 			<AdminPrivateRoute exact path="/admin/new_employee" component={NewEmployee} />
+			<AdminPrivateRoute exact path="/admin/manage_listings" component={ManageListings} />
+			<AdminPrivateRoute exact path="/admin/manage_users" component={ManageUsers} />
+			{/*<AdminPrivateRoute exact path="/admin/manage_reservations" component={ManageReservations} />*/}
 			<AdminPrivateRoute exact path="/new_listing" component={NewListing} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 			<PrivateRoute exact path="/account_update" component={AccountUpdate} />

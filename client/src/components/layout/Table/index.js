@@ -3,12 +3,12 @@ import TableHead from "./header";
 import TableBody from "./body";
 
 const Table = ({ resource }) => {
-	const headerTitles = Object.keys(resource[0]);
+	const headers = Object.keys(resource[0]);
 	
-  return (
+	return (
   	<table className="table table-condensed table-bordered customTable">
-	    <TableHead headerTitles={headerTitles}/>
-			<TableBody resource={resource}/>
+	    <TableHead headers={headers}/>
+			<TableBody headers={headers} resource={resource}/>
 	  </table> 
   );
 };
