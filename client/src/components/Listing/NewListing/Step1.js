@@ -3,7 +3,7 @@ import InputField from "../../../helpers/FormElements/inputField";
 import SelectTag from "../../../helpers/FormElements/selectField";
 import Panel from "../../layout/Panel";
 
-const StepOne = ({onchange, value, currentStep}) =>{
+const StepOne = ({onchange, currentStep, value}) =>{
 	if(currentStep !== 1) return null;
 
   return (
@@ -94,7 +94,7 @@ const StepOne = ({onchange, value, currentStep}) =>{
 					className="form-control" 
 					placeholder="Enter Property Size..." 
 					value={value.size}
-					name="price"
+					name="size"
 					label="Living Size (sqft)"
 					onChange={onchange}
 				/>
@@ -120,7 +120,7 @@ const StepOne = ({onchange, value, currentStep}) =>{
 					value={value.parking}
 					name="parking"
 					label="No. Car Parks"
-					onChang={onchange}
+					onChange={onchange}
 				/>
 	  	</div>
 	  </Fragment>	

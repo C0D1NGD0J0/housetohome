@@ -7,6 +7,7 @@ import Panel from "../../layout/Panel";
 
 const StepFive = ({ currentStep, onchange, value }) => {
 	if(currentStep !== 5) return null;
+	const ischecked = (value) => (value === true ? true : false);
 
   return (
 		<Fragment>
@@ -14,24 +15,34 @@ const StepFive = ({ currentStep, onchange, value }) => {
 			<div className="col-sm-12">
 				<ul className="property-features-list">
 					<li className="col-sm-4">
-						<CheckboxField name="featured" value="" label="Featured" options="" onSelectChange="" error=""/>
+						<CheckboxField 
+							name="featured"
+							label="Featured"
+							isChecked={ischecked(value.featured)}
+							onSelectChange={onchange}
+						/>
 					</li>
 
 					<li className="col-sm-4">
-						<CheckboxField name="active" value="" label="Publish" options="" onSelectChange="" error=""/>
+						<CheckboxField 
+							name="isActive"
+							label="Publish"
+							isChecked={ischecked(value.isActive)}
+							onSelectChange={onchange}
+						/>
 					</li>
 				</ul>
 			</div>
 
-			<div className="col-sm-12">
+			{/*<div className="col-sm-12">
 				<SelectTag 
 					label="Property Handler" 
-					name="listingType" 
-					selectChange="" 
-					value="" 
+					name="handler" 
+					onChange={onchange}
+					value={value.handler} 
 					options={['rent', 'sale', 'lease']} 
 				/>
-			</div>
+			</div>*/}
 		</Fragment>
   );
 };

@@ -7,6 +7,7 @@ import Panel from "../../layout/Panel";
 
 const StepTwo = ({ currentStep, onchange, value }) => {
 	if(currentStep !== 2) return null;
+	const ischecked = (value) => (value === true ? true : false);
 
   return (
 		<Fragment>
@@ -24,27 +25,27 @@ const StepTwo = ({ currentStep, onchange, value }) => {
 			<div className="col-sm-12">
 				<ul className="property-features-list">
 					<li className="col-sm-2">
-						<CheckboxField name="is_tv" value={value.is_tv} label="Cable TV" options="" onChange={onchange} error=""/>
+						<CheckboxField name="is_tv" label="Cable TV" isChecked={ischecked(value.is_tv)} onSelectChange={onchange} error="" />
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="is_ac" value={value.is_ac} label="AC" options="" onChange={onchange} error=""/>
+						<CheckboxField name="is_ac" label="AC" isChecked={ischecked(value.is_ac)} onSelectChange={onchange} error=""/>
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="is_heating" value={value.is_heating} label="Heating" options="" onChange={onchange} error=""/>
+						<CheckboxField name="is_heating" label="Heating" isChecked={ischecked(value.is_heating)} onSelectChange={onchange} error=""/>
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="is_internet" value={value.is_internet} label="WIFI" options="" onChange={onchange} error=""/>
+						<CheckboxField name="is_internet" label="WIFI" isChecked={ischecked(value.is_internet)} onSelectChange={onchange} error=""/>
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="is_kitchen" value={value.is_kitchen} label="Kitchen" options="" onChange={onchange} error=""/>
+						<CheckboxField name="is_kitchen" label="Kitchen" isChecked={ischecked(value.is_kitchen)} onSelectChange={onchange} error=""/>
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="pets" value={value.pets} label="Pets" options="" onChange={onchange} error=""/>
+						<CheckboxField name="pets" label="Pets" isChecked={ischecked(value.pets)} onSelectChange={onchange} error=""/>
 					</li>
 				</ul>
 			</div>

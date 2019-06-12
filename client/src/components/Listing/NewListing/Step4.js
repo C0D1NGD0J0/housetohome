@@ -8,17 +8,17 @@ import Panel from "../../layout/Panel";
 import ImagePreview from "./ImgPreview";
 import house_1 from "../../../assets/img/house_1.jpg";
 
-const StepFour = ({ currentStep, onchange }) => {
+const StepFour = ({ value, currentStep, onchange }) => {
 	if(currentStep !== 4) return null;
 
   return (
 		<Fragment>
 			<div className="col-sm-3">
-				<ImagePreview deletePreviewImg="" source="" />
+				{/*<ImagePreview deletePreviewImg="" source={house_1} />*/}
 			</div>
 			
 			<div className="col-sm-12">
-				<FileUpload title="Upload Photos" onChange={onchange} />
+				<FileUpload title="Upload Photos" onChange={onchange} name={value} />
 			</div>
 
 			{/*<div className="col-sm-12">

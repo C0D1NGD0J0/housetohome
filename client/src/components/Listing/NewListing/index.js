@@ -11,7 +11,7 @@ import StepThree from "./Step3";
 import StepFour from "./Step4";
 import StepFive from "./Step5";
 
-class NewEmployee extends Component {
+class NewListing extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,21 +29,28 @@ class NewEmployee extends Component {
     	maxCapacity: "",
     	floors: "",
     	parking: "",
-    	is_tv: "",
-    	is_kitchen: "",
-    	is_ac: "",
-    	is_heating: "",
-    	is_internet: "",
-    	pets: "",
-    	isActive: "",
+    	is_tv: false,
+    	is_kitchen: false,
+    	is_ac: false,
+    	is_heating: false,
+    	is_internet: false,
+    	pets: false,
+    	isActive: false,
     	address: "",
     	latitude: "",
-    	longitude: ""
+    	longitude: "",
+    	photos: []
     };
   }
 
   onFormFieldChange = (e) =>{
-		this.setState({ [e.target.name]: e.target.value });
+  	const { name, value } = e.target;
+		return this.setState({ [name]: value });
+  }
+
+  onSelectChange = (e) =>{
+  	const { name } = e.target;
+  	return this.setState({ [name]: !this.state[name] });
   }
 	
   onFormSubmit = (e) =>{
@@ -51,12 +58,8 @@ class NewEmployee extends Component {
 		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = this.state;
 		
 		const formData = { description, propertyType, listingType, size, featured, yearBuilt, price, handler, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude };
-
-		console.log(formData);
-  }
-
-  onSelectChange = (e) =>{
-  	this.setState({ [e.target.name]: e.target.value });
+		
+		console.log(this.state);
   }
 
   nextStep = (e) =>{
@@ -99,10 +102,10 @@ class NewEmployee extends Component {
 
   render() {
 		const { errors } = this.props;
-		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler,bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, currentStep } = this.state;
+		const { currentStep } = this.state;
 
     return(
-    	<ContentWrapper containerClass="container">
+			<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-xs-4 col-sm-3">
 						<SidebarWrapper>
@@ -119,7 +122,7 @@ class NewEmployee extends Component {
 											<StepOne 
 												currentStep={this.state.currentStep}
 												onchange={this.onFormFieldChange}
-												value={bedroom, bathroom, maxCapacity, price, yearBuilt, price, floors, parking, listingType, propertyType}
+												value={this.state}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -128,8 +131,8 @@ class NewEmployee extends Component {
 										<CSSTransition in={currentStep === 2} classNames="displayStep" timeout={500}>
 											<StepTwo 
 												currentStep={this.state.currentStep}
-												onchange={this.onFormFieldChange}
-												value={description, is_tv, is_ac, is_heating, is_internet, is_kitchen, pets}
+												onchange={this.onSelectChange}
+												value={this.state}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -139,14 +142,16 @@ class NewEmployee extends Component {
 											<StepThree 
 												currentStep={this.state.currentStep}
 												onchange={this.onFormFieldChange}
-												value={address,longitude, latitude}
+												value={this.state}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
 									
 									<TransitionGroup component={null}>
 										<CSSTransition in={currentStep === 4} classNames="displayStep" timeout={500}>
-											<StepFour 
+											<StepFour
+												value={this.state.photos}
+												deletePreviewImg=""
 												currentStep={this.state.currentStep}
 												onchange={this.onFormFieldChange}
 											/>
@@ -157,8 +162,8 @@ class NewEmployee extends Component {
 										<CSSTransition in={currentStep === 5} classNames="displayStep" timeout={500}>
 											<StepFive
 												currentStep={this.state.currentStep}
-												onchange={this.onFormFieldChange}
-												deletePreviewImg={() => "hello"}
+												onchange={this.onSelectChange}
+												value={this.state}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -183,4 +188,4 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewEmployee);
+export default connect(mapStateToProps, mapDispatchToProps)(NewListing);
