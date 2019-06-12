@@ -36,10 +36,7 @@ const PropertySchema = new Schema({
 	location: {
 		_type: {type: String, default: 'Point'},
 		coordinates: [{type: Number, required: [true, "You must supply coordinates."]}],
-		address: {
-			type: String,
-			required: [true, 'Property address must be provided.']
-		}
+		address: {type: String, required: [true, 'Property address must be provided.']}
 	},
 	photos: [{String}],
 	author: {type: Schema.Types.ObjectId, ref: "User"},

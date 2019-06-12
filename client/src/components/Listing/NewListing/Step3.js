@@ -31,9 +31,9 @@ const StepThree = ({ currentStep, onchange, value }) => {
 				<InputField
 					className="form-control" 
 					placeholder="Enter longitude..." 
-					value={value.longitude}
+					value={value.lng}
 					name="longitude"
-					error={error.longitude}
+					error={error.lng}
 					label="Longitude"
 					onChange={onchange}
 				/>
@@ -43,9 +43,9 @@ const StepThree = ({ currentStep, onchange, value }) => {
 				<InputField
 					className="form-control" 
 					placeholder="Enter Latitude..." 
-					value={value.latitude}
+					value={value.lat}
 					name="latitude"
-					error={error.latitude}
+					error={error.lat}
 					label="Latitude"
 					onChange={onchange}
 				/>

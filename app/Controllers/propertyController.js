@@ -16,14 +16,14 @@ const propertyCntrl = {
 
 	create: async (req, res, next) =>{
 		const errors = {};
-		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = req.body;
+		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, lat, lng } = req.body;
 		
 		try {			
 			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {}, features: {}, extras: {}, handler: ObjectId(handler) || req.currentuser.id });
 			
 			property.location.address = address;
-			property.location.coordinates[0] = latitude;
-			property.location.coordinates[1] = longitude;
+			property.location.coordinates[0] = lng;
+			property.location.coordinates[1] = lat;
 			
 			property.features = { bedroom, bathroom, maxCapacity, floors, parking };
 			property.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets};

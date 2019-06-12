@@ -37,8 +37,8 @@ class NewListing extends Component {
     	pets: false,
     	isActive: false,
     	address: "",
-    	latitude: "",
-    	longitude: "",
+    	lat: "",
+    	lng: "",
     	photos: []
     };
   }

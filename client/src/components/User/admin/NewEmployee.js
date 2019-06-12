@@ -52,77 +52,79 @@ class NewEmployee extends Component {
 					</div>
 
 					<div className="col-xs-8 col-sm-9">
-						<form onSubmit={this.onFormSubmit} className="form">
-							<div className="row">
-								<div className="col-sm-4">
-									<InputField
-										type="text" 
-										className="form-control" 
-										placeholder="Enter First Name..." 
-										value={firstName}
-										name="firstName"
-										label="First Name"
-										onChange={this.onFormFieldChange} 
-									/>
-								</div>
+						<Panel title="New Employee">
+							<form onSubmit={this.onFormSubmit} className="form">
+								<div className="row">
+									<div className="col-sm-4">
+										<InputField
+											type="text" 
+											className="form-control" 
+											placeholder="Enter First Name..." 
+											value={firstName}
+											name="firstName"
+											label="First Name"
+											onChange={this.onFormFieldChange} 
+										/>
+									</div>
 
-								<div className="col-sm-4">
-									<InputField
-										type="text" 
-										className="form-control" 
-										placeholder="Enter Last Name..." 
-										value={lastName}
-										name="lastName"
-										label="Last Name"
-										onChange={this.onFormFieldChange} 
-									/>
-								</div>
-								
-								<div className="col-sm-4">
-									<InputField
-										type="text" 
-										className="form-control" 
-										placeholder="Enter Phone number..." 
-										value={phone}
-										name="phone"
-										label="Contact Number(#)"
-										onChange={this.onFormFieldChange} 
-									/>
-								</div>
+									<div className="col-sm-4">
+										<InputField
+											type="text" 
+											className="form-control" 
+											placeholder="Enter Last Name..." 
+											value={lastName}
+											name="lastName"
+											label="Last Name"
+											onChange={this.onFormFieldChange} 
+										/>
+									</div>
+									
+									<div className="col-sm-4">
+										<InputField
+											type="text" 
+											className="form-control" 
+											placeholder="Enter Phone number..." 
+											value={phone}
+											name="phone"
+											label="Contact Number(#)"
+											onChange={this.onFormFieldChange} 
+										/>
+									</div>
 
-								<div className="col-sm-12">
-									<InputField
-										type="email" 
-										className="form-control" 
-										placeholder="Enter Email address..." 
-										value={email}
-										name="email"
-										label="Email"
-										onChange={this.onFormFieldChange} 
-									/>
-								</div>
+									<div className="col-sm-12">
+										<InputField
+											type="email" 
+											className="form-control" 
+											placeholder="Enter Email address..." 
+											value={email}
+											name="email"
+											label="Email"
+											onChange={this.onFormFieldChange} 
+										/>
+									</div>
 
-								<div className="col-sm-6">
-									<InputField
-										type="password" 
-										className="form-control" 
-										placeholder="Enter Password..." 
-										value={password}
-										name="password"
-										label="Password"
-										onChange={this.onFormFieldChange} 
-									/>
-								</div>
+									<div className="col-sm-6">
+										<InputField
+											type="password" 
+											className="form-control" 
+											placeholder="Enter Password..." 
+											value={password}
+											name="password"
+											label="Password"
+											onChange={this.onFormFieldChange} 
+										/>
+									</div>
 
-								<div className="col-sm-6">
-									<SelectTag label="Access Privilage" name="role" selectChange={this.onSelectChange} value={role} options={['admin', 'staff']} />
-								</div>
-							</div><br/>
+									<div className="col-sm-6">
+										<SelectTag label="Access Privilage" name="role" selectChange={this.onSelectChange} value={role} options={['admin', 'staff']} />
+									</div>
+								</div><br/>
 
-							<div className="form-group">
-								<input type="submit" value="Add Employee" className="btn btn-green btn-block" />
-							</div>
-						</form>
+								<div className="form-group">
+									<input type="submit" value="Add Employee" className="btn btn-success btn-block" />
+								</div>
+							</form>
+						</Panel>
 					</div>
 				</div>
 			</ContentWrapper>
