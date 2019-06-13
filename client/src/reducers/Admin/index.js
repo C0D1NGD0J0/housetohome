@@ -5,5 +5,5 @@ import ErrorsReducer from "../errors";
 
 export default combineReducers({
 	lisitng: ListingReducer,
-	user: UsersReducer
+	users: UsersReducer
 });

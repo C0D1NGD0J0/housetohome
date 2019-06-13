@@ -49,7 +49,7 @@ const Login = ({ loginAction, user: {isAuthenticated, user}, errors }) => {
 							onChange={onFormFieldChange} 
 						/><br/>
 
-						<input type="submit" value="Register" className="btn btn-green btn-block" />
+						<input type="submit" value="Login" className="btn btn-green btn-block" />
 
 						<div className="form_footer">
 							<Link to="/forgot_password">Forgot your password?</Link> <span>|</span>

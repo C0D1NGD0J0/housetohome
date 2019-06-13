@@ -14,6 +14,7 @@ export default function(state = initialState, action){
 		case LOAD_CURRENTUSER:
 			return {
 				...state,
+				token: null,
 				isAuthenticated: true,
 				loading: false,
 				info: {...payload}

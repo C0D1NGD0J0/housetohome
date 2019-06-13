@@ -31,12 +31,17 @@ class NewEmployee extends Component {
 		const { firstName, lastName, email, phone, password, role } = this.state;
 		const data = { firstName, lastName, email, phone, password, role };
 
-		return this.props.registerEmployeeAction(data, this.props.history);
+		this.props.registerEmployeeAction(data, this.props.history);
+		return this.resetForm();
   }
 
   onSelectChange = (e) =>{
   	this.setState({ role: e.target.value });
   }
+
+  resetForm = () =>{
+		this.setState({firstName: "",lastName: "",email: "",phone: "",password: "",role: ""});
+  };
 
   render() {
   	const { firstName, lastName, email, phone, password, role } = this.state;

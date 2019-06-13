@@ -28,7 +28,6 @@ const isAuthorizedAsAdmin = function(req, res, next){
 	
 	const decoded = jwt.verify(token, process.env.SECRET_KEY);
 	req.currentuser = { ...decoded };
-	console.log(decoded)
 	if(req.currentuser.role.isAdmin) return next();
 	
 	return res.status(401).json({msg: "Access Denied!!"});

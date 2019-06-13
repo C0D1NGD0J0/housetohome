@@ -28,9 +28,12 @@ if(localStorage.token){
 };
 
 const App = () =>{
-	useEffect(() =>{
-		store.dispatch(loadUserAction());
-	}, []);
+	store.dispatch(loadUserAction());
+	
+	// useEffect(() =>{
+	// 	store.dispatch(loadUserAction());
+	// 	console.log('fired')
+	// }, []);
 
   return (
   	<Provider store={store}>

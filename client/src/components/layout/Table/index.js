@@ -1,14 +1,9 @@
 import React from 'react';
-import TableHead from "./header";
-import TableBody from "./body";
 
-const Table = ({ resource }) => {
-	const headers = Object.keys(resource[0]);
-	
+const Table = ({ children }) => {
 	return (
-  	<table className="table table-condensed table-bordered customTable">
-	    <TableHead headers={headers}/>
-			<TableBody headers={headers} resource={resource}/>
+  	<table className="table customTable">
+			{children}
 	  </table> 
   );
 };

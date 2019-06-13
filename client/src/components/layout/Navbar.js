@@ -25,7 +25,7 @@ class Navbar extends Component {
 			        <li><Link to="#!">Listings</Link></li>
 			        { isAuthenticated ?
 			        	<li className="dropdown">
-				          <Link to="#!" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{info.firstName}<span className="caret"></span></Link>
+				          <Link to="#!" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{info && info.firstName}<span className="caret"></span></Link>
 				          <ul className="dropdown-menu">
 				            <li><Link to="/dashboard">Dashboard</Link></li>
 				            <li><Link to="/account_update">Settings</Link></li>
