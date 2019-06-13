@@ -51,7 +51,7 @@ class AccountUpdate extends Component {
 		const { errors } = this.props;
 
     return(
-    	<ContentWrapper containerClass="container-fluid">
+    	<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-xs-4 col-sm-3">
 						<SidebarWrapper>
