@@ -1,18 +1,19 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import ElementWrapper from "./FormElementWrapper";
 
-const SelectTag = ({ label, name, selectChange, value, options }) => {
+const SelectTag = ({ label, name, selectChange, value, options, error }) => {
   return (
-  	<Fragment>
+  	<ElementWrapper error={error}>
 			<label htmlFor={name}>{label}</label>
 			<select name={name} value={value} onChange={selectChange} id={name}>
-				<option value={value} disabled>{value}</option>
+				<option value={value} disabled selected hidden>{value}</option>
 				
 				{ options && options.map(item =>{
 						return (<option key={item} value={item}>{item.toUpperCase()}</option>);
 					})
 				}
 			</select>
-		</Fragment>
+		</ElementWrapper>
   );
 };
 

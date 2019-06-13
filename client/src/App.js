@@ -60,7 +60,6 @@ const OtherRoutes = () =>(
 			<AdminPrivateRoute exact path="/admin/new_employee" component={NewEmployee} />
 			<AdminPrivateRoute exact path="/admin/manage_listings" component={ManageListings} />
 			<AdminPrivateRoute exact path="/admin/manage_users" component={ManageUsers} />
-			{/*<AdminPrivateRoute exact path="/admin/manage_reservations" component={ManageReservations} />*/}
 			<AdminPrivateRoute exact path="/new_listing" component={NewListing} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 			<PrivateRoute exact path="/account_update" component={AccountUpdate} />

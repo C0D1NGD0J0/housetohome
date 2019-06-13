@@ -44,11 +44,11 @@ const authCntrl = {
 			let foundUser = await User.findOne({ email });
 			
 			if(foundUser){
-				errors.mgs = `This email ${email} has already been taken.`;
+				errors.mgs = `The email: ${email} has already been taken.`;
 				return res.status(400).json(errors);
 			};
 			
-			if(req.currentuser.isAdmin){
+			if(req.currentuser.role.isAdmin){
 				const user = new User({firstName, lastName, email, phone, password, role: ROLES[1]});
 				const salt = await bcrypt.genSalt(10);
 					
@@ -58,9 +58,9 @@ const authCntrl = {
 				await user.save();
 				sendEmail(req, "acctActivation", user, token);
 
-				return res.status(200).json("Employee has been added.");
+				return res.status(200).json({ msg: "Employee has been added.", user: user.detailsToJSON() });
 			};
-			
+
 			errors.msg = "Unathourized to perform this action";
 			return res.status(401).json(errors);
 		} catch(err) {

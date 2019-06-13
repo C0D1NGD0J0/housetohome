@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
-// import { } from "../../../actions/userAction";
+import { registerEmployeeAction } from "../../../actions/adminAction";
 import InputField from "../../../helpers/FormElements/inputField";
 import SelectTag from "../../../helpers/FormElements/selectField";
 import Panel from "../../layout/Panel";
@@ -31,7 +31,7 @@ class NewEmployee extends Component {
 		const { firstName, lastName, email, phone, password, role } = this.state;
 		const data = { firstName, lastName, email, phone, password, role };
 
-		//return addEmployeeAction(data);
+		return this.props.registerEmployeeAction(data, this.props.history);
   }
 
   onSelectChange = (e) =>{
@@ -41,7 +41,7 @@ class NewEmployee extends Component {
   render() {
   	const { firstName, lastName, email, phone, password, role } = this.state;
 		const { errors } = this.props;
-
+		
     return(
     	<ContentWrapper containerClass="container">
 				<div className="row">
@@ -62,6 +62,7 @@ class NewEmployee extends Component {
 											placeholder="Enter First Name..." 
 											value={firstName}
 											name="firstName"
+											error={errors.firstName}
 											label="First Name"
 											onChange={this.onFormFieldChange} 
 										/>
@@ -74,6 +75,7 @@ class NewEmployee extends Component {
 											placeholder="Enter Last Name..." 
 											value={lastName}
 											name="lastName"
+											error={errors.lastName}
 											label="Last Name"
 											onChange={this.onFormFieldChange} 
 										/>
@@ -86,6 +88,7 @@ class NewEmployee extends Component {
 											placeholder="Enter Phone number..." 
 											value={phone}
 											name="phone"
+											error={errors.phone}
 											label="Contact Number(#)"
 											onChange={this.onFormFieldChange} 
 										/>
@@ -98,6 +101,7 @@ class NewEmployee extends Component {
 											placeholder="Enter Email address..." 
 											value={email}
 											name="email"
+											error={errors.email}
 											label="Email"
 											onChange={this.onFormFieldChange} 
 										/>
@@ -110,13 +114,14 @@ class NewEmployee extends Component {
 											placeholder="Enter Password..." 
 											value={password}
 											name="password"
+											error={errors.password}
 											label="Password"
 											onChange={this.onFormFieldChange} 
 										/>
 									</div>
 
 									<div className="col-sm-6">
-										<SelectTag label="Access Privilage" name="role" selectChange={this.onSelectChange} value={role} options={['admin', 'staff']} />
+										<SelectTag error={errors.role} label="Access Privilage" name="role" selectChange={this.onSelectChange} value={role} options={['admin', 'staff']} />
 									</div>
 								</div><br/>
 
@@ -133,9 +138,12 @@ class NewEmployee extends Component {
 };
 
 const mapStateToProps = state =>({
-	
+	admin: state.admin.user,
+	errors: state.errors
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+	registerEmployeeAction
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewEmployee);
