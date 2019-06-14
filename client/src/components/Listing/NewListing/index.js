@@ -11,6 +11,7 @@ import StepTwo from "./Step2";
 import StepThree from "./Step3";
 import StepFour from "./Step4";
 import StepFive from "./Step5";
+import Geocode from 'react-geocode';
 
 class NewListing extends Component {
   constructor(props) {
@@ -38,10 +39,12 @@ class NewListing extends Component {
     	pets: false,
     	isActive: false,
     	address: "",
+    	addressInfo: "",
     	latitude: "",
     	longitude: "",
     	photos: []
     };
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_APIKEY);
   }
 
   onFormFieldChange = (e) =>{
@@ -104,10 +107,26 @@ class NewListing extends Component {
   	return null;
   }
 
+  getGeoCodeFromAddress = async (e) =>{
+  	if(e.keyCode == 13 && e.target.name == 'address'){
+  		e.preventDefault();
+			await Geocode.fromAddress(this.state.address).then(
+			  response => {
+			  	const { formatted_address } = response.results[0];
+			    const { lat, lng } = response.results[0].geometry.location;
+			    this.setState({latitude: lat, longitude: lng, address: formatted_address});
+			  },
+			  error => {
+			    console.error(error);
+			  }
+			);
+  	};
+  }
+
   render() {
 		const { errors, listings: { all } } = this.props;
 		const { photos, currentStep, ...values } = this.state;
-
+		
     return(
     	<ContentWrapper containerClass="container">
 				<div className="row">
@@ -151,6 +170,7 @@ class NewListing extends Component {
 												onchange={this.onFormFieldChange}
 												value={this.state}
 												error={errors}
+												fn={this.getGeoCodeFromAddress}
 											/>
 										</CSSTransition>
 									</TransitionGroup>

@@ -5,7 +5,7 @@ import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import TextAreaField from "../../../helpers/FormElements/textAreaField";
 import Panel from "../../layout/Panel";
 
-const StepThree = ({ currentStep, onchange, value, error }) => {
+const StepThree = ({ currentStep, onchange, value, error, fn }) => {
 	if(currentStep !== 3) return null;
 	
   return (
@@ -22,6 +22,7 @@ const StepThree = ({ currentStep, onchange, value, error }) => {
 					name="address"
 					error={error && error.address}
 					label="Address"
+					keyDownFunc={fn}
 					onChange={onchange}
 				/>
 			</div>
@@ -35,6 +36,7 @@ const StepThree = ({ currentStep, onchange, value, error }) => {
 					error={error && error.longitude}
 					label="Longitude"
 					onChange={onchange}
+					disabled={true}
 				/>
 			</div>
 
@@ -46,7 +48,9 @@ const StepThree = ({ currentStep, onchange, value, error }) => {
 					name="latitude"
 					error={error && error.latitude}
 					label="Latitude"
+					readOnly="true"
 					onChange={onchange}
+					disabled={true}
 				/>
 			</div>
 		</Fragment>
