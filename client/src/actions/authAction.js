@@ -48,12 +48,12 @@ export const loadUserAction = () => async dispatch =>{
 		if(localStorage.token){
 			setAuthHeaderToken(localStorage.token);
 			const res = await axios.get("/api/users/currentuser");
-		
+			
 			const { info } = res.data;
 			const decoded = jwtDecode(localStorage.token);
 			const currentTime = Math.floor(Date.now().valueOf() / 1000);
-			if(decoded.exp < currentTime) return dispatch(logoutAction());
-
+			
+			if(decoded.exp <= currentTime) return dispatch(logoutAction());
 			return dispatch({ type: LOAD_CURRENTUSER, payload: info });
 		};
 	} catch(err) {
@@ -61,8 +61,9 @@ export const loadUserAction = () => async dispatch =>{
 	};
 };
 
-export const logoutAction = () => async dispatch =>{
-	dispatch({type: LOGOUT_CURRENTUSER, payload: {}});
+export const logoutAction = () => dispatch =>{
+	dispatch({ type: LOGOUT_CURRENTUSER, payload: {} });
+	console.log('am logging out...')
 	dispatch(setAlertAction("Logout successful...", "success"));
 	return window.location = "/";
 };

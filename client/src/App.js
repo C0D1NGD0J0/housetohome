@@ -14,27 +14,16 @@ import ManageListings from "./components/User/admin/ManageListings";
 import ManageUsers from "./components/User/admin/ManageUsers";
 import NewEmployee from "./components/User/admin/NewEmployee";
 import NewListing from "./components/Listing/NewListing/";
-import { loadUserAction } from "./actions/authAction";
 import { clearErrors } from "./actions/utilAction";
 import { setAuthHeaderToken } from "./helpers/";
 import { Provider } from "react-redux";
 import PrivateRoute from "./helpers/PrivateRoute";
 import AdminPrivateRoute from "./helpers/EmployeePrivateRoute";
 import store from "./store";
+import "./helpers/validateAuthUser";
 import './App.css';
 
-if(localStorage.token){
-	setAuthHeaderToken(localStorage.token);
-};
-
 const App = () =>{
-	store.dispatch(loadUserAction());
-	
-	// useEffect(() =>{
-	// 	store.dispatch(loadUserAction());
-	// 	console.log('fired')
-	// }, []);
-
   return (
   	<Provider store={store}>
 	  	<Router>
