@@ -43,7 +43,7 @@ const isAuthorizedAsStaff = function(req, res, next){
 	
 	const decoded = jwt.verify(token, process.env.SECRET_KEY);
 	req.currentuser = { ...decoded };
-	if(req.currentuser.isAdmin || req.currentuser.isStaff) return next();
+	if(req.currentuser.role.isAdmin || req.currentuser.role.isStaff) return next();
 	
 	return res.status(401).json({msg: "Access Denied!!"});
 };

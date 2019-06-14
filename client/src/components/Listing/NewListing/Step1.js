@@ -2,21 +2,21 @@ import React, { Fragment } from 'react';
 import InputField from "../../../helpers/FormElements/inputField";
 import SelectTag from "../../../helpers/FormElements/selectField";
 import Panel from "../../layout/Panel";
+import staticData from "./staticData";
 
-const StepOne = ({onchange, currentStep, value }) =>{
+const StepOne = ({onchange, currentStep, value, error }) =>{
 	if(currentStep !== 1) return null;
-	const error = {}; //temp
-
+	
   return (
   	<Fragment>
 	  	<div className="col-sm-6">
 				<SelectTag 
 					label="Listing Type" 
 					name="listingType" 
-					error={error.listingType}
+					error={error && error.listingType}
 					selectChange={onchange}
 					value={value.listingType}
-					options={['rent', 'sale', 'lease']} 
+					options={staticData.listingType} 
 				/>
 	  	</div>
 
@@ -24,10 +24,10 @@ const StepOne = ({onchange, currentStep, value }) =>{
 				<SelectTag 
 					label="Property Type" 
 					name="propertyType"  
-					error={error.propertyType}	
+					error={error && error.propertyType}	
 					value={value.propertyType}
 					selectChange={onchange}
-					options={['office', 'condo', 'house', 'land']} 
+					options={staticData.propertyType} 
 				/>
 	  	</div>
 
@@ -38,9 +38,8 @@ const StepOne = ({onchange, currentStep, value }) =>{
 					placeholder="No. of Bedrooms..." 
 					value={value.bedroom}
 					name="bedroom"
-					error={error.bedroom}
+					error={error && error.bedroom}
 					label="Bedrooms"
-					error={error.bedroom}
 					onChange={onchange}
 				/>
 	  	</div>
@@ -52,7 +51,7 @@ const StepOne = ({onchange, currentStep, value }) =>{
 					placeholder="No. Bathrooms..." 
 					value={value.bathroom}
 					name="bathroom"
-					error={error.bathroom}
+					error={error && error.bathroom}
 					label="Bathrooms"
 					onChange={onchange}
 				/>
@@ -65,7 +64,7 @@ const StepOne = ({onchange, currentStep, value }) =>{
 					placeholder="Max number of Occupants..." 
 					value={value.maxCapacity}
 					name="maxCapacity"
-					error={error.maxCapacity}
+					error={error && error.maxCapacity}
 					label="Max. Capacity"
 					onChange={onchange}
 				/>
@@ -78,7 +77,7 @@ const StepOne = ({onchange, currentStep, value }) =>{
 					placeholder="Enter Listing Price..." 
 					value={value.price}
 					name="price"
-					error={error.price}
+					error={error && error.price}
 					label="Price"
 					onChange={onchange}
 				/>
@@ -91,7 +90,7 @@ const StepOne = ({onchange, currentStep, value }) =>{
 					placeholder="Enter Built Year..." 
 					value={value.yearBuilt}
 					name="yearBuilt"
-					error={error.yearBuilt}
+					error={error && error.yearBuilt}
 					label="Year Built"
 					onChange={onchange}
 				/>
@@ -104,7 +103,7 @@ const StepOne = ({onchange, currentStep, value }) =>{
 					placeholder="Enter Property Size..." 
 					value={value.size}
 					name="size"
-					error={error.size}
+					error={error && error.size}
 					label="Living Size (sqft)"
 					onChange={onchange}
 				/>
@@ -117,7 +116,7 @@ const StepOne = ({onchange, currentStep, value }) =>{
 					placeholder="No. Floors..." 
 					value={value.floors}
 					name="floors"
-					error={error.floors}
+					error={error && error.floors}
 					label="No. Floors"
 					onChange={onchange}
 				/>
@@ -130,7 +129,7 @@ const StepOne = ({onchange, currentStep, value }) =>{
 					placeholder="No. Car Parking..." 
 					value={value.parking}
 					name="parking"
-					error={error.parking}
+					error={error && error.parking}
 					label="No. Car Parks"
 					onChange={onchange}
 				/>

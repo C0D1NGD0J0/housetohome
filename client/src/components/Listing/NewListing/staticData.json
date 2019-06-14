@@ -1,0 +1,5 @@
+{
+	"listingType": ["sale", "rent", "lease"],
+	"propertyType": ["condominium", "house", "office", "land", "apartment"],
+	"role": ["staff", "admin", "guest"]
+}

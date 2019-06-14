@@ -151,9 +151,16 @@ const validate = {
 
 		data.description = !isEmpty(data.description) ? data.description : "" ;
 		data.propertyType = !isEmpty(data.propertyType) ? data.propertyType : "" ;
+		data.listingType = !isEmpty(data.listingType) ? data.listingType : "" ;
 		data.size = !isEmpty(data.size) ? data.size : "" ;
+		data.address = !isEmpty(data.address) ? data.address : "" ;
 		data.yearBuilt = !isEmpty(data.yearBuilt) ? data.yearBuilt : "" ;
 		data.price = !isEmpty(data.price) ? data.price : "" ;
+		data.bedroom = !isEmpty(data.bedroom) ? data.bedroom : "";
+		data.bathroom = !isEmpty(data.bathroom) ? data.bathroom : "";
+		data.maxCapacity = !isEmpty(data.maxCapacity) ? data.maxCapacity : "";
+		data.floors = !isEmpty(data.floors) ? data.floors : "";
+		data.parking = !isEmpty(data.parking) ? data.parking : "";
 
 		if(Validator.isEmpty(data.description)){
 			errors.description = "Property description needs to be provided.";
@@ -189,7 +196,32 @@ const validate = {
 			errors.price = "Property price is not a valid format.";
 		};
 
+		if(Validator.isEmpty(data.address)){
+			errors.address = "Property address must be provided.";
+		};
+
+		if(Validator.isEmpty(data.listingType)){
+			errors.listingType = "Listing type must be provided.";
+		};
+
+		if(Validator.isEmpty(data.bedroom)){
+			errors.bedroom = "No. of bedrooms must be provided.";
+		};
+
+		if(Validator.isEmpty(data.bathroom)){
+			errors.bathroom = "No. of bathroom must be provided.";
+		};
+
+		if(Validator.isEmpty(data.maxCapacity)){
+			errors.maxCapacity = "Property max capacity can't be blank.";
+		};
+
+		if(Validator.isEmpty(data.parking)){
+			errors.parking = "No. car parking spaces must be provided.";
+		};
+
 		if(!isEmpty(errors)){
+			console.log("validation errors");
 			return res.status(400).json(errors);
 		};
 

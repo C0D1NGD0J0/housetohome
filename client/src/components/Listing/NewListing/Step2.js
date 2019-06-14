@@ -5,10 +5,9 @@ import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import TextAreaField from "../../../helpers/FormElements/textAreaField";
 import Panel from "../../layout/Panel";
 
-const StepTwo = ({ currentStep, onchange, value }) => {
+const StepTwo = ({ currentStep, onchange, value, checkBoxChange, error }) => {
 	if(currentStep !== 2) return null;
 	const ischecked = (value) => (value === true ? true : false);
-	const error = {};
 	
   return (
 		<Fragment>
@@ -18,7 +17,7 @@ const StepTwo = ({ currentStep, onchange, value }) => {
 					placeholder="Property Description" 
 					value={value.description} 
 					label="Description"
-					error={error.description}
+					error={error && error.description}
 					onChange={onchange}
 				/>
 			</div>
@@ -26,27 +25,27 @@ const StepTwo = ({ currentStep, onchange, value }) => {
 			<div className="col-sm-12">
 				<ul className="property-features-list">
 					<li className="col-sm-2">
-						<CheckboxField name="is_tv" label="Cable TV" isChecked={ischecked(value.is_tv)} onSelectChange={onchange} error={error.is_tv} />
+						<CheckboxField name="is_tv" label="Cable TV" isChecked={ischecked(value.is_tv)} onSelectChange={checkBoxChange} error={error && error.is_tv} />
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="is_ac" label="AC" isChecked={ischecked(value.is_ac)} onSelectChange={onchange} error={error.is_ac}/>
+						<CheckboxField name="is_ac" label="AC" isChecked={ischecked(value.is_ac)} onSelectChange={checkBoxChange} error={error && error.is_ac}/>
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="is_heating" label="Heating" isChecked={ischecked(value.is_heating)} onSelectChange={onchange} error={error.is_heating}/>
+						<CheckboxField name="is_heating" label="Heating" isChecked={ischecked(value.is_heating)} onSelectChange={checkBoxChange} error={error && error.is_heating}/>
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="is_internet" label="WIFI" isChecked={ischecked(value.is_internet)} onSelectChange={onchange} error={error.is_internet}/>
+						<CheckboxField name="is_internet" label="WIFI" isChecked={ischecked(value.is_internet)} onSelectChange={checkBoxChange} error={error && error.is_internet}/>
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="is_kitchen" label="Kitchen" isChecked={ischecked(value.is_kitchen)} onSelectChange={onchange} error={error.is_kitchen}/>
+						<CheckboxField name="is_kitchen" label="Kitchen" isChecked={ischecked(value.is_kitchen)} onSelectChange={checkBoxChange} error={error && error.is_kitchen}/>
 					</li>
 
 					<li className="col-sm-2">
-						<CheckboxField name="pets" label="Pets" isChecked={ischecked(value.pets)} onSelectChange={onchange} error={error.pets}/>
+						<CheckboxField name="pets" label="Pets" isChecked={ischecked(value.pets)} onSelectChange={checkBoxChange} error={error && error.pets}/>
 					</li>
 				</ul>
 			</div>
@@ -57,9 +56,9 @@ const StepTwo = ({ currentStep, onchange, value }) => {
 						<CheckboxField 
 							name="featured"
 							label="Featured"
-							error={error.featured}
+							error={error && error.featured}
 							isChecked={ischecked(value.featured)}
-							onSelectChange={onchange}
+							onSelectChange={checkBoxChange}
 						/>
 					</li>
 
@@ -67,9 +66,9 @@ const StepTwo = ({ currentStep, onchange, value }) => {
 						<CheckboxField 
 							name="isActive"
 							label="Publish"
-							error={error.isActive}
+							error={error && error.isActive}
 							isChecked={ischecked(value.isActive)}
-							onSelectChange={onchange}
+							onSelectChange={checkBoxChange}
 						/>
 					</li>
 				</ul>

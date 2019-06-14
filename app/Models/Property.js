@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 const slug = require("slug");
 
@@ -36,13 +37,25 @@ const PropertySchema = new Schema({
 	location: {
 		_type: {type: String, default: 'Point'},
 		coordinates: [{type: Number, required: [true, "You must supply coordinates."]}],
-		address: {type: String, required: [true, 'Property address must be provided.']}
+		address: {
+			type: String, 
+			required: [true, 'Property address must be provided.'],
+			unique: [true, 'Property with this address already exists.'],
+			trim: true,
+			lowercase: true
+		}
 	},
 	photos: [{String}],
 	author: {type: Schema.Types.ObjectId, ref: "User"},
 	reservations: [{id: Schema.Types.ObjectId, start: String, end: String}],
 	meta: {}
 }, {timestamps: true});
+
+PropertySchema.index({
+	"location.address": "text"
+});
+
+PropertySchema.plugin(uniqueValidator);
 
 PropertySchema.virtual("full_address").get(function(){
 	return `${this.address.unitNo} ${this.address.street} street, ${this.address.city.toUpperCase()}, ${this.address.state.toUpperCase()}, ${this.address.postCode.toUpperCase()}.`

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
+import { creatLisitngAction } from "../../../actions/listingAction";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from "../../layout/Panel";
@@ -37,8 +38,8 @@ class NewListing extends Component {
     	pets: false,
     	isActive: false,
     	address: "",
-    	lat: "",
-    	lng: "",
+    	latitude: "",
+    	longitude: "",
     	photos: []
     };
   }
@@ -56,7 +57,7 @@ class NewListing extends Component {
   onFormSubmit = (e) =>{
 		e.preventDefault();
 		const { currentStep, ...formData } = this.state;		
-		console.log(formData);
+		return this.props.creatLisitngAction(formData, this.props.history);
   }
 
   nextStep = (e) =>{
@@ -81,7 +82,13 @@ class NewListing extends Component {
 	  			Next <i className="fa fa-arrow-right"></i>
 	  		</button>
   		);
-  	};
+  	} else {
+  		return(
+				<button className="btn btn-green pull-right" onClick={this.onFormSubmit}>
+	  			<i className="fa fa-arrow-check"></i> Create Listing
+	  		</button>
+  		);
+  	}
   	return null;
   }
 
@@ -98,7 +105,7 @@ class NewListing extends Component {
   }
 
   render() {
-		const { errors } = this.props;
+		const { errors, listings: { all } } = this.props;
 		const { photos, currentStep, ...values } = this.state;
 
     return(
@@ -120,7 +127,7 @@ class NewListing extends Component {
 												currentStep={currentStep}
 												onchange={this.onFormFieldChange}
 												value={this.state}
-												error={errors && errors}
+												error={errors}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -129,7 +136,8 @@ class NewListing extends Component {
 										<CSSTransition in={currentStep === 2} classNames="displayStep" timeout={500}>
 											<StepTwo 
 												currentStep={currentStep}
-												onchange={this.onSelectChange}
+												onchange={this.onFormFieldChange}
+												checkBoxChange={this.onSelectChange}
 												value={this.state}
 												error={errors}
 											/>
@@ -161,7 +169,7 @@ class NewListing extends Component {
 									
 									<TransitionGroup component={null}>
 										<CSSTransition in={currentStep === 5} classNames="displayStep" timeout={500}>
-											<StepFive currentStep={currentStep} values={values} />
+											<StepFive currentStep={currentStep} values={values} error={errors}/>
 										</CSSTransition>
 									</TransitionGroup>
 
@@ -180,9 +188,12 @@ class NewListing extends Component {
 };
 
 const mapStateToProps = state =>({
-	
+	listings: state.listings,
+	errors: state.errors
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+	creatLisitngAction
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewListing);

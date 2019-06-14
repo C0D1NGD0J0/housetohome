@@ -5,9 +5,8 @@ import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import TextAreaField from "../../../helpers/FormElements/textAreaField";
 import Panel from "../../layout/Panel";
 
-const StepThree = ({ currentStep, onchange, value }) => {
+const StepThree = ({ currentStep, onchange, value, error }) => {
 	if(currentStep !== 3) return null;
-	const error = {};
 	
   return (
 		<Fragment>
@@ -21,7 +20,7 @@ const StepThree = ({ currentStep, onchange, value }) => {
 					placeholder="Property Address..." 
 					value={value.address}
 					name="address"
-					error={error.address}
+					error={error && error.address}
 					label="Address"
 					onChange={onchange}
 				/>
@@ -31,9 +30,9 @@ const StepThree = ({ currentStep, onchange, value }) => {
 				<InputField
 					className="form-control" 
 					placeholder="Enter longitude..." 
-					value={value.lng}
+					value={value.longitude}
 					name="longitude"
-					error={error.lng}
+					error={error && error.longitude}
 					label="Longitude"
 					onChange={onchange}
 				/>
@@ -43,9 +42,9 @@ const StepThree = ({ currentStep, onchange, value }) => {
 				<InputField
 					className="form-control" 
 					placeholder="Enter Latitude..." 
-					value={value.lat}
+					value={value.latitude}
 					name="latitude"
-					error={error.lat}
+					error={error && error.latitude}
 					label="Latitude"
 					onChange={onchange}
 				/>
