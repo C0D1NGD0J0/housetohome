@@ -9,18 +9,20 @@ import Table from "../../layout/Table";
 
 class AdminDashboard extends Component {
 	componentDidMount(){
-		if(!this.props.user || this.props.user.info && this.props.user.info.role.isGuest){
+		if(!this.props.currentuser || this.props.currentuser.info && this.props.currentuser.info.role.isGuest){
 			return this.props.history.push('/dashboard');
 		}
 	}
 
 	render() {
+		const { currentuser: { info } } = this.props;
+		
 		return (
 			<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-sm-4 col-md-3">
 						<SidebarWrapper>
-							<AdminSidebar />
+							<AdminSidebar user={info}/>
 						</SidebarWrapper>
 					</div>
 
@@ -87,7 +89,7 @@ class AdminDashboard extends Component {
 };
 
 const mapStateToProps = state =>({
-	user: state.user
+	currentuser: state.user
 });
 
 export default connect(mapStateToProps)(AdminDashboard);

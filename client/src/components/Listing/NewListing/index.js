@@ -129,7 +129,7 @@ class NewListing extends Component {
   }
 
   render() {
-		const { errors, listings: { all } } = this.props;
+		const { errors, listings: { all }, currentuser: { info } } = this.props;
 		const { photos, currentStep, ...values } = this.state;
 		
     return(
@@ -137,7 +137,7 @@ class NewListing extends Component {
 				<div className="row">
 					<div className="col-xs-4 col-sm-3">
 						<SidebarWrapper>
-							<AdminSidebar />
+							<AdminSidebar user={info}/>
 						</SidebarWrapper>
 					</div>
 
@@ -218,6 +218,7 @@ class NewListing extends Component {
 };
 
 const mapStateToProps = state =>({
+	currentuser: state.user,
 	listings: state.listings,
 	errors: state.errors
 });

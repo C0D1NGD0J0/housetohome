@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const UserSidebar = ({ className }) => {
   return (
   	<div className="sidebar_box">
-			<h4>User Dashboard</h4><hr/>
+			<NavLink activeClassName="active" to="/dashboard"><h4>User Dashboard</h4></NavLink><hr/>
 
 			<ul className="sidebar_menu">
 				<li><NavLink activeClassName="active" to="#!"><i className="fa fa-user"></i> My Reservations</NavLink></li>

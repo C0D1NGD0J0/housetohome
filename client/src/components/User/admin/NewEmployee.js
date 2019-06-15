@@ -45,14 +45,14 @@ class NewEmployee extends Component {
 
   render() {
   	const { firstName, lastName, email, phone, password, role } = this.state;
-		const { errors } = this.props;
+		const { errors, currentuser: {info} } = this.props;
 		
     return(
     	<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-xs-4 col-sm-3">
 						<SidebarWrapper>
-							<AdminSidebar />
+							<AdminSidebar user={info} />
 						</SidebarWrapper>
 					</div>
 
@@ -143,7 +143,7 @@ class NewEmployee extends Component {
 };
 
 const mapStateToProps = state =>({
-	admin: state.admin.user,
+	currentuser: state.user,
 	errors: state.errors
 });
 

@@ -36,13 +36,14 @@ class ManageUsers extends Component {
 				</tr> 
 			)
 		});
+		const { currentuser: { info } } = this.props;
 
     return (
     	<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-sm-4 col-md-3">
 						<SidebarWrapper>
-							<AdminSidebar />
+							<AdminSidebar user={info}/>
 						</SidebarWrapper>
 					</div>
 					
