@@ -4,8 +4,9 @@ import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER } from "./types";
 import { setAlertAction } from "./alertAction";
 import { setAuthHeaderToken } from "../helpers/";
 import jwtDecode from "jwt-decode";
+import history from "../helpers/history";
 
-export const registerAction = (userdata, history) => async dispatch =>{
+export const registerAction = (userdata) => async dispatch =>{
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
@@ -63,7 +64,6 @@ export const loadUserAction = () => async dispatch =>{
 
 export const logoutAction = () => dispatch =>{
 	dispatch({ type: LOGOUT_CURRENTUSER, payload: {} });
-	console.log('am logging out...')
 	dispatch(setAlertAction("Logout successful...", "success"));
 	return window.location = "/";
 };

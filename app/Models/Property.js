@@ -51,14 +51,23 @@ const PropertySchema = new Schema({
 	meta: {}
 }, {timestamps: true});
 
+PropertySchema.set('toObject', { virtuals: true })
+PropertySchema.set('toJSON', { virtuals: true })
+
 PropertySchema.index({
 	"location.address": "text"
 });
 
 PropertySchema.plugin(uniqueValidator);
 
-PropertySchema.virtual("full_address").get(function(){
-	return `${this.address.unitNo} ${this.address.street} street, ${this.address.city.toUpperCase()}, ${this.address.state.toUpperCase()}, ${this.address.postCode.toUpperCase()}.`
+PropertySchema.virtual("formatAddress").get(function(){
+	const address = this.location.address.split(",");
+	return{
+		street: address[0].trim(),
+		city: address[1].trim(),
+		postCode: address[2].trim(),
+		country: address[3].trim()
+	};
 });
 
 const property = mongoose.model("Property", PropertySchema);

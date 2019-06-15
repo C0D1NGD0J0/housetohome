@@ -47,9 +47,9 @@ const propertyCntrl = {
 		const { propertyId } = req.params;
 
 		try {
-			const property = await Property.findById(propertyId).exec();
+			let property = await Property.findById(propertyId).exec();
 			errors.msg = "Property not found!";
-			if(!porperty) return res.status(400).json(errors);
+			if(!property) return res.status(400).json(errors);
 			return res.status(200).json(property);
 		} catch(e) {
 			errors.msg = e.message;

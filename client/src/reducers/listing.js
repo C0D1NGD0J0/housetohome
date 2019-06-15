@@ -1,7 +1,7 @@
-import { GET_ALL_LISTINGS, CREATE_NEW_LISTNG, UPDATE_LISTING, DELETE_LISTING, SHOW_LISTING } from "../actions/types";
+import { GET_LISTINGS, GET_LISTING } from "../actions/types";
 
 const initialState = {
-	all: [],
+	all: {},
 	show: null,
 	loading: true
 };
@@ -10,12 +10,12 @@ export default function(state = initialState, action){
 	const { type, payload } = action;
 
 	switch(type){
-		case CREATE_NEW_LISTNG:
+		case GET_LISTING:
 			return{
 				...state,
-				all: [...state.all, payload],
-				loading: false
-			}	
+				loading: false,
+				show: payload
+			}
 		default:
 			return state;
 	}

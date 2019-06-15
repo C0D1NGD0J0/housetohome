@@ -650,7 +650,7 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 8.8rem;
   text-align: left;
   font-size: 3.5rem;
-  text-transform: none;
+  text-transform: uppercase;
   border-bottom: 1px solid #d6d6d6;
   font-family: Montserrat,sans-serif;
 }
@@ -658,6 +658,7 @@ h1, h2, h3, h4, h5, h6 {
 #listing-page .listing_city {
   display: block;
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 #listing-page .listing_header {

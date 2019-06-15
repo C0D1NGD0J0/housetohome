@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
@@ -23,7 +24,7 @@ const ManageListings = ({ currentuser, getAllListings, listings }) => {
 				<td className="text-capitalize">{listing.listingType}</td>
 				<td>{listing.isActive ? "Published" : "Pending"}</td>
 				<td>
-					<span className="actionBtn"><i className="fa fa-eye"></i></span>
+					<Link to={`/properties/${listing._id}`} className="actionBtn"><i className="fa fa-eye"></i></Link>
 					<span className="actionBtn"><i className="fa fa-pencil"></i></span>
 					<span className="actionBtn"><i className="fa fa-trash"></i></span>
 				</td>

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { Router, Route, Switch} from "react-router-dom";
 import Landing from "./components/Landing";
 import Login from "./components/Auth/Login";
 import ScrollToTop from "./helpers/ScrollToTop";
@@ -10,21 +10,23 @@ import Alert from "./components/layout/Alert";
 import Dashboard from "./components/User/Dashboard";
 import AccountUpdate from "./components/User/AccountUpdate";
 import AdminDashboard from "./components/User/admin/AdminDashboard";
-import ManageListings from "./components/User/admin/ManageListings";
+import ManageListings from "./components/Listing/Admin/ManageListings";
 import ManageUsers from "./components/User/admin/ManageUsers";
 import NewEmployee from "./components/User/admin/NewEmployee";
 import NewListing from "./components/Listing/NewListing/";
+import Listing from "./components/Listing/DisplayListing/";
 import { Provider } from "react-redux";
 import PrivateRoute from "./helpers/PrivateRoute";
 import AdminPrivateRoute from "./helpers/EmployeePrivateRoute";
 import store from "./store";
+import history from "./helpers/history";
 import "./helpers/validateAuthUser";
 import './App.css';
 
 const App = () =>{
   return (
   	<Provider store={store}>
-	  	<Router>
+	  	<Router history={history}>
 	  		<ScrollToTop>
 			  	<Fragment>
 			  		<Alert />
@@ -51,6 +53,7 @@ const OtherRoutes = () =>(
 			<AdminPrivateRoute exact path="/admin/manage_listings" component={ManageListings} />
 			<AdminPrivateRoute exact path="/admin/manage_users" component={ManageUsers} />
 			<AdminPrivateRoute exact path="/admin/new_listing" component={NewListing} />
+			<Route exact path="/properties/:id" component={Listing} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 			<PrivateRoute exact path="/account_update" component={AccountUpdate} />
 		</Fragment>
