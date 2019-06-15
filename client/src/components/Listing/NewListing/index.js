@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
-import { creatLisitngAction } from "../../../actions/listingAction";
+import { creatLisitngAction } from "../../../actions/adminAction";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from "../../layout/Panel";
@@ -92,8 +92,7 @@ class NewListing extends Component {
 	  			<i className="fa fa-arrow-check"></i> Create Listing
 	  		</button>
   		);
-  	}
-  	return null;
+  	};
   }
 
   prevStepButton = () =>{
@@ -113,7 +112,7 @@ class NewListing extends Component {
 	}
 
   getGeoCodeFromAddress = async (e) =>{
-  	if(e.keyCode == 13 && e.target.name == 'address'){
+  	if(e.keyCode === '13' && e.target.name === 'address'){
   		e.preventDefault();
 			await Geocode.fromAddress(this.state.address).then(
 			  response => {

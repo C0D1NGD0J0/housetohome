@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Landing from "./components/Landing";
 import Login from "./components/Auth/Login";
@@ -14,8 +14,6 @@ import ManageListings from "./components/User/admin/ManageListings";
 import ManageUsers from "./components/User/admin/ManageUsers";
 import NewEmployee from "./components/User/admin/NewEmployee";
 import NewListing from "./components/Listing/NewListing/";
-import { clearErrors } from "./actions/utilAction";
-import { setAuthHeaderToken } from "./helpers/";
 import { Provider } from "react-redux";
 import PrivateRoute from "./helpers/PrivateRoute";
 import AdminPrivateRoute from "./helpers/EmployeePrivateRoute";

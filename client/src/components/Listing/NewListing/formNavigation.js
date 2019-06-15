@@ -9,7 +9,7 @@ const FormNavbar = ({ navItems, updateCurrentStep }) => {
 	
 	const navitem = navItems.map((title, i) =>{
 		return(
-			<li style={{cursor: "pointer"}}><span onClick={() => updateCurrentStep(i + 1)}>{title}</span></li>
+			<li style={{cursor: "pointer"}} key={i}><span onClick={() => updateCurrentStep(i + 1)}>{title}</span></li>
 		);
 	});
 

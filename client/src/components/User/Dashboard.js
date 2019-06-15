@@ -4,7 +4,7 @@ import SidebarWrapper from "../layout/Sidebar";
 import UserSidebar from "../layout/Sidebar/userSidebar";
 import Panel from "../layout/Panel";
 import { connect } from "react-redux";
-import Table from "../layout/Table";
+// import Table from "../layout/Table";
 
 class Dashboard extends Component {
 	componentDidMount(){

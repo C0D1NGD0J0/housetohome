@@ -4,6 +4,6 @@ import UsersReducer from "./user";
 import ErrorsReducer from "../errors";
 
 export default combineReducers({
-	lisitng: ListingReducer,
+	listings: ListingReducer,
 	users: UsersReducer
 });

@@ -52,6 +52,17 @@ const adminCntrl = {
 			errors.msg = e.message;
 			return res.status(404).json(errors);
 		};
+	},
+
+	properties: async (req, res, next) =>{
+		const errors = {};
+		try {
+			const properties = await Property.find({}).sort({ createdAt: -1});
+			return res.status(200).json(properties);
+		} catch(err) {
+			errors.msg = err.message;
+			return res.status(404).json(errors);
+		};
 	}
 };
 
