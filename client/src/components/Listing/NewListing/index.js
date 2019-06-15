@@ -12,6 +12,7 @@ import StepThree from "./Step3";
 import StepFour from "./Step4";
 import StepFive from "./Step5";
 import Geocode from 'react-geocode';
+import FormNavigation from "./formNavigation";
 
 class NewListing extends Component {
   constructor(props) {
@@ -106,6 +107,10 @@ class NewListing extends Component {
   	}
   	return null;
   }
+	
+	updateCurrentStep = (num) =>{
+		this.setState({ currentStep: num });
+	}
 
   getGeoCodeFromAddress = async (e) =>{
   	if(e.keyCode == 13 && e.target.name == 'address'){
@@ -138,6 +143,11 @@ class NewListing extends Component {
 
 					<div className="col-xs-8 col-sm-9">
 						<Panel title="New Listing">
+							<FormNavigation 
+								navItems={["General Info", "Description", "Address", "Photos", "Save"]}
+								updateCurrentStep={this.updateCurrentStep}
+							/>
+
 							<form onSubmit={this.onFormSubmit} className="form">
 								<div className="row">
 									<TransitionGroup component={null}>
