@@ -51,8 +51,8 @@ const PropertySchema = new Schema({
 	meta: {}
 }, {timestamps: true});
 
-PropertySchema.set('toObject', { virtuals: true })
-PropertySchema.set('toJSON', { virtuals: true })
+PropertySchema.set('toObject', { virtuals: true });
+PropertySchema.set('toJSON', { virtuals: true });
 
 PropertySchema.index({
 	"location.address": "text"

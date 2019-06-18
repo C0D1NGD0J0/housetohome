@@ -430,6 +430,16 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0.3rem 1rem 0.3rem rgba(107, 110, 112, 0.1);
 }
 
+.sidebar_box .contact_box-info li{
+  font-size: 1.2rem;
+}
+
+.sidebar_box .contact_box-info li span{
+  width: 80%;
+  text-overflow: ellipsis;
+  font-size: 1.4rem;
+}
+
 .sidebar_menu {
   margin: 0;
   padding: 0;
@@ -798,6 +808,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #listing-page .listing_amenities-list_item {
+  width: 33%;
+  float: left;
   font-size: 1.4rem;
   text-transform: uppercase;
 }

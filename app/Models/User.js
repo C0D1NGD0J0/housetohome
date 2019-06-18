@@ -54,9 +54,12 @@ UserSchema.index({
 	lastName: "text"
 });
 
-UserSchema.methods.fullname = function(){
-	return this.firstName + " " + this.lastName;
-};
+UserSchema.set('toObject', { virtuals: true });
+UserSchema.set('toJSON', { virtuals: true });
+
+UserSchema.virtual("fullname").get(function(){
+	return `${this.firstName} ${this.lastName}`;
+});
 
 UserSchema.methods.getGravatar = function(){
 	const hash = md5(this.email);
@@ -89,19 +92,19 @@ UserSchema.methods.detailsToJSON = function(user){
 	return userinfo;
 };
 
-UserSchema.methods.guestDetailsToJSON = function(user){
-	const userinfo = {
-		id: this._id,
-		email: this.email,
-		firstName: this.firstName,
-		lastName: this.lastName,
-		phone: this.phone
-	};
+// UserSchema.methods.guestDetailsToJSON = function(user){
+// 	const userinfo = {
+// 		id: this._id,
+// 		email: this.email,
+// 		firstName: this.firstName,
+// 		lastName: this.lastName,
+// 		phone: this.phone
+// 	};
 	
 	
 
-	return userinfo;
-};
+// 	return userinfo;
+// };
 
 const user = mongoose.model("User", UserSchema);
 

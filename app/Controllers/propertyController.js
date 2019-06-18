@@ -47,7 +47,7 @@ const propertyCntrl = {
 		const { propertyId } = req.params;
 
 		try {
-			let property = await Property.findById(propertyId).exec();
+			let property = await Property.findById(propertyId).populate("handler", "email phone fullname firstName lastName").exec();
 			errors.msg = "Property not found!";
 			if(!property) return res.status(400).json(errors);
 			return res.status(200).json(property);
