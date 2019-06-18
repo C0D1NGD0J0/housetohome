@@ -4,7 +4,7 @@ import SelectTag from "../../../helpers/FormElements/selectField";
 import Panel from "../../layout/Panel";
 import staticData from "./staticData";
 
-const StepOne = ({onchange, currentStep, value, error }) =>{
+const StepOne = ({onchange, currentStep, value, error, options, isAdmin}) =>{
 	if(currentStep !== 1) return null;
 	
   return (
@@ -134,6 +134,19 @@ const StepOne = ({onchange, currentStep, value, error }) =>{
 					onChange={onchange}
 				/>
 	  	</div>
+			
+			{	isAdmin ?
+		  	<div className="col-sm-12">
+					<SelectTag 
+						label="Assign Agent" 
+						name="handler"  
+						error={error && error.handler}	
+						value={value.handler}
+						selectChange={onchange}
+						options={options} 
+					/>
+		  	</div> : null
+		  }
 	  </Fragment>	
   );
 };

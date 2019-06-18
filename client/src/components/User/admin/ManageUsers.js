@@ -19,7 +19,8 @@ class ManageUsers extends Component {
 
   render() {
   	const { all } = this.props.users;
-		const tableRowData = all.map((user, i) =>{
+  
+		const tableRowData = Object.values(all).map((user, i) =>{
 			return (
 				<tr key={i}>
 					<td>{i+1}</td>

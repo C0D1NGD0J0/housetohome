@@ -7,7 +7,7 @@ import Panel from "../../layout/Panel";
 
 const StepFive = ({ currentStep, values, error }) => {
 	if(currentStep !== 5) return null;
-	let {description, address, longitude, latitude, ...rest} = values;
+	let {description, address, longitude, latitude, handler, ...rest} = values;
 	
 	const displayErrors = error && Object.values(error).map((err, i) =>(<li key={i}>{err}</li>));
 	const liTag = Object.keys(rest).map((key, i) =>{

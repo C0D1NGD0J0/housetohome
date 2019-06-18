@@ -31,7 +31,7 @@ const propertyCntrl = {
 			if(req.currentuser.role.isAdmin){
 				property.isActive = isActive;
 				property.featured = featured;
-				// property.handler = handler;
+				property.handler = handler;
 			};
 			
 			property = await property.save();

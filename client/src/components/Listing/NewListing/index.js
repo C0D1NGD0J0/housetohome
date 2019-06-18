@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
-import { creatLisitngAction } from "../../../actions/adminAction";
+import { creatLisitngAction, getAllUsers } from "../../../actions/adminAction";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from "../../layout/Panel";
@@ -40,12 +40,15 @@ class NewListing extends Component {
     	pets: false,
     	isActive: false,
     	address: "",
-    	addressInfo: "",
     	latitude: "",
     	longitude: "",
     	photos: []
     };
     Geocode.setApiKey(process.env.REACT_APP_GOOGLE_APIKEY);
+  }
+
+  componentDidMount(){
+  	this.props.getAllUsers();
   }
 
   onFormFieldChange = (e) =>{
@@ -128,7 +131,7 @@ class NewListing extends Component {
   }
 
   render() {
-		const { errors, listings: { all }, currentuser: { info } } = this.props;
+		const { errors, listings: { all }, currentuser: { info }, employees } = this.props;
 		const { photos, currentStep, ...values } = this.state;
 		
     return(
@@ -156,6 +159,8 @@ class NewListing extends Component {
 												onchange={this.onFormFieldChange}
 												value={this.state}
 												error={errors}
+												options={employees}
+												isAdmin={info && info.role.isAdmin}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -219,11 +224,13 @@ class NewListing extends Component {
 const mapStateToProps = state =>({
 	currentuser: state.user,
 	listings: state.listings,
-	errors: state.errors
+	errors: state.errors,
+	employees: state.admin.users.all
 });
 
 const mapDispatchToProps = {
-	creatLisitngAction
+	creatLisitngAction,
+	getAllUsers
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewListing);
