@@ -1,28 +1,32 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import Panel from "../../layout/Panel";
 import Table from "../../layout/Table";
 import { getAllListings } from "../../../actions/adminAction";
+import { truncateText } from "../../../helpers";
 
-const ManageListings = ({ currentuser, getAllListings, listings }) => {
-	const { info } = currentuser;
-	
+const ManageListings = ({ currentuser: {isAuthenticated, info}, getAllListings, listings }) => {
 	useEffect(() =>{
 		getAllListings();
 	}, [getAllListings]);
 	
+	if(!isAuthenticated){
+		return <Redirect to="/login" />;
+	};
+
 	const tableRowData = Object.values(listings.all).map((listing, i) =>{
 		return (
 			<tr key={i}>
 				<td>{i+1}</td>
-				<td className="text-capitalize">{listing.location.address}</td>
+				<td className="text-capitalize">{truncateText(listing.location.address, 18)}</td>
+				<td className="text-capitalize">{listing.formatAddress.country}</td>
 				<td className="text-capitalize">{listing.propertyType}</td>
 				<td className="text-capitalize">{listing.listingType}</td>
-				<td>{listing.isActive ? "Published" : "Pending"}</td>
+				<td className="text-uppercase">{listing.isActive ? "Published" : "Pending"}</td>
 				<td>
 					<Link to={`/properties/${listing.id}`} className="actionBtn"><i className="fa fa-eye"></i></Link>
 					<Link to={`/admin/properties/edit/${listing.id}`} className="actionBtn"><i className="fa fa-pencil"></i></Link>
@@ -47,7 +51,8 @@ const ManageListings = ({ currentuser, getAllListings, listings }) => {
 							<thead>
 								<tr>
 									<th>#</th>
-					        <th>Location</th>
+					        <th>Address</th>
+					        <th>Country</th>
 					        <th>Property Type</th>
 					        <th>Listing Type</th>
 					        <th>Status</th>

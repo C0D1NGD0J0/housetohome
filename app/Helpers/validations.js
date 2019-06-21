@@ -148,19 +148,19 @@ const validate = {
 	property: (req, res, next) =>{
 		const errors = {};
 		const data = req.body;
-
+		
 		data.description = !isEmpty(data.description) ? data.description : "" ;
 		data.propertyType = !isEmpty(data.propertyType) ? data.propertyType : "" ;
 		data.listingType = !isEmpty(data.listingType) ? data.listingType : "" ;
-		data.size = !isEmpty(data.size) ? data.size : "" ;
+		data.size = !isEmpty(data.size) ? data.size +'' : "" ;
 		data.address = !isEmpty(data.address) ? data.address : "" ;
 		data.yearBuilt = !isEmpty(data.yearBuilt) ? data.yearBuilt : "" ;
-		data.price = !isEmpty(data.price) ? data.price : "" ;
-		data.bedroom = !isEmpty(data.bedroom) ? data.bedroom : "";
-		data.bathroom = !isEmpty(data.bathroom) ? data.bathroom : "";
-		data.maxCapacity = !isEmpty(data.maxCapacity) ? data.maxCapacity : "";
-		data.floors = !isEmpty(data.floors) ? data.floors : "";
-		data.parking = !isEmpty(data.parking) ? data.parking : "";
+		data.price = !isEmpty(data.price) ? data.price +'' : "" ;
+		data.bedroom = !isEmpty(data.bedroom) ? data.bedroom +'' : "";
+		data.bathroom = !isEmpty(data.bathroom) ? data.bathroom +'' : "";
+		data.maxCapacity = !isEmpty(data.maxCapacity) ? data.maxCapacity +'' : "";
+		data.floors = !isEmpty(data.floors) ? data.floors +'' : "";
+		data.parking = !isEmpty(data.parking) ? data.parking +'' : "";
 
 		if(Validator.isEmpty(data.description)){
 			errors.description = "Property description needs to be provided.";
@@ -287,14 +287,3 @@ function isEmpty(value){
 };
 
 module.exports = {validate};
-
-
-
-// address: {
-// 	postCode
-// 	unitNo
-// 	state
-// 	street
-// 	city
-// 	country
-// }

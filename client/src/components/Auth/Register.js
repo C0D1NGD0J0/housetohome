@@ -6,7 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 import { setAlertAction } from "../../actions/alertAction";
 import { registerAction } from "../../actions/authAction";
 
-const Register = ({ setAlertAction, registerAction, errors, history, isAuthenticated }) => {
+const Register = ({ setAlertAction, registerAction, errors, history, user: {isAuthenticated, info} }) => {
 	const [formData, updateFormData] = useState({firstName: '', lastName: '', email: '', phone: '', password: '', password2: ''});
 	const { firstName, lastName, email, phone, password, password2 } = formData;
 
@@ -17,8 +17,8 @@ const Register = ({ setAlertAction, registerAction, errors, history, isAuthentic
 	};
 	
 	if(isAuthenticated){
-		return <Redirect to="/" />
-	}
+		return (info && info.isadmin) ? <Redirect to="/admin/dashboard" /> : <Redirect to="/dashboard" />
+	};
 
   return (
   	<ContentWrapper mainClass="login_bg-img" containerClass="container login">
@@ -127,7 +127,7 @@ Register.displayName = 'Register';
 
 const mapStateToProps =(state) =>({
 	errors: state.errors,
-	isAuthenticated: state.user.isAuthenticated
+	user: state.user
 });
 
 export default connect(mapStateToProps, { setAlertAction, registerAction })(Register);

@@ -5,7 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginAction } from "../../actions/authAction";
 
-const Login = ({ loginAction, user: {isAuthenticated, user}, errors }) => {
+const Login = ({ loginAction, user: {isAuthenticated, info}, errors }) => {
 	const [formData, updateFormData] = useState({ email: '', password: '' });
 	const { email, password } = formData;
 
@@ -16,7 +16,7 @@ const Login = ({ loginAction, user: {isAuthenticated, user}, errors }) => {
 	}
 
 	if(isAuthenticated){
-		return <Redirect to="/dashboard" />
+		return (info && info.isadmin) ? <Redirect to="/admin/dashboard" /> : <Redirect to="/dashboard" />
 	};
 
   return (

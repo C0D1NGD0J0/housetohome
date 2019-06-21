@@ -47,7 +47,7 @@ const propertyCntrl = {
 		const { propertyId } = req.params;
 
 		try {
-			let property = await Property.findById(propertyId).populate("handler", "email phone fullname firstName lastName").exec();
+			let property = await Property.findById(propertyId).populate("handler", "fullname firstName lastName email phone").exec();
 			errors.msg = "Property not found!";
 			if(!property) return res.status(400).json(errors);
 			return res.status(200).json(property);
@@ -63,10 +63,9 @@ const propertyCntrl = {
 		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = req.body;
 
 		try {
-			let property = await Property.findById(propertyId).exec();
-
-			const updateData = { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, meta: {} };
-			
+			let property = await Property.findById(propertyId).exec();			
+			const updateData = { description, propertyType, listingType, size, yearBuilt, price, 
+				location:{ coordinates: []}, features: {}, extras: {}, meta: {} };
 
 			updateData.location.address = address;
 			updateData.location.coordinates[0] = latitude;
@@ -74,16 +73,16 @@ const propertyCntrl = {
 			
 			updateData.features = { bedroom, bathroom, maxCapacity, floors, parking };
 			updateData.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets};
-
-			if(req.currentuser.isAdmin){
-				updateData.handler = handler;
-				updateData.isActive = isActive;
-			};
-
 			updateData.meta.lastUpdatedBy = req.currentuser.id;
 
+			if(req.currentuser.isadmin){
+				updateData.handler = handler;
+				updateData.isActive = isActive;
+			};			
+
 			if(property.author._id.equals(req.currentuser.id)){
-				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true, runValidators: true }).exec();
+				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true }).populate("handler", "id fullname").exec();
+				
 				return res.status(200).json(property);
 			} else{
 				errors.msg = "You are not permitted to perform this action.";
@@ -91,7 +90,7 @@ const propertyCntrl = {
 			};
 		} catch(e) {
 			errors.msg = e.message;
-			return res.status(404).json(errors);
+			return res.status(400).json(errors);
 		};
 	},
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
-import { creatLisitngAction, getAllUsers } from "../../../actions/adminAction";
+import { creatLisitngAction, getAllUsers, updateListingAction } from "../../../actions/adminAction";
 import { getListingAction } from "../../../actions/listingAction";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -24,7 +24,7 @@ class NewListing extends Component {
     	propertyType: "",
     	listingType: "",
     	size: "",
-    	featured: "",
+    	featured: false,
     	yearBuilt: "",
     	price: "",
     	handler: "",
@@ -49,9 +49,13 @@ class NewListing extends Component {
   }
 
   async componentDidMount(){
-  	const { info } = this.props.currentuser;
+  	const { info, isAuthenticated } = this.props.currentuser;
   	const { id } = this.props.match.params;
   	
+  	if(!isAuthenticated){
+			return this.props.history.push("/login");
+  	};
+
   	if(info && info.isadmin){
   		this.props.getAllUsers("employee");
   	};
@@ -65,7 +69,7 @@ class NewListing extends Component {
 		const { id } = this.props.match.params;
 		if(id && id.length === 24){
 			this.populateInitialValues(previousProps);
-  	};	
+  	};
 	}
 
   onFormFieldChange = (e) =>{
@@ -80,8 +84,14 @@ class NewListing extends Component {
 	
   onFormSubmit = (e) =>{
 		e.preventDefault();
-		const { currentStep, ...formData } = this.state;		
-		return this.props.creatLisitngAction(formData, this.props.history);
+		const { id } = this.props.match.params;
+		const { currentStep, ...formData } = this.state;
+
+		if(id && id.length === 24){
+			return this.props.updateListingAction(id, formData);
+  	};
+
+		return this.props.creatLisitngAction(formData);
   }
 
   nextStep = (e) =>{
@@ -130,10 +140,11 @@ class NewListing extends Component {
   }
 
   populateInitialValues = (previousProps) =>{
+  	const { id } = this.props.match.params;
   	const { show: currentLisitng } = this.props.listings;
   	const { show: previousCurrentListing } = previousProps.listings;
-  	
-  	if(this.props.match.params.id && currentLisitng && JSON.stringify(previousCurrentListing) !== JSON.stringify(currentLisitng)){
+		
+  	if(id && currentLisitng && JSON.stringify(previousCurrentListing) !== JSON.stringify(currentLisitng)){
 			this.setState({
 				description: currentLisitng.description,
 				propertyType: currentLisitng.propertyType, 
@@ -142,7 +153,7 @@ class NewListing extends Component {
 				featured: currentLisitng.featured,
 				yearBuilt: currentLisitng.yearBuilt,
 				price: currentLisitng.price,
-				handler: currentLisitng.handler,
+				handler: currentLisitng.handler.fullname,
 				bedroom: currentLisitng.features.bedroom,
 				bathroom: currentLisitng.features.bathroom,
 				maxCapacity: currentLisitng.features.maxCapacity,
@@ -172,8 +183,7 @@ class NewListing extends Component {
 			await Geocode.fromAddress(this.state.address).then(
 			  response => {
 			  	const { formatted_address } = response.results[0];
-			  	console.log(formatted_address)
-			    const { lat, lng } = response.results[0].geometry.location;
+			  	const { lat, lng } = response.results[0].geometry.location;
 			    this.setState({latitude: lat, longitude: lng, address: formatted_address});
 			  },
 			  error => {
@@ -284,7 +294,8 @@ const mapStateToProps = state =>({
 const mapDispatchToProps = {
 	creatLisitngAction,
 	getAllUsers,
-	getListingAction
+	getListingAction,
+	updateListingAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewListing);

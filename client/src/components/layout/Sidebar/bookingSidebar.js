@@ -6,11 +6,11 @@ const BookingSidebar = ({ className }) => {
 			<h4>Reservation</h4><hr/>
 			<form className="form booking_form" action="new_booking.html">
 				<div className="form-group">
-					<label for="startDate">Check In</label>
+					<label htmlFor="startDate">Check In</label>
 					<input type="date" name="startDate" className="form-control datepicker"/>
 				</div>
 				<div className="form-group">
-					<label for="startDate">Check Out</label>
+					<label htmlFor="startDate">Check Out</label>
 					<input type="date" name="endDate" className="form-control datepicker" disabled/>
 				</div>
 				

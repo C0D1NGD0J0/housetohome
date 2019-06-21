@@ -35,12 +35,15 @@ const PropertySchema = new Schema({
 		pets: {type: Boolean, default: false}
 	},
 	location: {
-		_type: {type: String, default: 'Point'},
-		coordinates: [{type: Number, required: [true, "You must supply coordinates."]}],
+		type: {type: String, default: 'Point'},
+		coordinates: [{
+			type: Number, 
+			unique: [true, 'Coordinates with this address already exists.'], 
+			required: [true, "You must supply coordinates."]
+		}],
 		address: {
-			type: String, 
+			type: String,
 			required: [true, 'Property address must be provided.'],
-			unique: [true, 'Property with this address already exists.'],
 			trim: true,
 			lowercase: true
 		}
@@ -54,9 +57,9 @@ const PropertySchema = new Schema({
 PropertySchema.set('toObject', { virtuals: true });
 PropertySchema.set('toJSON', { virtuals: true });
 
-PropertySchema.index({
-	"location.address": "text"
-});
+// PropertySchema.index({
+// 	"location.address": "text"
+// });
 
 PropertySchema.plugin(uniqueValidator);
 

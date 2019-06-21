@@ -58,12 +58,13 @@ export const loadUserAction = () => async dispatch =>{
 			return dispatch({ type: LOAD_CURRENTUSER, payload: info });
 		};
 	} catch(err) {
-		return dispatch(handleError(err.message));
+		dispatch(handleError(err.message));
+		return setTimeout(() => dispatch(clearErrors()), 5000);
 	};
 };
 
 export const logoutAction = () => dispatch =>{
 	dispatch({ type: LOGOUT_CURRENTUSER, payload: {} });
 	dispatch(setAlertAction("Logout successful...", "success"));
-	return window.location = "/";
+	return history.push("/");
 };

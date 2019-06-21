@@ -6,14 +6,14 @@ const SelectTag = ({ label, name, selectChange, value, options, error }) => {
   	<ElementWrapper error={error}>
 			<label htmlFor={name}>{label}</label>
 			<select name={name} value={value} onChange={selectChange} id={name}>
-				<option value={value} disabled hidden>{value}</option>
+				<option value={value} disabled>{value}</option>
 				{
 					Array.isArray(options) ? 
 						options.map((item, i) =>{
 							return (<option key={i} value={item}>{item}</option>);
 						})
-					: Object.values(options).filter(user => !user.role.isGuest).map((user, i) =>{
-						return (<option key={i} value={user.id}>{user.firstName}</option>);
+					: Object.values(options).map((user, i) =>{
+						return (<option key={i} value={user.id}>{user.firstName.toUpperCase()}</option>);
 					})
 				}
 			</select>

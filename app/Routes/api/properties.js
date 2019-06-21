@@ -8,7 +8,7 @@ router.get("/all", propertyCntrl.index);
 
 router.get("/:propertyId", propertyCntrl.show);
 
-router.post("/", isAuthorizedAsStaff, validate.property, propertyCntrl.create);
+router.post("/", validate.property, isAuthorizedAsStaff, propertyCntrl.create);
 
 router.put("/:propertyId", validate.property, isAuthorizedAsStaff, propertyCntrl.update);
 
