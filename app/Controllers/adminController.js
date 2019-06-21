@@ -12,7 +12,6 @@ const adminCntrl = {
 		const { usertype } = req.query;
 		let query;
 		
-		console.log("usertype: ", usertype);
 		if(usertype === 'all' || usertype == ""){
 			query = {}
 		} else {
