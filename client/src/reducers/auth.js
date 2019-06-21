@@ -1,7 +1,13 @@
 import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER, AUTH_ERROR, UPDATE_CURRENTUSER, DELETE_ACCOUNT } from "../actions/types";
 
+// const initialState = {
+// 	token: localStorage.getItem('token'),
+// 	isAuthenticated: false,
+// 	loading: true,
+// 	info: null
+// };
+
 const initialState = {
-	token: localStorage.getItem('token'),
 	isAuthenticated: false,
 	loading: true,
 	info: null
@@ -14,7 +20,6 @@ export default function(state = initialState, action){
 		case LOAD_CURRENTUSER:
 			return {
 				...state,
-				token: null,
 				isAuthenticated: true,
 				loading: false,
 				info: {...payload}

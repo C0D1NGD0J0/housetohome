@@ -28,7 +28,7 @@ class ManageUsers extends Component {
 					<td>{user.lastName}</td>
 					<td>{user.email}</td>
 					<td>{user.phone}</td>
-					<td>{Object.keys(user.role)}</td>
+					<td>{user.role}</td>
 					<td>
 						<span className="actionBtn"><i className="fa fa-eye"></i></span>
 						<span className="actionBtn"><i className="fa fa-pencil"></i></span>
