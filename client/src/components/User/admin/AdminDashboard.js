@@ -9,7 +9,7 @@ import Table from "../../layout/Table";
 
 class AdminDashboard extends Component {
 	componentDidMount(){
-		if(!this.props.currentuser || this.props.currentuser.info && this.props.currentuser.info.role.isGuest){
+		if(this.props.currentuser.info && !this.props.currentuser.info.isadmin){
 			return this.props.history.push('/dashboard');
 		}
 	}

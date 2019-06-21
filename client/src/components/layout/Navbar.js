@@ -27,7 +27,7 @@ class Navbar extends Component {
 			        	<li className="dropdown">
 				          <Link to="#!" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{info && info.firstName}<span className="caret"></span></Link>
 				          <ul className="dropdown-menu">
-				            { info && !info.role.isGuest ? <li><Link to="/admin/dashboard">Admin</Link></li> : null }
+				            { info && info.isadmin ? <li><Link to="/admin/dashboard">Admin</Link></li> : null }
 				            <li><Link to="/dashboard">Dashboard</Link></li>
 				            <li><Link to="/account_update">Settings</Link></li>
 				            <li><a onClick={this.props.logoutAction}>Logout</a></li>

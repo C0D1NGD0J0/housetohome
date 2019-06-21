@@ -3,8 +3,6 @@ import _ from "lodash";
 
 const initialState = {
 	all: {},
-	employees: {},
-	guests: {},
 	show: null,
 	loading: true
 };
@@ -16,7 +14,7 @@ export default function(state = initialState, action){
 		case GET_ALL_USERS:
 			return{
 				...state,
-				all: {...state.all, ..._.mapKeys(payload, "id")},
+				all: {..._.mapKeys(payload, "id")},
 				loading: false
 			};
 		case ADD_NEW_EMPLOYEE:

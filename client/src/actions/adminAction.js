@@ -1,6 +1,6 @@
 import axios from "axios";
 import { handleFormError, clearErrors, handleError } from "./utilAction";
-import { ADD_NEW_EMPLOYEE, GET_ALL_USERS, ADMIN_LOAD_LISTINGS, CREATE_NEW_LISTNG, UPDATE_LISTING, DELETE_LISTING, SHOW_LISTING } from "./types";
+import { ADD_NEW_EMPLOYEE, GET_ALL_USERS, ADMIN_LOAD_LISTINGS, CREATE_NEW_LISTNG, UPDATE_LISTING, DELETE_LISTING, SHOW_LISTING, GET_EMPLOYEES } from "./types";
 import { setAlertAction } from "./alertAction";
 
 export const registerEmployeeAction = (userdata, history) => async dispatch =>{
@@ -22,9 +22,9 @@ export const registerEmployeeAction = (userdata, history) => async dispatch =>{
 	};
 };
 
-export const getAllUsers = () => async dispatch =>{
+export const getAllUsers = (type = "all") => async dispatch =>{
 	try {
-		const res = await axios.get("/api/admin/users");
+		const res = await axios.get(`/api/admin/users?usertype=${type}`);
 		return dispatch({type: GET_ALL_USERS, payload: res.data });
 	} catch(err) {
 		dispatch(handleError(err.message));

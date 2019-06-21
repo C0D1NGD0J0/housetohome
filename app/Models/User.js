@@ -42,7 +42,8 @@ const UserSchema = new Schema({
 	activationTokenExpires: {type: Date, default: ""},
 	passwordResetToken: {type: String, default:""},
 	passwordResetExpires: {type: Date, default: ""},
-	role: {type: String, default: "guest", lowercase: true},
+	_type: {type: String, default: "guest", lowercase: true},
+	isAdmin: {type: Boolean, default: false},
 	likedProperty: [{type: Schema.Types.ObjectId, ref: 'Property'}],
 	avatar: {type: String},
 }, {timestamps: true});
@@ -66,45 +67,22 @@ UserSchema.methods.getGravatar = function(){
 	return `https://gravatar.com/avatar/${hash}?s=200`;
 };
 
-UserSchema.methods.userRole = function(){
-	switch(this.role){
-		case 'admin':
-			return {isAdmin: true};
-		case 'staff':
-			return {isStaff: true};
-		case 'guest':
-			return {isGuest: true};
-		default:
-			return this.role;
-	}
-};
-
 UserSchema.methods.detailsToJSON = function(user){
-	const userinfo = {
+	const _user = {
 		id: this._id,
 		email: this.email,
 		firstName: this.firstName,
 		lastName: this.lastName,
 		phone: this.phone,
-		role: this.userRole()
+		role: this._type
 	};
 
-	return userinfo;
+	if(_user.role === 'employee'){
+		_user.isadmin = this.isAdmin;
+	};
+
+	return _user;
 };
-
-// UserSchema.methods.guestDetailsToJSON = function(user){
-// 	const userinfo = {
-// 		id: this._id,
-// 		email: this.email,
-// 		firstName: this.firstName,
-// 		lastName: this.lastName,
-// 		phone: this.phone
-// 	};
-	
-	
-
-// 	return userinfo;
-// };
 
 const user = mongoose.model("User", UserSchema);
 

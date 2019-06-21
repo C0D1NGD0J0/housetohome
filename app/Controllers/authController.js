@@ -48,7 +48,7 @@ const authCntrl = {
 				return res.status(400).json(errors);
 			};
 			
-			if(req.currentuser.role.isAdmin){
+			if(req.currentuser.isadmin){
 				const user = new User({firstName, lastName, email, phone, password, role: ROLES[1]});
 				const salt = await bcrypt.genSalt(10);
 					

@@ -9,8 +9,20 @@ const adminCntrl = {
 
 	users: async (req, res, next) =>{
 		const errors = {};
+		const { usertype } = req.query;
+		let query;
+		
+		console.log("usertype: ", usertype);
+		if(usertype === 'all' || usertype == ""){
+			query = {}
+		} else {
+			query = {
+				_type: usertype
+			}
+		};
+
 		try {
-			let users = await User.find({}).exec();
+			let users = await User.find(query).exec();
 			users = users.map((item, i) => item.detailsToJSON());
 			return res.status(200).json(users);
 		} catch(e) {

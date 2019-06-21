@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import { creatLisitngAction, getAllUsers } from "../../../actions/adminAction";
+import { getListingAction } from "../../../actions/listingAction";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from "../../layout/Panel";
@@ -47,9 +48,25 @@ class NewListing extends Component {
     Geocode.setApiKey(process.env.REACT_APP_GOOGLE_APIKEY);
   }
 
-  componentDidMount(){
-  	this.props.getAllUsers();
+  async componentDidMount(){
+  	const { info } = this.props.currentuser;
+  	const { id } = this.props.match.params;
+  	
+  	if(info && info.isadmin){
+  		this.props.getAllUsers("employee");
+  	};
+
+  	if(id && id.length === 24){
+			await this.props.getListingAction(id);
+  	};
   }
+	
+	componentDidUpdate(previousProps){
+		const { id } = this.props.match.params;
+		if(id && id.length === 24){
+			this.populateInitialValues(previousProps);
+  	};	
+	}
 
   onFormFieldChange = (e) =>{
   	const { name, value } = e.target;
@@ -83,6 +100,8 @@ class NewListing extends Component {
 
   nextStepButton = () =>{
   	const { currentStep } = this.state;
+  	const { id } = this.props.match.params;
+
   	if(currentStep <= 4){
   		return(
 				<button className="btn btn-success pull-right" onClick={this.nextStep}>
@@ -92,7 +111,7 @@ class NewListing extends Component {
   	} else {
   		return(
 				<button className="btn btn-green pull-right" onClick={this.onFormSubmit}>
-	  			<i className="fa fa-arrow-check"></i> Create Listing
+	  			<i className="fa fa-arrow-check"></i> {id ? "Update Listing" : "Create Listing"}
 	  		</button>
   		);
   	};
@@ -109,17 +128,51 @@ class NewListing extends Component {
   	}
   	return null;
   }
+
+  populateInitialValues = (previousProps) =>{
+  	const { show: currentLisitng } = this.props.listings;
+  	const { show: previousCurrentListing } = previousProps.listings;
+  	
+  	if(this.props.match.params.id && currentLisitng && JSON.stringify(previousCurrentListing) !== JSON.stringify(currentLisitng)){
+			this.setState({
+				description: currentLisitng.description,
+				propertyType: currentLisitng.propertyType, 
+				listingType: currentLisitng.listingType, 
+				size: currentLisitng.size, 
+				featured: currentLisitng.featured,
+				yearBuilt: currentLisitng.yearBuilt,
+				price: currentLisitng.price,
+				handler: currentLisitng.handler,
+				bedroom: currentLisitng.features.bedroom,
+				bathroom: currentLisitng.features.bathroom,
+				maxCapacity: currentLisitng.features.maxCapacity,
+				floors: currentLisitng.features.floors,
+				parking: currentLisitng.features.parking,
+				is_tv: currentLisitng.extras.is_tv,
+				is_kitchen: currentLisitng.extras.is_kitchen,
+				is_ac: currentLisitng.extras.is_ac,
+				is_heating: currentLisitng.extras.is_heating,
+				is_internet: currentLisitng.extras.is_internet,
+				pets: currentLisitng.extras.pets,
+				isActive: currentLisitng.isActive,
+				address: currentLisitng.location.address,
+				latitude: currentLisitng.location.coordinates[0],
+				longitude: currentLisitng.location.coordinates[1]
+			});
+  	};
+  }
 	
 	updateCurrentStep = (num) =>{
 		this.setState({ currentStep: num });
 	}
 
   getGeoCodeFromAddress = async (e) =>{
-  	if(e.keyCode === '13' && e.target.name === 'address'){
+  	if(e.keyCode === 13 && e.target.name === 'address'){
   		e.preventDefault();
 			await Geocode.fromAddress(this.state.address).then(
 			  response => {
 			  	const { formatted_address } = response.results[0];
+			  	console.log(formatted_address)
 			    const { lat, lng } = response.results[0].geometry.location;
 			    this.setState({latitude: lat, longitude: lng, address: formatted_address});
 			  },
@@ -133,7 +186,7 @@ class NewListing extends Component {
   render() {
 		const { errors, listings: { all }, currentuser: { info }, employees } = this.props;
 		const { photos, currentStep, ...values } = this.state;
-		
+	
     return(
     	<ContentWrapper containerClass="container">
 				<div className="row">
@@ -160,7 +213,7 @@ class NewListing extends Component {
 												value={this.state}
 												error={errors}
 												options={employees}
-												isAdmin={info && info.role.isAdmin}
+												isAdmin={info && info.isadmin}
 											/>
 										</CSSTransition>
 									</TransitionGroup>
@@ -230,7 +283,8 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = {
 	creatLisitngAction,
-	getAllUsers
+	getAllUsers,
+	getListingAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewListing);

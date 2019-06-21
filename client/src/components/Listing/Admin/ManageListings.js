@@ -24,8 +24,8 @@ const ManageListings = ({ currentuser, getAllListings, listings }) => {
 				<td className="text-capitalize">{listing.listingType}</td>
 				<td>{listing.isActive ? "Published" : "Pending"}</td>
 				<td>
-					<Link to={`/properties/${listing._id}`} className="actionBtn"><i className="fa fa-eye"></i></Link>
-					<span className="actionBtn"><i className="fa fa-pencil"></i></span>
+					<Link to={`/properties/${listing.id}`} className="actionBtn"><i className="fa fa-eye"></i></Link>
+					<Link to={`/admin/properties/edit/${listing.id}`} className="actionBtn"><i className="fa fa-pencil"></i></Link>
 					<span className="actionBtn"><i className="fa fa-trash"></i></span>
 				</td>
 			</tr> 

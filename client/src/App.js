@@ -49,10 +49,11 @@ const OtherRoutes = () =>(
 		<Fragment>
 			<Navbar />
 			<AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
-			<AdminPrivateRoute exact path="/admin/new_employee" component={NewEmployee} />
-			<AdminPrivateRoute exact path="/admin/manage_listings" component={ManageListings} />
+			<AdminPrivateRoute exact path="/admin/employees/new" component={NewEmployee} />
+			<AdminPrivateRoute exact path="/admin/properties" component={ManageListings} />
 			<AdminPrivateRoute exact path="/admin/manage_users" component={ManageUsers} />
-			<AdminPrivateRoute exact path="/admin/new_listing" component={NewListing} />
+			<AdminPrivateRoute exact path="/admin/properties/new" component={NewListing} />
+			<AdminPrivateRoute exact path="/admin/properties/edit/:id" component={NewListing} />
 			<Route exact path="/properties/:id" component={Listing} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 			<PrivateRoute exact path="/account_update" component={AccountUpdate} />
