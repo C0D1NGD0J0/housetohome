@@ -48,14 +48,14 @@ class AccountUpdate extends Component {
 
   render() {
   	const { firstName, lastName, email, phone, password, password2 } = this.state;
-		const { errors } = this.props;
+		const { errors, user } = this.props;
 
     return(
     	<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-xs-4 col-sm-3">
 						<SidebarWrapper>
-							<UserSidebar />
+							<UserSidebar user={user.info}/>
 						</SidebarWrapper>
 					</div>
 

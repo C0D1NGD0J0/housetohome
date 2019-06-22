@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
+import UserSidebar from "../../layout/Sidebar/userSidebar";
 import Panel from "../../layout/Panel";
 import Table from "../../layout/Table";
 import { getAllListings } from "../../../actions/adminAction";
@@ -11,7 +12,9 @@ import { truncateText } from "../../../helpers";
 
 const ManageListings = ({ currentuser: {isAuthenticated, info}, getAllListings, listings }) => {
 	useEffect(() =>{
-		getAllListings();
+		if(info.isadmin){
+			getAllListings();
+		};
 	}, [getAllListings]);
 	
 	if(!isAuthenticated){
@@ -41,7 +44,9 @@ const ManageListings = ({ currentuser: {isAuthenticated, info}, getAllListings, 
 			<div className="row">
 				<div className="col-sm-4 col-md-3">
 					<SidebarWrapper>
-						<AdminSidebar user={info}/>
+						{
+							info.isadmin ? <AdminSidebar user={info}/> : <UserSidebar user={info} />
+						}
 					</SidebarWrapper>
 				</div>
 				

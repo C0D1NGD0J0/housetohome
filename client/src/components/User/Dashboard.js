@@ -4,7 +4,6 @@ import SidebarWrapper from "../layout/Sidebar";
 import UserSidebar from "../layout/Sidebar/userSidebar";
 import Panel from "../layout/Panel";
 import { connect } from "react-redux";
-// import Table from "../layout/Table";
 
 class Dashboard extends Component {
 	componentDidMount(){
@@ -12,12 +11,14 @@ class Dashboard extends Component {
 	}
 
 	render() {
+		const { currentuser } = this.props;
+
 		return (
 			<ContentWrapper containerClass="container">
 				<div className="row">
 					<div className="col-xs-4 col-sm-3">
 						<SidebarWrapper>
-							<UserSidebar />
+							<UserSidebar user={currentuser.info} />
 						</SidebarWrapper>
 					</div>
 
@@ -47,7 +48,7 @@ class Dashboard extends Component {
 };
 
 const mapStateToProps = state =>({
-	user: state.user
+	currentuser: state.user
 });
 
 export default connect(mapStateToProps)(Dashboard);

@@ -5,6 +5,7 @@ import SidebarWrapper from "../../layout/Sidebar";
 import { creatLisitngAction, getAllUsers, updateListingAction } from "../../../actions/adminAction";
 import { getListingAction } from "../../../actions/listingAction";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
+import UserSidebar from "../../layout/Sidebar/userSidebar";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from "../../layout/Panel";
 import StepOne from "./Step1";
@@ -202,7 +203,9 @@ class NewListing extends Component {
 				<div className="row">
 					<div className="col-xs-4 col-sm-3">
 						<SidebarWrapper>
-							<AdminSidebar user={info}/>
+							{
+								(info && info.isadmin) ? <AdminSidebar user={info}/> : <UserSidebar user={info} />
+							}
 						</SidebarWrapper>
 					</div>
 

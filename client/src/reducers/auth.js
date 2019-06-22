@@ -1,9 +1,11 @@
 import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER, AUTH_ERROR, UPDATE_CURRENTUSER, DELETE_ACCOUNT } from "../actions/types";
+import _ from "lodash";
 
 const initialState = {
 	isAuthenticated: false,
 	loading: true,
-	info: null
+	info: null,
+	properties: {}
 };
 
 export default function(state = initialState, action){
@@ -15,7 +17,8 @@ export default function(state = initialState, action){
 				...state,
 				isAuthenticated: true,
 				loading: false,
-				info: {...payload}
+				info: {...payload.info},
+				// properties: {...state.properties, ..._.mapKeys(payload.properties, "_id")}
 			};
 
 		case SET_TOKEN:

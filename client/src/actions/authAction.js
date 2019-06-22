@@ -49,7 +49,10 @@ export const loadUserAction = () => async dispatch =>{
 		if(localStorage.token){
 			setAuthHeaderToken(localStorage.token);
 			const decoded = jwtDecode(localStorage.token);
-			return dispatch({ type: LOAD_CURRENTUSER, payload: decoded });
+
+			// const res = await axios.get("/api/users/currentuser");
+			// const info = {...decoded, ...res.data.info};
+			return dispatch({ type: LOAD_CURRENTUSER, payload: {info: decoded} });
 		};
 	} catch(err) {
 		dispatch(handleError(err.message));
@@ -60,5 +63,4 @@ export const loadUserAction = () => async dispatch =>{
 export const logoutAction = () => dispatch =>{
 	dispatch({ type: LOGOUT_CURRENTUSER, payload: {} });
 	return dispatch(setAlertAction("Logout successful...", "success"));
-	// return history.push("/");
 };

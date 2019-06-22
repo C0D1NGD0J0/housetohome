@@ -11,14 +11,3 @@ router.put("/currentuser", validate.userInfo, isAuthorized, userCntrl.update);
 router.delete("/:userId", isAuthorized, userCntrl.delete);
 
 module.exports = router;
-
-
-/* Routes:
-	GET 		/api/admin/employees
-	GET 		/api/admin/employees/:id
-
-	GET 		/api/employees/:id
-	GET 		/api/employees/:id/properties
-	PUT 		/api/employees/:id
-	DELETE 	/api/employees/:id
-*/

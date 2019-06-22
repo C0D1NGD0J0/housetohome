@@ -25,17 +25,7 @@ const AdminSidebar = ({ user }) => {
 						<li><NavLink exact activeClassName="active" to="#!"><i className="fa fa-envelope"></i> Mail</NavLink></li>
 						
 						<li><NavLink exact activeClassName="active" to="/admin/manage_billing"><i className="fa fa-credit-card"></i> Billing</NavLink></li>
-					</Fragment> : 
-
-					<Fragment>
-						<li><NavLink exact activeClassName="active" to="/admin/properties/new"><i className="fa fa-plus"></i> New Listings</NavLink></li>
-
-						<li><NavLink exact activeClassName="active" to="/admin/properties"><i className="fa fa-cogs"></i> Listings</NavLink></li>
-
-						<li><NavLink exact activeClassName="active" to="#!"><i className="fa fa-home"></i> Viewings</NavLink></li>
-
-						<li><NavLink exact activeClassName="active" to="#!"><i className="fa fa-envelope"></i> Mail</NavLink></li>
-					</Fragment>
+					</Fragment> : null
 				}
 			</ul>
 		</div>  

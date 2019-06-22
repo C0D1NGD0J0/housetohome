@@ -10,8 +10,9 @@ const userCntrl = {
 
 		try {
 			const user = await User.findById(userId);
-			
-			return res.status(200).json({info: user.detailsToJSON()});
+			const properties = await Property.find({author: user.id}).exec();
+
+			return res.status(200).json({info: user.detailsToJSON(), properties});
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(400).json(errors);
