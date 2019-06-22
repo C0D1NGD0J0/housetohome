@@ -1,12 +1,5 @@
 import { SET_TOKEN, LOAD_CURRENTUSER, LOGOUT_CURRENTUSER, AUTH_ERROR, UPDATE_CURRENTUSER, DELETE_ACCOUNT } from "../actions/types";
 
-// const initialState = {
-// 	token: localStorage.getItem('token'),
-// 	isAuthenticated: false,
-// 	loading: true,
-// 	info: null
-// };
-
 const initialState = {
 	isAuthenticated: false,
 	loading: true,

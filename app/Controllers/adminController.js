@@ -22,7 +22,7 @@ const adminCntrl = {
 
 		try {
 			let users = await User.find(query).exec();
-			users = users.map((item, i) => item.detailsToJSON());
+			users = users.filter((user) => user.id !== req.currentuser.id).map((item, i) => item.detailsToJSON());
 			return res.status(200).json(users);
 		} catch(e) {
 			errors.msg = e.message;

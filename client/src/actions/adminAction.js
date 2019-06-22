@@ -1,16 +1,11 @@
 import axios from "axios";
 import { handleFormError, clearErrors, handleError } from "./utilAction";
-import { ADD_NEW_EMPLOYEE, GET_ALL_USERS, ADMIN_LOAD_LISTINGS, CREATE_NEW_LISTNG, UPDATE_LISTING, DELETE_LISTING, SHOW_LISTING, GET_EMPLOYEES } from "./types";
+import { ADD_NEW_EMPLOYEE, GET_ALL_USERS, ADMIN_LOAD_LISTINGS, CREATE_NEW_LISTNG, UPDATE_LISTING, ADMIN_SHOW_USER } from "./types";
 import { setAlertAction } from "./alertAction";
 import history from "../helpers/history";
 
 export const registerEmployeeAction = (userdata, history) => async dispatch =>{
-	const config = {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
-
+	const config = {headers: { 'Content-Type': 'application/json' } };
 	const data = JSON.stringify(userdata);
 
 	try {
@@ -29,6 +24,16 @@ export const getAllUsers = (type = "all") => async dispatch =>{
 		return dispatch({type: GET_ALL_USERS, payload: res.data });
 	} catch(err) {
 		dispatch(handleError(err.message));
+		return setTimeout(() => dispatch(clearErrors()), 5000);
+	};
+};
+
+export const getUserAccount = (id) => async dispatch =>{
+	try {
+		const res = await axios.get(`/api/admin/users/${id}`);
+		return dispatch({type: ADMIN_SHOW_USER, payload: res.data});
+	} catch(err) {
+		dispatch(handleFormError(err.response.data));
 		return setTimeout(() => dispatch(clearErrors()), 5000);
 	};
 };

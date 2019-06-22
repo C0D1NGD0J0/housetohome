@@ -1,4 +1,4 @@
-import { GET_ALL_USERS, GET_EMPLOYEES, GET_GUESTS, ADD_NEW_EMPLOYEE, ADMIN_SHOW_USER, ADMIN_UPDATE_USER, } from "../../actions/types";
+import { GET_ALL_USERS, ADD_NEW_EMPLOYEE, ADMIN_SHOW_USER, ADMIN_UPDATE_USER, } from "../../actions/types";
 import _ from "lodash";
 
 const initialState = {
@@ -21,7 +21,13 @@ export default function(state = initialState, action){
 			return{
 				...state,
 				loading: false,
-				employees: {...state.employees, [payload.data.id]: payload.data}
+				all: {...state.all, [payload.data.id]: payload.data}
+			};
+		case ADMIN_SHOW_USER:
+			return{
+				...state,
+				loading: false,
+				show: {...payload}
 			};
 		default: 
 			return state;

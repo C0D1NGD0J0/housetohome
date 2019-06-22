@@ -12,6 +12,7 @@ import AccountUpdate from "./components/User/AccountUpdate";
 import AdminDashboard from "./components/User/admin/AdminDashboard";
 import ManageListings from "./components/Listing/Admin/ManageListings";
 import ManageUsers from "./components/User/admin/ManageUsers";
+import ManageUser from "./components/User/admin/ManageUser";
 import NewEmployee from "./components/User/admin/NewEmployee";
 import NewListing from "./components/Listing/NewListing/";
 import Listing from "./components/Listing/DisplayListing/";
@@ -53,6 +54,7 @@ const OtherRoutes = () =>(
 			<AdminPrivateRoute exact path="/admin/properties" component={ManageListings} />
 			<AdminPrivateRoute exact path="/admin/manage_users" component={ManageUsers} />
 			<AdminPrivateRoute exact path="/admin/properties/new" component={NewListing} />
+			<AdminPrivateRoute exact path="/admin/manage_users/:id" component={ManageUser} />
 			<AdminPrivateRoute exact path="/admin/properties/edit/:id" component={NewListing} />
 			<Route exact path="/properties/:id" component={Listing} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />

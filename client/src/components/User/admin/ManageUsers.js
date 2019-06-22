@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
@@ -18,9 +18,9 @@ class ManageUsers extends Component {
 	}
 
   render() {
-  	const { all } = this.props.users;
-  
-		const tableRowData = Object.values(all).map((user, i) =>{
+  	const { users } = this.props;
+  	const { currentuser: { info } } = this.props;
+		const tableRowData = Object.values(users).map((user, i) =>{
 			return (
 				<tr key={i}>
 					<td>{i+1}</td>
@@ -30,14 +30,11 @@ class ManageUsers extends Component {
 					<td>{user.phone}</td>
 					<td>{user.role}</td>
 					<td>
-						<span className="actionBtn"><i className="fa fa-eye"></i></span>
-						<span className="actionBtn"><i className="fa fa-pencil"></i></span>
-						<span className="actionBtn"><i className="fa fa-trash"></i></span>
+						<Link to={`/admin/manage_users/${user.id}`} className="actionBtn"><i className="fa fa-eye"></i></Link>
 					</td>
 				</tr> 
 			)
 		});
-		const { currentuser: { info } } = this.props;
 
     return (
     	<ContentWrapper containerClass="container">
@@ -76,9 +73,9 @@ class ManageUsers extends Component {
 
 ManageUsers.displayName = 'ManageUsers';
 
-const mapStateToProps = state =>({
+const mapStateToProps = (state, ownProps) =>({
 	currentuser: state.user,
-	users: state.admin.users
+	users: state.admin.users.all
 });
 
 const mapDispatchToProps = {
