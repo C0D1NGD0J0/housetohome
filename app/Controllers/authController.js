@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const { sendEmail, tokenGenerator } = require("../Helpers/utils");
 const User = require('../Models/User');
-const ROLES = ["admin", "staff", "guest"];
+const ROLES = ["admin", "staff"];
 
 const authCntrl = {
 	signupGuest: async (req, res, next) =>{

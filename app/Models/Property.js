@@ -67,9 +67,9 @@ PropertySchema.virtual("formatAddress").get(function(){
 	const address = this.location.address.split(",");
 	return{
 		street: address[0].trim(),
-		city: address[1].trim(),
-		postCode: address[2].trim(),
-		country: address[3].trim()
+		city: address[1] ? address[1].trim() : "",
+		postCode: address[2] ? address[2].trim() : "",
+		country: address[3] ? address[3].trim() : ""
 	};
 });
 

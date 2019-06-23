@@ -40,6 +40,14 @@ class ManageUser extends Component {
 
 	componentDidUpdate(prevProps, prevState){
 		const {user} = this.props;
+		const { currentuser } = this.props;
+
+		if(!currentuser.isAuthenticated){
+			return this.props.history.push("/login");
+		} else if (!currentuser.info.isadmin) {
+			return this.props.history.push("/dashboard");
+		};
+		
 		if(user.info && prevState.firstName !== user.info.firstName){
 			this.setState({
 				firstName: user.info.firstName,
@@ -47,7 +55,7 @@ class ManageUser extends Component {
 				email: user.info.email,
 				phone: user.info.phone,
 			});
-		}
+		};
 	}
 
   onFormFieldChange = (e) =>{

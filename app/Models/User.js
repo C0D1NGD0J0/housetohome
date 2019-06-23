@@ -42,7 +42,7 @@ const UserSchema = new Schema({
 	activationTokenExpires: {type: Date, default: ""},
 	passwordResetToken: {type: String, default:""},
 	passwordResetExpires: {type: Date, default: ""},
-	_type: {type: String, default: "guest", lowercase: true},
+	role: {type: String, default: "guest", lowercase: true},
 	isAdmin: {type: Boolean, default: false},
 	likedProperty: [{type: Schema.Types.ObjectId, ref: 'Property'}],
 	avatar: {type: String},
@@ -74,7 +74,7 @@ UserSchema.methods.detailsToJSON = function(user){
 		firstName: this.firstName,
 		lastName: this.lastName,
 		phone: this.phone,
-		role: this._type
+		role: this.role
 	};
 
 	if(_user.role === 'employee'){

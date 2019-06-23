@@ -27,6 +27,10 @@ const propertyCntrl = {
 			
 			property.features = { bedroom, bathroom, maxCapacity, floors, parking };
 			property.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets};
+			
+			if(!req.currentuser.isadmin && req.currentuser.role === 'employee'){
+				property.handler = req.currentuser.id;
+			};
 
 			if(req.currentuser.isadmin){
 				property.isActive = isActive;
