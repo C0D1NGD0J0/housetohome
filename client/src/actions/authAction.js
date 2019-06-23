@@ -62,5 +62,6 @@ export const loadUserAction = () => async dispatch =>{
 
 export const logoutAction = () => dispatch =>{
 	dispatch({ type: LOGOUT_CURRENTUSER, payload: {} });
-	return dispatch(setAlertAction("Logout successful...", "success"));
+	dispatch(setAlertAction("Logout successful...", "success"));
+	return window.location.href = "/";
 };

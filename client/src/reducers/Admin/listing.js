@@ -1,4 +1,4 @@
-import { ADMIN_LOAD_LISTINGS, CREATE_NEW_LISTNG, UPDATE_LISTING } from "../../actions/types";
+import { ADMIN_LOAD_LISTINGS, ADMIN_LOAD_LISTING, CREATE_NEW_LISTNG, UPDATE_LISTING } from "../../actions/types";
 import _ from "lodash";
 
 const initialState = {
@@ -16,6 +16,12 @@ export default function(state = initialState, action){
 				...state,
 				loading: false,
 				all: {...state.all, ..._.mapKeys(payload, "_id")}
+			};
+		case ADMIN_LOAD_LISTING:
+			return{
+				...state,
+				loading: false,
+				show: payload
 			};
 		case CREATE_NEW_LISTNG:
 		case UPDATE_LISTING:

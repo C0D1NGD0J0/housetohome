@@ -36,7 +36,8 @@ if(!isProduction){
 	// 			price: faker.commerce.price() * 1000,
 	// 			featured: BOOLEAN_VALUES[Math.floor(Math.random() * Math.floor(BOOLEAN_VALUES.length))],
 	// 			handler: users[Math.floor(Math.random() * Math.floor(users.length))].id,
-	// 			isActive: true
+	// 			isActive: true,
+	// 			author: users[Math.floor(Math.random() * Math.floor(users.length))].id
 	// 		});
 
 	// 		property.features = {

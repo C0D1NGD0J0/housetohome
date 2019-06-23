@@ -51,7 +51,7 @@ const propertyCntrl = {
 		const { propertyId } = req.params;
 
 		try {
-			let property = await Property.findById(propertyId).populate("handler", "fullname firstName lastName email phone").exec();
+			let property = await Property.findById(propertyId).populate("handler", "id fullname firstName lastName email phone").exec();
 			errors.msg = "Property not found!";
 			if(!property) return res.status(400).json(errors);
 			return res.status(200).json(property);
@@ -83,8 +83,9 @@ const propertyCntrl = {
 				updateData.handler = handler;
 				updateData.isActive = isActive;
 			};			
-
-			if(property.author._id.equals(req.currentuser.id)){
+			
+			console.log(updateData);
+			if(property.author._id.equals(req.currentuser.id) || req.currentuser.isadmin){
 				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true }).populate("handler", "id fullname").exec();
 				
 				return res.status(200).json(property);

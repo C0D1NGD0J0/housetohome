@@ -16,7 +16,7 @@ const adminCntrl = {
 			query = {}
 		} else {
 			query = {
-				_type: usertype
+				role: usertype
 			}
 		};
 

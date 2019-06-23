@@ -62,7 +62,7 @@ class NewListing extends Component {
   	};
 
   	if(id && id.length === 24){
-			await this.props.getListingAction(id);
+			await this.props.getListingAction(id, true);
   	};
   }
 	
@@ -154,7 +154,7 @@ class NewListing extends Component {
 				featured: currentLisitng.featured,
 				yearBuilt: currentLisitng.yearBuilt,
 				price: currentLisitng.price,
-				handler: currentLisitng.handler.fullname,
+				handler: currentLisitng.handler._id,
 				bedroom: currentLisitng.features.bedroom,
 				bathroom: currentLisitng.features.bathroom,
 				maxCapacity: currentLisitng.features.maxCapacity,
@@ -195,9 +195,9 @@ class NewListing extends Component {
   }
 
   render() {
-		const { errors, listings: { all }, currentuser: { info }, employees } = this.props;
+		const { errors, listings: { all, show }, currentuser: { info }, employees } = this.props;
 		const { photos, currentStep, ...values } = this.state;
-	
+		
     return(
     	<ContentWrapper containerClass="container">
 				<div className="row">
@@ -289,7 +289,7 @@ class NewListing extends Component {
 
 const mapStateToProps = state =>({
 	currentuser: state.user,
-	listings: state.listings,
+	listings: state.admin.listings,
 	errors: state.errors,
 	employees: state.admin.users.all
 });

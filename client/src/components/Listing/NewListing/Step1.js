@@ -6,7 +6,7 @@ import staticData from "./staticData";
 
 const StepOne = ({onchange, currentStep, value, error, options, isAdmin}) =>{
 	if(currentStep !== 1) return null;
-	
+	console.log(value.handler);
   return (
   	<Fragment>
 	  	<div className="col-sm-6">
