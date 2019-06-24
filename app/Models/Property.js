@@ -32,6 +32,9 @@ const PropertySchema = new Schema({
 		is_ac: {type: Boolean, default: false},
 		is_heating: {type: Boolean, default: false},
 		is_internet: {type: Boolean, default: false},
+		is_gym: {type: Boolean, default: false},
+		swimming_pool: {type: Boolean, default: false},
+		is_laundry: {type: Boolean, default: false},
 		pets: {type: Boolean, default: false}
 	},
 	location: {

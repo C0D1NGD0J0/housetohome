@@ -16,7 +16,7 @@ const propertyCntrl = {
 
 	create: async (req, res, next) =>{
 		const errors = {};
-		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = req.body;
+		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, is_gym, swimming_pool, is_laundry } = req.body;
 		
 		try {			
 			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {}, features: {}, extras: {} });
@@ -64,7 +64,7 @@ const propertyCntrl = {
 	update: async (req, res, next) =>{
 		const errors = {};
 		const propertyId = ObjectId(req.params.propertyId);
-		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude } = req.body;
+		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, is_gym, swimming_pool, is_laundry } = req.body;
 
 		try {
 			let property = await Property.findById(propertyId).exec();			
@@ -76,7 +76,7 @@ const propertyCntrl = {
 			updateData.location.coordinates[1] = longitude;
 			
 			updateData.features = { bedroom, bathroom, maxCapacity, floors, parking };
-			updateData.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets};
+			updateData.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, is_gym, swimming_pool, is_laundry};
 			updateData.meta.lastUpdatedBy = req.currentuser.id;
 
 			if(req.currentuser.isadmin){
@@ -84,7 +84,6 @@ const propertyCntrl = {
 				updateData.isActive = isActive;
 			};			
 			
-			console.log(updateData);
 			if(property.author._id.equals(req.currentuser.id) || req.currentuser.isadmin){
 				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true }).populate("handler", "id fullname").exec();
 				

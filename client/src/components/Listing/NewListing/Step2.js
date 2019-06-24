@@ -24,35 +24,43 @@ const StepTwo = ({ currentStep, onchange, value, checkBoxChange, error }) => {
 
 			<div className="col-sm-12">
 				<ul className="property-features-list">
-					<li className="col-sm-2">
+					<li>
 						<CheckboxField name="is_tv" label="Cable TV" isChecked={ischecked(value.is_tv)} onSelectChange={checkBoxChange} error={error && error.is_tv} />
 					</li>
 
-					<li className="col-sm-2">
+					<li>
 						<CheckboxField name="is_ac" label="AC" isChecked={ischecked(value.is_ac)} onSelectChange={checkBoxChange} error={error && error.is_ac}/>
 					</li>
 
-					<li className="col-sm-2">
+					<li>
 						<CheckboxField name="is_heating" label="Heating" isChecked={ischecked(value.is_heating)} onSelectChange={checkBoxChange} error={error && error.is_heating}/>
 					</li>
 
-					<li className="col-sm-2">
+					<li>
 						<CheckboxField name="is_internet" label="WIFI" isChecked={ischecked(value.is_internet)} onSelectChange={checkBoxChange} error={error && error.is_internet}/>
 					</li>
 
-					<li className="col-sm-2">
+					<li>
 						<CheckboxField name="is_kitchen" label="Kitchen" isChecked={ischecked(value.is_kitchen)} onSelectChange={checkBoxChange} error={error && error.is_kitchen}/>
 					</li>
 
-					<li className="col-sm-2">
+					<li>
+						<CheckboxField name="is_gym" label="Gym" isChecked={ischecked(value.is_gym)} onSelectChange={checkBoxChange} error={error && error.is_gym}/>
+					</li>
+
+					<li>
+						<CheckboxField name="is_laundry" label="Laundry" isChecked={ischecked(value.is_laundry)} onSelectChange={checkBoxChange} error={error && error.is_laundry}/>
+					</li>
+
+					<li>
+						<CheckboxField name="swimming_pool" label="Swimming Pool" isChecked={ischecked(value.swimming_pool)} onSelectChange={checkBoxChange} error={error && error.swimming_pool}/>
+					</li>
+
+					<li>
 						<CheckboxField name="pets" label="Pets" isChecked={ischecked(value.pets)} onSelectChange={checkBoxChange} error={error && error.pets}/>
 					</li>
-				</ul>
-			</div>
 
-			<div className="col-sm-12">
-				<ul className="property-features-list">
-					<li className="col-sm-2">
+					<li>
 						<CheckboxField 
 							name="featured"
 							label="Featured"
@@ -62,7 +70,7 @@ const StepTwo = ({ currentStep, onchange, value, checkBoxChange, error }) => {
 						/>
 					</li>
 
-					<li className="col-sm-2">
+					<li>
 						<CheckboxField 
 							name="isActive"
 							label="Publish"

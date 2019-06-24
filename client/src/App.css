@@ -108,6 +108,13 @@ hr.hr {
   background-color: rgba(97, 137, 47, 0.4);
 }
 
+hr.hr_long {
+  width: 100%;
+  height: .1rem;
+  margin: 0 0 2rem 0;
+  background-color: rgba(97, 137, 47, 0.4);
+}
+
 h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif;
@@ -801,29 +808,22 @@ h1, h2, h3, h4, h5, h6 {
   margin: 2rem 0;
 }
 
-#listing-page .listing_amenities-list {
-  margin: 0;
+#listing-page .amenities_list{
   padding: 0;
+  margin: 1rem 0;
   list-style: none;
 }
 
-#listing-page .listing_amenities-list_item {
+#listing-page .amenities_list li{
   width: 33%;
-  float: left;
   font-size: 1.4rem;
+  line-height: 3.5rem;
+  display: inline-block;
   text-transform: uppercase;
 }
 
-#listing-page .listing_amenities-list_item .fa-check {
-  color: #86C232;
-}
-
-#listing-page .listing_amenities-list_item .fa-times {
-  color: red;
-}
-
-#listing-page .listing_amenities-list li {
-  line-height: 3.5rem;
+#listing-page .amenities_list li span{
+  padding-left: .8rem;
 }
 
 #listing-page .listing_description {
@@ -849,6 +849,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .property-features-list li {
+  width: 25%;
   display: inline-block;
 }
 

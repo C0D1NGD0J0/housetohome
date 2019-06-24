@@ -32,9 +32,9 @@ const ListingInfo = ({ listing }) => {
 				</div>
 			</div><div className="clearfix"></div>
 
-			<div className="listing_short-info well">
+			<div className="listing_short-info">
 				<div style={{width: "100%"}}>
-					<h4 className="listing_subtitle">Overview</h4><hr className="hr"/>
+					<h4 className="listing_subtitle">Overview</h4><hr className="hr_long"/>
 				</div>
 
 				<div className="listing_short-info_item">
@@ -63,72 +63,55 @@ const ListingInfo = ({ listing }) => {
 				</div>
 			</div>
 
-			<div className="listing_amenities well">
-				<h4 className="listing_subtitle">Amenities</h4><hr className="hr"/>
-				<ul className="listing_amenities-list row">
-					<li className="listing_amenities-list_item">
-						<div>
-							<i className={classnames("fa",
-								{"fa-times": !(listing && listing.extras.is_ac), 
-								"fa-check": (listing && listing.extras.is_ac)})}>
-							</i>
-							<span className={classnames({"not_provided": !(listing && listing.extras.is_ac)})}>
-								AC/Central Cooling
-							</span>
-						</div>
+			<div className="listing_amenities">
+				<h4 className="listing_subtitle">Amenities</h4><hr className="hr_long"/>
+				<ul className="amenities_list">
+					<li className={classnames({"not_provided": !(listing && listing.extras.is_ac)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Air Conditioning</span>
 					</li>
-					<li className="listing_amenities-list_item">
-						<div>
-							<i className="fa fa-check"></i>
-							<span>AC & Heating</span>
-						</div>
+					<li className={classnames({"not_provided": !(listing && listing.extras.is_internet)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Wireless Internet</span>
 					</li>
-					<li className="listing_amenities-list_item">
-						<div>
-							<i className="fa fa-check"></i>
-							<span>AC & Heating</span>
-						</div>
+					<li className={classnames({"not_provided": !(listing && listing.extras.is_kitchen)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Kitchen (supplies)</span>
 					</li>
-					<li className="listing_amenities-list_item">
-						<div>
-							<i className="fa fa-check"></i>
-							<span>AC & Heating</span>
-						</div>
+					<li className={classnames({"not_provided": !(listing && listing.extras.is_tv)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Cable TV</span>
 					</li>
-					<li className="listing_amenities-list_item">
-						<div>
-							<i className="fa fa-check"></i>
-							<span>AC & Heating</span>
-						</div>
+					<li className={classnames({"not_provided": !(listing && listing.extras.is_heating)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Heating</span>
 					</li>
-					<li className="listing_amenities-list_item">
-						<div>
-							<i className="fa fa-times"></i>
-							<span className="not_provided">AC & Heating</span>
-						</div>
+					<li className={classnames({"not_provided": !(listing && listing.extras.is_gym)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Fitness Center (Gym)</span>
 					</li>
-					<li className="listing_amenities-list_item">
-						<div>
-							<i className="fa fa-times"></i>
-							<span className="not_provided">AC & Heating</span>
-						</div>
+					<li className={classnames({"not_provided": !(listing && listing.extras.swimming_pool)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Swimming Pool</span>
 					</li>
-					<li className="listing_amenities-list_item">
-						<div>
-							<i className="fa fa-check"></i>
-							<span>AC & Heating</span>
-						</div>
+					<li className={classnames({"not_provided": !(listing && listing.extras.is_laundry)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Laundry</span>
+					</li>
+					<li className={classnames({"not_provided": !(listing && listing.extras.is_pets)})}>
+						<i className="fa fa-check-circle-o"></i>
+						<span>Pets</span>
 					</li>
 				</ul>
 			</div>
 
-			<div className="listing_description well">
-				<h4 className="listing_subtitle">Description:</h4><hr className="hr"/>
+			<div className="listing_description">
+				<h4 className="listing_subtitle">Description:</h4><hr className="hr_long"/>
 				{listing && listing.description}
 			</div>
 
-			<div className="listing_description well">
-				<h4 className="listing_subtitle">Map:</h4><hr className="hr"/>
+			<div className="listing_description">
+				<h4 className="listing_subtitle">Map:</h4><hr className="hr_long"/>
 				
 			</div>
 		</div>
