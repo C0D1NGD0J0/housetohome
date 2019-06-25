@@ -1,6 +1,6 @@
 import axios from "axios";
 import { handleFormError, clearErrors, handleError } from "./utilAction";
-import { ADD_NEW_EMPLOYEE, GET_ALL_USERS, ADMIN_LOAD_LISTINGS, CREATE_NEW_LISTNG, UPDATE_LISTING, ADMIN_SHOW_USER } from "./types";
+import { ADD_NEW_EMPLOYEE, GET_ALL_USERS, ADMIN_LOAD_LISTINGS, CREATE_NEW_LISTNG, UPDATE_LISTING, ADMIN_SHOW_USER, DELETE_LISTING } from "./types";
 import { setAlertAction } from "./alertAction";
 import history from "../helpers/history";
 
@@ -73,6 +73,16 @@ export const updateListingAction = (id, listingData) => async dispatch =>{
 		return dispatch(setAlertAction("Listing update was successful...", "success"));
 	} catch(err) {
 		dispatch(handleFormError(err.response.data));
+		return setTimeout(() => dispatch(clearErrors()), 5000);
+	};
+};
+
+export const deleteListingAction = (id) => dispatch =>{
+	try {
+		const res = axios.delete(`/api/admin/properties/${id}`);
+		return dispatch({type: DELETE_LISTING, payload: id });
+	} catch(err) {
+		dispatch(handleError(err.message));
 		return setTimeout(() => dispatch(clearErrors()), 5000);
 	};
 };

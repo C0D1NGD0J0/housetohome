@@ -1,4 +1,4 @@
-import { ADMIN_LOAD_LISTINGS, ADMIN_LOAD_LISTING, CREATE_NEW_LISTNG, UPDATE_LISTING } from "../../actions/types";
+import { ADMIN_LOAD_LISTINGS, ADMIN_LOAD_LISTING, CREATE_NEW_LISTNG, UPDATE_LISTING, DELETE_LISTING } from "../../actions/types";
 import _ from "lodash";
 
 const initialState = {
@@ -30,6 +30,12 @@ export default function(state = initialState, action){
 				loading: false,
 				all: {...state.all, [payload.id]: payload}
 			}
+		case DELETE_LISTING:
+			return{
+				...state,
+				loading: false,
+				all: _.omit(state.all, payload)
+			};
 		default: 
 			return state;
 	};

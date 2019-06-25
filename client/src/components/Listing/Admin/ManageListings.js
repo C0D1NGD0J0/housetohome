@@ -7,10 +7,10 @@ import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import UserSidebar from "../../layout/Sidebar/userSidebar";
 import Panel from "../../layout/Panel";
 import Table from "../../layout/Table";
-import { getAllListings } from "../../../actions/adminAction";
+import { getAllListings, deleteListingAction } from "../../../actions/adminAction";
 import { truncateText } from "../../../helpers";
 
-const ManageListings = ({ currentuser: {isAuthenticated, info}, getAllListings, listings }) => {
+const ManageListings = ({ currentuser: {isAuthenticated, info}, getAllListings, listings, deleteListingAction }) => {
 	useEffect(() =>{
 		if(info.isadmin){
 			getAllListings();
@@ -33,7 +33,7 @@ const ManageListings = ({ currentuser: {isAuthenticated, info}, getAllListings, 
 				<td>
 					<Link to={`/properties/${listing.id}`} className="actionBtn"><i className="fa fa-eye"></i></Link>
 					<Link to={`/admin/properties/edit/${listing.id}`} className="actionBtn"><i className="fa fa-pencil"></i></Link>
-					<span className="actionBtn"><i className="fa fa-trash"></i></span>
+					<span className="actionBtn" onClick={() => deleteListingAction(listing.id)} ><i className="fa fa-trash"></i></span>
 				</td>
 			</tr> 
 		)
@@ -82,4 +82,4 @@ const mapStateToProps = state =>({
 	listings: state.admin.listings
 });
 
-export default connect(mapStateToProps, { getAllListings })(ManageListings);
+export default connect(mapStateToProps, { getAllListings, deleteListingAction })(ManageListings);

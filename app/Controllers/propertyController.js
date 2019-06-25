@@ -103,10 +103,14 @@ const propertyCntrl = {
 		const { propertyId } = req.params;
 
 		try {
-			const property = await Property.findOneAndRemove({_id: propertyId}).exec();
-			if(!property) return res.status(404).json({msg: "Property not found."});
-			
-			return res.status(200).json(property);
+			if(req.currentuser.isadmin){
+				const property = await Property.findOneAndRemove({_id: propertyId}).exec();
+				if(!property) return res.status(404).json({msg: "Property not found."});
+				
+				return res.status(200).json(property);
+			};
+
+			return res.status(401).json("Action not authorized!!");
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(404).json(errors);
