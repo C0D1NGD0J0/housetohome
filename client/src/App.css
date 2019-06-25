@@ -833,6 +833,20 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1.5rem 0;
 }
 
+#listing-page .listing_map {
+  width: 100%;
+  height: 55rem;
+  margin: 2rem 0;
+  overflow: hidden;
+}
+
+#listing-page .listing_map > div{
+  position: relative !important;
+  width: 100% !important;
+  height: 49rem;
+  max-height: 100%;
+}
+
 .not_provided {
   color: rgba(96, 110, 124, 0.4);
 }

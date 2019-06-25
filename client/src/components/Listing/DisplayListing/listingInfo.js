@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from "react-moment";
 import classnames from "classnames";
+import GoogleMap from "./googleMap";
 
 const ListingInfo = ({ listing }) => {
 	
@@ -110,9 +111,9 @@ const ListingInfo = ({ listing }) => {
 				{listing && listing.description}
 			</div>
 
-			<div className="listing_description">
+			<div className="listing_map">
 				<h4 className="listing_subtitle">Map:</h4><hr className="hr_long"/>
-				
+				<GoogleMap listingLocation={listing && listing.location}/>
 			</div>
 		</div>
   );
