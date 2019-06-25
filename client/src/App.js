@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Router, Route, Switch} from "react-router-dom";
 import Landing from "./components/Landing";
 import Login from "./components/Auth/Login";
@@ -21,10 +21,14 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import AdminPrivateRoute from "./helpers/EmployeePrivateRoute";
 import store from "./store";
 import history from "./helpers/history";
-import "./helpers/validateAuthUser";
+import { validateCurrentUser } from "./helpers/validateAuthUser";
 import './App.css';
 
 const App = () =>{
+	useEffect(() =>{
+		validateCurrentUser();
+	}, [validateCurrentUser]);
+
   return (
   	<Provider store={store}>
 	  	<Router history={history}>
