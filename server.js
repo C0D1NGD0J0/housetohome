@@ -12,22 +12,21 @@ const corsOptions = {
 
 // Middleware
 if (process.env.NODE_ENV !== 'production') {
-  dotenv.config()
+  dotenv.config();
+  app.use(logger('dev'));
 };
 
 app.use(cors(corsOptions));
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Database Connection
 require('./app/Database')();
-// require('./app/Database/seed');
 
 // Models
 require('./app/Models/User');
 require('./app/Models/Property');
-require('./app/Models/Reservation');
+// require('./app/Models/Reservation');
 // require('./app/Models/Report');
 
 // Routes
@@ -38,6 +37,7 @@ app.use('/api/users', require('./app/Routes/api/users'));
 app.use('/api/properties', require('./app/Routes/api/properties'));
 app.use(require('./app/Routes/api/reservations'));
 
+// SERVER
 app.listen(port, () =>{
 	console.log(`Server is live on port ${port}`);
 });

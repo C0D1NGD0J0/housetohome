@@ -18,3 +18,17 @@ export const truncateText = (str, length = 1000) =>{
 
 	return str;
 };
+
+export const formatDisplayPrice = (symbl, listing) =>{
+	if(!listing) return "00.00";
+
+	switch (listing.listingType) {
+		case "rent":
+		case "lease":
+			return `${symbl}${listing.price} /month`;
+		case "sale":
+			return `${symbl}${listing.price}`;
+		default:
+			return `${symbl}${listing.price}`;
+	}	
+};

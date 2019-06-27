@@ -22,12 +22,12 @@ class Navbar extends Component {
 			    <div id="navbar" className="collapse navbar-collapse">
 			      <ul className="nav navbar-nav navbar-right">
 			        <li><Link to="/">Home</Link></li>
-			        <li><Link to="#!">Listings</Link></li>
+			        <li><Link to="/properties">Listings</Link></li>
+			        { info && info.isadmin ? <li><Link to="/admin/dashboard">Admin</Link></li> : null }
 			        { isAuthenticated ?
 			        	<li className="dropdown">
 				          <Link to="#!" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{info && info.firstName}<span className="caret"></span></Link>
 				          <ul className="dropdown-menu">
-				            { info && info.isadmin ? <li><Link to="/admin/dashboard">Admin</Link></li> : null }
 				            <li><Link to="/dashboard">Dashboard</Link></li>
 				            <li><Link to="/account_update">Settings</Link></li>
 				            <li><a onClick={this.props.logoutAction}>Logout</a></li>

@@ -14,9 +14,9 @@ const MapWrapper = (props) => {
   		google={props.google} 
   		zoom={14} 
   		style={mapStyle} 
-  		initialCenter={{lat: listing.coordinates[1], lng: listing.coordinates[0]}} 
+  		initialCenter={{lat: listing.coordinates[0], lng: listing.coordinates[1]}} 
   	>
-			<Marker position={{lat: listing.coordinates[1], lng: listing.coordinates[0]}} />
+			<Marker position={{lat: listing.coordinates[0], lng: listing.coordinates[1]}} />
   	</Map>
   );
 };

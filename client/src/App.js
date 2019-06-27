@@ -15,6 +15,7 @@ import ManageUsers from "./components/User/admin/ManageUsers";
 import ManageUser from "./components/User/admin/ManageUser";
 import NewEmployee from "./components/User/admin/NewEmployee";
 import NewListing from "./components/Listing/NewListing/";
+import AllListings from "./components/Listing/AllListings/index";
 import Listing from "./components/Listing/DisplayListing/";
 import { Provider } from "react-redux";
 import PrivateRoute from "./helpers/PrivateRoute";
@@ -61,6 +62,7 @@ const OtherRoutes = () =>(
 			<AdminPrivateRoute exact path="/admin/manage_users/:id" component={ManageUser} />
 			<AdminPrivateRoute exact path="/admin/properties/edit/:id" component={NewListing} />
 			<Route exact path="/properties/:id" component={Listing} />
+			<Route exact path="/properties" component={AllListings} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 			<PrivateRoute exact path="/account_update" component={AccountUpdate} />
 		</Fragment>

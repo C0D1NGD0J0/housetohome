@@ -5,7 +5,7 @@ import { setAlertAction } from "./alertAction";
 
 export const getListingsAction = () => async dispatch =>{
 	try {
-		const res = await axios.get("/api/properties");
+		const res = await axios.get("/api/properties/all");
 		return dispatch({type: GET_LISTINGS, payload: res.data });
 	} catch(err) {
 		dispatch(handleError(err.message));

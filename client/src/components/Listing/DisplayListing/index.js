@@ -4,9 +4,9 @@ import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import ListingInfo from "./listingInfo";
 import { getListingAction } from "../../../actions/listingAction";
-import Reservation from "../../layout/Sidebar/bookingSidebar";
-import PropertyAgentInfo from "../../layout/Sidebar/handlerSidebar";
-import NearByListings from "../../layout/Sidebar/nearByListingsSidebar";
+import Reservation_SB from "../../layout/Sidebar/bookingSidebar";
+import PropertyAgentInfo_SB from "../../layout/Sidebar/handlerSidebar";
+import NearByListings_SB from "../../layout/Sidebar/nearByListingsSidebar";
 
 class Listing extends Component {
   constructor(props) {
@@ -31,9 +31,9 @@ class Listing extends Component {
 
 						<div className="col-sm-4 col-md-3">
 							<SidebarWrapper>
-								<Reservation />
-								<PropertyAgentInfo handler={listing && listing.handler} />
-								<NearByListings />
+								<Reservation_SB />
+								<PropertyAgentInfo_SB handler={listing && listing.handler} />
+								<NearByListings_SB />
 							</SidebarWrapper>
 						</div>
 					</div>
