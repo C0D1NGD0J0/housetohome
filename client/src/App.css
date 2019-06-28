@@ -528,9 +528,65 @@ h1, h2, h3, h4, h5, h6 {
   background: #FFFFFF;
 }
 
-.card {
+#properties .search{
+  display: flex;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+#properties .search_input{
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  color: inherit;
+  padding: .7rem 2rem;
+  width: 40%;
+  margin-right: -3rem;
+  border-radius: 100px;
+  background-color: #eee;
+  transition: all 0.4s ease-in-out;
+}
+
+#properties .search_input:focus{
+  outline: none;
+  box-shadow: 0 .3rem .3rem rgba(0,0,0,0.5);
+  transition: all 0.4s ease-in-out;
+}
+
+#properties .search_input::-webkit-input-placeholder{
+  font-weight: 300;
+  text-align: center;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+#properties .search_btn{
+  border: none;
+  background-color: transparent;
+}
+
+#properties .search_btn:focus{
+  outline: none;
+}
+
+#properties .search_btn:active{
+  transform: translateY(2px);
+}
+
+#properties .properties-list{
   width: 100%;
-  background-color: #FFFFFF;
+  display: flex;
+  align-items: flex-start;
+}
+
+.card {
+  flex: 1;
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #Fdfdfd;
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
 }
@@ -612,9 +668,14 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba(97, 137, 47, 0.4);
 }
 
+.card_footer{
+  align-self: flex-end;
+}
+
 .card_footer h4 {
-  color: #FFFFFF;
+  color: #000;
   margin-bottom: 0;
+  font-size: 1.4rem;
   text-align: center;
   padding: 1rem 2rem;
   background-color: #86C232;

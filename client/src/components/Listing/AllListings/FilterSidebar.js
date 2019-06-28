@@ -1,4 +1,7 @@
 import React from 'react';
+import InputField from "../../../helpers/FormElements/inputField";
+import SelectTag from "../../../helpers/FormElements/selectField";
+import CheckboxField from "../../../helpers/FormElements/checkboxField";
 
 const FilterSidebar = ({ className }) => {
   return (
@@ -6,12 +9,6 @@ const FilterSidebar = ({ className }) => {
 			<h3>Filter</h3><hr/>
 
 			<ul className="sidebar_menu filter_options">
-				<li>
-					<div className="form-group form">
-						<span className="control-label">Enter Location</span>
-						<input type="text" name="location" className="form-control" placeholder="Enter city name to search..." />
-					</div>								
-				</li>
 				<li>
 					<div className="form-group">
 						<span className="control-label">Listing Type</span>
@@ -56,14 +53,8 @@ const FilterSidebar = ({ className }) => {
 				</li>
 				<li>
 					<div className="form-group">
-						<span className="control-label">Property Size <small>(sqft)</small></span>
-						<select className="">
-							{/*<option selected disabled></option>*/}
-							<option value="1">One</option>
-							<option value="2">Two</option>
-							<option value="3">Three</option>
-							<option value="4+">Four(+)</option>
-						</select>
+						<span className="control-label">Property Size: <small>(sqft)</small></span>
+						<input type="range" name="size" className="form-control" min="0" max="250000" step="100" />
 					</div>								
 				</li>
 			</ul>
