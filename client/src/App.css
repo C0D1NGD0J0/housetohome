@@ -493,13 +493,13 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
-.filter_options li .control-label {
-  font-size: 1.2rem;
-  font-weight: bold;
+.filter_options li label {
+  font-size: 1.4rem;
+  font-weight: 100;
   text-transform: uppercase;
 }
 
-.filter_options li .control-label > #price {
+.filter_options li label > #price {
   font-size: 1.4rem;
 }
 
@@ -539,7 +539,7 @@ h1, h2, h3, h4, h5, h6 {
 #properties .search_input{
   font-family: inherit;
   font-size: inherit;
-  border: none;
+  border: 1px solid #86C232;
   color: inherit;
   padding: .7rem 2rem;
   width: 40%;
@@ -551,6 +551,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #properties .search_input:focus{
   outline: none;
+  width: 80%;
   box-shadow: 0 .3rem .3rem rgba(0,0,0,0.5);
   transition: all 0.4s ease-in-out;
 }
@@ -575,17 +576,17 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(2px);
 }
 
-#properties .properties-list{
+/*#properties .properties-list{
   width: 100%;
   display: flex;
   align-items: flex-start;
-}
+}*/
 
 .card {
-  flex: 1;
+  /*flex: 1;*/
+  /*display: flex;
+  flex-wrap: wrap;*/
   margin: 1rem;
-  display: flex;
-  flex-wrap: wrap;
   background-color: #Fdfdfd;
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);

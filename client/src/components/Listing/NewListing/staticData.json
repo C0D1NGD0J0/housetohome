@@ -1,5 +1,6 @@
 {
 	"listingType": ["sale", "rent", "lease"],
 	"propertyType": ["condominium", "house", "office", "land", "apartment"],
-	"role": ["employee", "guest"]
+	"role": ["employee", "guest"],
+	"bedrooms": [1,2,3,4,5]
 }

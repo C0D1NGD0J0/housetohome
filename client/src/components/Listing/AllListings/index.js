@@ -3,52 +3,68 @@ import { connect } from "react-redux";
 import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import Filter from "./FilterSidebar";
-import ListingCard from "./ListingCard";
 import Pagination from "../../layout/Pagination";
 import { getListingsAction } from "../../../actions/listingAction";
 import spriteSVG from "../../../assets/img/sprite.svg";
-import magnifyingGlassSVG from "../../../assets/img/svg/magnifying-glass.svg";
+import SearchField from "./SearchField";
+import Listings from "./Listings";
 
-class Listings extends Component {
+class ListingsIndex extends Component {
   constructor(props) {
   	super(props);
-  	this.state = {};
+  	this.state = {
+  		listingType: "",
+  		propertyType: "",
+  		price: 0,
+  		size: 0,
+  		bedroom: "",
+  		search: "",
+  		filteredListings: []
+  	};
   }
 	
 	componentDidMount(){
 		this.props.getListingsAction();
 	}
+	
+	onInputChange = (e) =>{
+		const { name, value } = e.target;
+
+		this.setState({ [name]: value }, () =>{
+			this.filteredData();
+		});
+	}
+
+	filteredData = () =>{
+		const listings = Object.values(this.props.listings);
+		const data = listings.filter((listing) =>{
+			return listing.listingType === this.state.listingType
+		});
+
+		this.setState({ filteredListings: [...data] });
+	}
 
   render() {
-  	const { listings } = this.props;
-  	if(!listings) return null;
+  	const listings = Object.values(this.props.listings);
+		const { filteredListings } = this.state;
 
-  	const displayListings = listings && Object.values(listings).map((listing, i) =>{
-			return <ListingCard listing={listing} key={i}/>
-  	});
-
-    return (
+  	return (
     	<ContentWrapper containerClass="container">
 				<div id="listing-page">
 					<div className="row">
 						<div className="col-sm-4 col-md-3">
 							<SidebarWrapper>
-								<Filter />
+								<Filter value={this.state} onchange={this.onInputChange}/>
 							</SidebarWrapper>
 						</div>
 
 						<div className="col-sm-8 col-md-9">
 							<div id="properties">
-								<div className="search">
-									<input type="text" name="search" placeholder="Enter Country or City name" className="search_input" />
-									<button className="search_btn">
-										<img src={magnifyingGlassSVG} />
-									</button>
-								</div>
-
+								<SearchField value={this.state.search} onchange={this.onInputChange}/>
 							
-								<div className="properties-list">
-									{displayListings}
+								<div className="row properties-list">
+									{/*<Listings listings={filteredListings.length === 0 ? listings : filteredListings}/>*/}
+									<Listings listings={filteredListings}/>
 								</div>
 							</div>
 						</div>
@@ -65,4 +81,4 @@ const mapStateToProps = state =>({
 	listings: state.listings.all
 });
 
-export default connect(mapStateToProps, { getListingsAction })(Listings);
+export default connect(mapStateToProps, { getListingsAction })(ListingsIndex);

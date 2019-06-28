@@ -2,60 +2,48 @@ import React from 'react';
 import InputField from "../../../helpers/FormElements/inputField";
 import SelectTag from "../../../helpers/FormElements/selectField";
 import CheckboxField from "../../../helpers/FormElements/checkboxField";
+import RangeField from "../../../helpers/FormElements/rangeField";
+import staticData from "../NewListing/staticData";
 
-const FilterSidebar = ({ className }) => {
+const FilterSidebar = ({ value, onchange }) => {
+
   return (
-		<div className="sidebar_box sticky sidebar_filter">
+		<div className="sidebar_box sidebar_filter">
 			<h3>Filter</h3><hr/>
 
 			<ul className="sidebar_menu filter_options">
 				<li>
-					<div className="form-group">
-						<span className="control-label">Listing Type</span>
-						<select className="">
-							{/*<option selected disabled></option>*/}
-							<option value="sale">Sale</option>
-							<option value="rent">Rent</option>
-							<option value="lease">Lease</option>
-						</select>
-					</div>								
+					<SelectTag 
+						label="Listing Type" 
+						name="listingType" 
+						selectChange={onchange}
+						value={value.listingType}
+						options={staticData.listingType} 
+					/>							
 				</li>
 				<li>
-					<div className="form-group">
-						<span className="control-label">Property Type</span>
-						<select>
-							{/*<option selected disabled></option>*/}
-							<option value="apartment">House</option>
-							<option value="apartment">Apartments</option>
-							<option value="apartment">Office Space</option>
-							<option value="apartment">Empty Land</option>
-							<option value="apartment">Condominium</option>
-						</select>
-					</div>								
+					<SelectTag 
+						label="Property Type" 
+						name="propertyType" 
+						selectChange={onchange}
+						value={value.propertyType}
+						options={staticData.propertyType} 
+					/>						
 				</li>
 				<li>
-					<div className="form-group">
-						<span className="control-label">Bedrooms</span>
-						<select className="">
-							{/*<option selected disabled></option>*/}
-							<option value="1">One</option>
-							<option value="2">Two</option>
-							<option value="3">Three</option>
-							<option value="4+">Four(+)</option>
-						</select>
-					</div>								
+					<SelectTag 
+						label="Bedrooms" 
+						name="bedroom" 
+						selectChange={onchange}
+						value={value.bedroom}
+						options={staticData.bedrooms} 
+					/>					
 				</li>
 				<li>
-					<div className="form-group">
-						<span className="control-label">Property Price: $<span id="price">00.00</span> </span>
-						<input type="range" name="price" className="form-control" min="0" max="200000" step="0.01" id='priceRange' />
-					</div>								
+					<RangeField name="price" value={value.price} label="Property Price" onChange={onchange} min={100000} max={800000} step={500}/>	
 				</li>
 				<li>
-					<div className="form-group">
-						<span className="control-label">Property Size: <small>(sqft)</small></span>
-						<input type="range" name="size" className="form-control" min="0" max="250000" step="100" />
-					</div>								
+					<RangeField name="size" value={value.size} label="Property Size" onChange={onchange} min={500} max={5000} step={200}/>	
 				</li>
 			</ul>
 		</div>
