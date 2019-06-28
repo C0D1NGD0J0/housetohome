@@ -16,7 +16,7 @@ const ListingCard = (props) => {
 
 					<div className="card_content">
 						<h3 className="card_content-title">
-							{listing.formatAddress.street}, {listing.formatAddress.city}
+							{listing.location.address}
 						</h3><hr/>
 						<ul className="property_amenities-list">
 							<li><i className="fa fa-bathtub"></i> {listing && listing.features.bathroom}</li>

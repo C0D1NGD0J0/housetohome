@@ -32,7 +32,7 @@ class Navbar extends Component {
 				            <li><Link to="/account_update">Settings</Link></li>
 				            <li><a onClick={this.props.logoutAction}>Logout</a></li>
 				          </ul>
-				        </li> : null
+				        </li> : <li><Link to="/login"><i className="fa fa-key"></i></Link></li>
 				      }
 			      </ul>
 			    </div>

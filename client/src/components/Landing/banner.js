@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const HeroSection = (props) => {
   return (
@@ -11,7 +12,7 @@ const HeroSection = (props) => {
 					</div>
 					
 					<div className="home_content-btn text-center">
-						<a href="properties.html" className="btn btn-green">View Property Listings</a>
+						<Link to="/properties" className="btn btn-green">View Property Listings</Link>
 					</div>
 				</div>
 			</div>

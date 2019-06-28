@@ -25,10 +25,10 @@ export const formatDisplayPrice = (symbl, listing) =>{
 	switch (listing.listingType) {
 		case "rent":
 		case "lease":
-			return `${symbl}${listing.price} /month`;
+			return `${symbl}${listing.price.toFixed(2)} /month`;
 		case "sale":
-			return `${symbl}${listing.price}`;
+			return `${symbl}${listing.price.toFixed(2)}`;
 		default:
-			return `${symbl}${listing.price}`;
+			return `${symbl}${listing.price.toFixed(2)}`;
 	}	
 };
