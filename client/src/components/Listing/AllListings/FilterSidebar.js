@@ -5,7 +5,7 @@ import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import RangeField from "../../../helpers/FormElements/rangeField";
 import staticData from "../NewListing/staticData";
 
-const FilterSidebar = ({ value, onchange }) => {
+const FilterSidebar = ({ value, onchange, resetFilter }) => {
 
   return (
 		<div className="sidebar_box sidebar_filter">
@@ -44,6 +44,10 @@ const FilterSidebar = ({ value, onchange }) => {
 				</li>
 				<li>
 					<RangeField name="size" value={value.size} label="Property Size" onChange={onchange} min={500} max={5000} step={200}/>	
+				</li>
+
+				<li>
+					<button className="btn btn-danger" onClick={resetFilter}>RESET</button>
 				</li>
 			</ul>
 		</div>

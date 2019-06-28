@@ -19,7 +19,8 @@ class ListingsIndex extends Component {
   		size: 0,
   		bedroom: "",
   		search: "",
-  		filteredListings: []
+  		filteredListings: [],
+  		hasFiltered: false,
   	};
   }
 	
@@ -33,20 +34,47 @@ class ListingsIndex extends Component {
 		this.setState({ [name]: value }, () =>{
 			this.filteredData();
 		});
+	}	
+	
+	resetFilter = () =>{
+		this.setState({
+			hasFiltered: false,
+			listingType: "",
+  		propertyType: "",
+  		price: 0,
+  		size: 0,
+  		bedroom: "",
+  		search: "",
+  		filteredListings: [],
+		})
 	}
 
 	filteredData = () =>{
 		const listings = Object.values(this.props.listings);
-		const data = listings.filter((listing) =>{
-			return listing.listingType === this.state.listingType
+		const filters = ["listingType","propertyType","price","size","bedroom"];
+		let data = listings;
+
+		filters.forEach((type) => {
+			if(this.state[type]){
+				data = data.filter((listing) =>{
+					switch (type) {
+						case "price":
+							return listing[type] <= this.state[type];
+						case "size":
+							return listing[type] <= this.state[type]			
+						default:
+							return listing[type] === this.state[type]
+					}
+				})
+			}
 		});
 
-		this.setState({ filteredListings: [...data] });
+		this.setState({ filteredListings: [...data], hasFiltered: true });
 	}
 
   render() {
   	const listings = Object.values(this.props.listings);
-		const { filteredListings } = this.state;
+		const { filteredListings, hasFiltered } = this.state;
 
   	return (
     	<ContentWrapper containerClass="container">
@@ -54,7 +82,7 @@ class ListingsIndex extends Component {
 					<div className="row">
 						<div className="col-sm-4 col-md-3">
 							<SidebarWrapper>
-								<Filter value={this.state} onchange={this.onInputChange}/>
+								<Filter value={this.state} onchange={this.onInputChange} resetFilter={this.resetFilter}/>
 							</SidebarWrapper>
 						</div>
 
@@ -63,8 +91,8 @@ class ListingsIndex extends Component {
 								<SearchField value={this.state.search} onchange={this.onInputChange}/>
 							
 								<div className="row properties-list">
-									{/*<Listings listings={filteredListings.length === 0 ? listings : filteredListings}/>*/}
-									<Listings listings={filteredListings}/>
+									<Listings listings={!hasFiltered ? listings : filteredListings}/>
+									{/*<Listings listings={filteredListings}/>*/}
 								</div>
 							</div>
 						</div>
