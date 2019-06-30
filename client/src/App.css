@@ -576,17 +576,21 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(2px);
 }
 
-/*#properties .properties-list{
+.row.properties-list{
   width: 100%;
   display: flex;
-  align-items: flex-start;
-}*/
+  flex-wrap: wrap;
+}
+
+.row.properties-list > [class*='col-']{
+  display: flex;
+  flex-direction: column;
+}
 
 .card {
-  /*flex: 1;*/
-  /*display: flex;
-  flex-wrap: wrap;*/
   margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
   background-color: #Fdfdfd;
   transition: box-shadow 0.3s ease-in-out;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);

@@ -62,6 +62,8 @@ class ListingsIndex extends Component {
 							return listing[type] <= this.state[type];
 						case "size":
 							return listing[type] <= this.state[type]			
+						case "bedroom":
+							return listing.features[type] <= this.state[type]
 						default:
 							return listing[type] === this.state[type]
 					}
@@ -92,7 +94,6 @@ class ListingsIndex extends Component {
 							
 								<div className="row properties-list">
 									<Listings listings={!hasFiltered ? listings : filteredListings}/>
-									{/*<Listings listings={filteredListings}/>*/}
 								</div>
 							</div>
 						</div>

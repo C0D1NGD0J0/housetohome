@@ -6,7 +6,7 @@ const ListingCard = (props) => {
 	const { listing } = props;
 
   return (
-  	<div className="col-xs-12 col-sm-6 col-md-4">
+  	<div className="col-xs-6 col-sm-6 col-md-4">
 	    <div className="card property">
 				<Link to={`/properties/${listing.id}`}>
 					<div className="card_img-wrapper">
