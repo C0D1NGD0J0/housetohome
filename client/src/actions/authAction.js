@@ -65,3 +65,36 @@ export const logoutAction = () => dispatch =>{
 	dispatch(setAlertAction("Logout successful...", "success"));
 	return window.location.href = "/";
 };
+
+export const forgotPasswordAction = (userdata) => dispatch =>{
+	const config = { headers: { 'Content-Type': 'application/json' } };
+	const data = JSON.stringify(userdata);
+
+	axios.post("/api/auth/forgot_password", data, config).then((res) =>{
+		return dispatch(setAlertAction(res.data.msg, "success"));
+	}).catch((err) => {
+		if(err.response.data.msg){
+			return dispatch(setAlertAction(err.response.data.msg, 'danger'));
+		} else{
+			dispatch(handleFormError(err.response.data));
+			return setTimeout(() => dispatch(clearErrors()), 3000);
+		};
+	});
+};
+
+export const resetPasswordAction = (userdata) => dispatch =>{
+	const config = { headers: { 'Content-Type': 'application/json' } };
+	const data = JSON.stringify({password: userdata.password, password2: userdata.password2});
+	
+	axios.post(`/api/auth/reset_password/${userdata.token}`, data, config).then((res) =>{
+		dispatch(setAlertAction(res.data.msg, "success"));
+		return history.push("/login");
+	}).catch((err) => {
+		if(err.response.data.msg){
+			return dispatch(setAlertAction(err.response.data.msg, 'danger'));
+		} else{
+			dispatch(handleFormError(err.response.data));
+			return setTimeout(() => dispatch(clearErrors()), 3000);
+		};
+	});
+};

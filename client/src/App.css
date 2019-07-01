@@ -8,13 +8,13 @@
   box-sizing: border-box;
 }
 
-.row {
+/*.row {
   margin-top: -15px;
 }
 
 .row > div {
   margin-top: 15px;
-}
+}*/
 
 html, body {
   height: 100%;
@@ -61,7 +61,7 @@ section {
 
 #wrapper {
   min-height: 100%;
-  height: auto;
+  height: 100%;
   margin: 0 auto -6rem;
   padding: 0 0 6rem;
   padding-top: 7rem;
@@ -310,6 +310,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   text-transform: uppercase;
   background-color: #86C232;
+}
+
+.form{
+  padding: 1rem;
+  margin: 0 0 2rem 0;
 }
 
 .form input[type="tel"],

@@ -4,6 +4,8 @@ import Landing from "./components/Landing";
 import Login from "./components/Auth/Login";
 import ScrollToTop from "./helpers/ScrollToTop";
 import Register from "./components/Auth/Register";
+import ForgotPassword from "./components/Auth/ForgotPassword";
+import ResetPassword from "./components/Auth/ResetPassword";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Alert from "./components/layout/Alert";
@@ -39,6 +41,8 @@ const App = () =>{
 			    	<Switch>
 			    		<Route exact path="/login" component={Login} />
 							<Route exact path="/register" component={Register} />
+							<Route exact path="/forgot_password" component={ForgotPassword} />
+							<Route exact path="/reset_password/:token" component={ResetPassword} />
 			    		<Route exact path="/" component={Landing} />
 			    		<Route component={OtherRoutes} />
 			    	</Switch>

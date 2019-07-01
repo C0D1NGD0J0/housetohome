@@ -7,14 +7,9 @@ export default function(state = initialState, action){
 
 	switch(type){
 		case HANDLE_FORM_ERRORS: 
-			return payload;
-		
 		case HANDLE_ERRORS:
-			return payload;
-
 		case CLEAR_ERROR:
-			return payload;
-			
+			return payload;		
 		default:
 			return state;
 	}

@@ -128,6 +128,8 @@ const authCntrl = {
 	forgotPwd: async (req, res, next) =>{
 		const token = await tokenGenerator();
 		const { email } = req.body;
+		const errors = {};
+
 		try {
 			const user = await User.findOne({ email });
 			if(user){
@@ -139,7 +141,8 @@ const authCntrl = {
 
 				return res.status(200).json({msg: "kindly check your email for further instructions."});
 			};		
-			throw new Error("Invalid email provided, contact web administrator.");
+			
+			return res.status(404).json({msg: "Invalid email provided."})
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(404).json(errors);
@@ -148,8 +151,8 @@ const authCntrl = {
 
 	resetPwd: async (req, res, next) =>{
 		const { token } = req.params;
-		const errors = {};
 		const { password } = req.body;
+		const errors = {};
 		
 		try {
 			const user = await User.findOne({ passwordResetToken: token, passwordResetExpires: {$gt: Date.now()}});
@@ -161,7 +164,7 @@ const authCntrl = {
 				await user.save();
 				return res.status(200).json({msg: "Password reset was successful."});
 			};
-			throw new Error("invalid reset token, please generate a new token.");
+			return res.status(404).json({msg: "invalid reset token, please generate a new token."});
 		} catch(err) {
 			errors.msg = e.message;
 			return res.status(404).json(errors);

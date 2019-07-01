@@ -28,7 +28,7 @@ const sendEmail = async function(req, type, receiver, token){
 
 		pwdReset:`<h1>Click the provided link to Reset your Password</h1><hr>
 			<p>You are receiving this email becasue you requested to reset your password on HouseToHome employee portal.</p>
-			<h3><a href=http:${req.headers.host}/reset/${token}>Reset Password</a></h3>
+			<h3><a href=http:${req.headers.host}/reset_password/${token}>Reset Password</a></h3>
 			<p>If you didn't request this, please kindly ignore this email and your password will remain unchanged"</p>`,
 
 		guestActivation: `<h1>Click the provided link to activate your Guest Account</h1><hr>
