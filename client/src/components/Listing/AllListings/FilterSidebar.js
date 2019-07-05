@@ -43,7 +43,7 @@ const FilterSidebar = ({ value, onchange, resetFilter }) => {
 					<RangeField name="price" value={value.price} label="Property Price" onChange={onchange} min={100000} max={800000} step={500}/>	
 				</li>
 				<li>
-					<RangeField name="size" value={value.size} label="Property Size" onChange={onchange} min={500} max={5000} step={200}/>	
+					<RangeField name="size" value={value.size} label="Property Size" onChange={onchange} min={500} max={100000} step={500}/>	
 				</li>
 
 				<li>
