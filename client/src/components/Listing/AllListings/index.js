@@ -33,6 +33,9 @@ class ListingsIndex extends Component {
 
 		this.setState({ [name]: value }, () =>{
 			this.filteredData();
+			if(name === "search"){
+				this.searchData();
+			}
 		});
 	}	
 	
@@ -67,10 +70,22 @@ class ListingsIndex extends Component {
 						default:
 							return listing[type] === this.state[type]
 					}
-				})
-			}
+				});
+			};
 		});
 
+		this.setState({ filteredListings: [...data], hasFiltered: true });
+	}
+
+	searchData = () =>{
+		const listings = Object.values(this.props.listings);
+		const { search, hasFiltered, filteredListings } = this.state;
+		let data = (!hasFiltered || search.length === 0) ? listings : filteredListings;
+		
+		data = data.filter((listing) =>{
+			return listing.location.address.toLowerCase().match(search.toLowerCase());
+		});
+		
 		this.setState({ filteredListings: [...data], hasFiltered: true });
 	}
 
