@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import SearchField from "../Listing/AllListings/SearchField";
 
 const HeroSection = (props) => {
   return (
@@ -11,8 +12,8 @@ const HeroSection = (props) => {
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni qui magnam, perferendis non minus ipsa.</p>
 					</div>
 					
-					<div className="home_content-btn text-center">
-						<Link to="/properties" className="btn btn-green">View Property Listings</Link>
+					<div className="home_content-searchbar">
+						<SearchField />
 					</div>
 				</div>
 			</div>
