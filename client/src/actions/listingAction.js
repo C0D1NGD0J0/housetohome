@@ -1,6 +1,8 @@
 import axios from "axios";
+import store from "../store";
+import history from "../helpers/history";
 import { handleFormError, clearErrors, handleError } from "./utilAction";
-import { GET_LISTING, GET_LISTINGS, ADMIN_LOAD_LISTING } from "./types";
+import { GET_LISTING, GET_LISTINGS, ADMIN_LOAD_LISTING, SEARCH_LISTINGS } from "./types";
 import { setAlertAction } from "./alertAction";
 
 export const getListingsAction = () => async dispatch =>{
@@ -21,4 +23,21 @@ export const getListingAction = (id, isadmin = false) => async dispatch =>{
 	} catch(err) {
 		console.log(err);
 	};
+};
+
+export const searchListingsAction = (searchVal, originPath) => async dispatch =>{
+	try {
+		const res = await axios.get(`/api/properties/all?country=${searchVal}`);
+		dispatch({type: GET_LISTINGS, payload: res.data });
+		if(originPath === '/'){
+			return history.push(`/properties?country=${searchVal}`);
+		};
+	} catch(err) {
+		dispatch(handleFormError(err.response.data));
+		return setTimeout(() => dispatch(clearErrors()), 5000);
+	};
+};
+
+export const getSearchResultAction = (value) => dispatch =>{
+	return searchListingsAction(value);
 };

@@ -4,16 +4,12 @@ import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import ListingInfo from "./listingInfo";
 import { getListingAction } from "../../../actions/listingAction";
-import Reservation_SB from "../../layout/Sidebar/bookingSidebar";
-import PropertyAgentInfo_SB from "../../layout/Sidebar/handlerSidebar";
-import NearByListings_SB from "../../layout/Sidebar/nearByListingsSidebar";
+import ReservationSB from "../../layout/Sidebar/bookingSidebar";
+import PropertyAgentInfoSB from "../../layout/Sidebar/handlerSidebar";
+import NearByListingsSB from "../../layout/Sidebar/nearByListingsSidebar";
 
 class Listing extends Component {
-  constructor(props) {
-  	super(props);
-  }
-	
-	componentDidMount(){
+  componentDidMount(){
 		const { id } = this.props.match.params;
 		if(id !== "") return this.props.getListingAction(id);
 	}
@@ -31,9 +27,9 @@ class Listing extends Component {
 
 						<div className="col-sm-4 col-md-3">
 							<SidebarWrapper>
-								<Reservation_SB />
-								<PropertyAgentInfo_SB handler={listing && listing.handler} />
-								<NearByListings_SB />
+								<ReservationSB />
+								<PropertyAgentInfoSB handler={listing && listing.handler} />
+								<NearByListingsSB />
 							</SidebarWrapper>
 						</div>
 					</div>

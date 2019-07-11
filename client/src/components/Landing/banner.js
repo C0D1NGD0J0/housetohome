@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import SearchField from "../Listing/AllListings/SearchField";
+import { connect } from "react-redux";
+import { searchListingsAction } from "../../actions/listingAction";
 
 const HeroSection = (props) => {
+	const { searchListingsAction } = props;
+	const [searchValue, setSearchValue] = useState("");
+	
+	const handleSearchRequest = (e) =>{
+		e.preventDefault();
+		searchListingsAction(searchValue, "/");
+	};
+
   return (
     <section id="home" className="home">
 			<div className="home_cover">
@@ -13,7 +23,9 @@ const HeroSection = (props) => {
 					</div>
 					
 					<div className="home_content-searchbar">
-						<SearchField />
+						<form onSubmit={handleSearchRequest}>
+							<SearchField value={searchValue} onchange={(e) => setSearchValue(e.target.value)} />
+						</form>
 					</div>
 				</div>
 			</div>
@@ -23,4 +35,4 @@ const HeroSection = (props) => {
 
 HeroSection.displayName = 'HeroSection';
 
-export default HeroSection;
+export default connect(null, {searchListingsAction})(HeroSection);

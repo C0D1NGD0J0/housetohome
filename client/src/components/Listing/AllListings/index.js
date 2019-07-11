@@ -4,10 +4,11 @@ import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import Filter from "./FilterSidebar";
 import Pagination from "../../layout/Pagination";
-import { getListingsAction } from "../../../actions/listingAction";
+import { getListingsAction, searchListingsAction } from "../../../actions/listingAction";
 import spriteSVG from "../../../assets/img/sprite.svg";
 import SearchField from "./SearchField";
 import Listings from "./Listings";
+import queryStr from 'query-string'
 
 class ListingsIndex extends Component {
   constructor(props) {
@@ -25,7 +26,12 @@ class ListingsIndex extends Component {
   }
 	
 	componentDidMount(){
-		this.props.getListingsAction();
+		const q = queryStr.parse(this.props.location.search);
+		if(!q.country){
+			return this.props.getListingsAction();
+		};
+
+		this.props.searchListingsAction(q.country);
 	}
 	
 	onInputChange = (e) =>{
@@ -125,4 +131,4 @@ const mapStateToProps = state =>({
 	listings: state.listings.all
 });
 
-export default connect(mapStateToProps, { getListingsAction })(ListingsIndex);
+export default connect(mapStateToProps, { getListingsAction, searchListingsAction })(ListingsIndex);

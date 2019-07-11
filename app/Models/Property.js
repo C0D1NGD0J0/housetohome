@@ -60,9 +60,9 @@ const PropertySchema = new Schema({
 PropertySchema.set('toObject', { virtuals: true });
 PropertySchema.set('toJSON', { virtuals: true });
 
-// PropertySchema.index({
-// 	"location.address": "text"
-// });
+PropertySchema.index({
+	"location.address": "text"
+});
 
 PropertySchema.plugin(uniqueValidator);
 

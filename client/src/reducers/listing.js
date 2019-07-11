@@ -1,4 +1,4 @@
-import { GET_LISTINGS, GET_LISTING } from "../actions/types";
+import { GET_LISTINGS, SEARCH_LISTINGS, GET_LISTING } from "../actions/types";
 import _ from "lodash";
 
 const initialState = {
@@ -22,6 +22,12 @@ export default function(state = initialState, action){
 				...state,
 				loading: false,
 				show: payload
+			}
+		case SEARCH_LISTINGS:
+			return{
+				...state,
+				loading: false,
+				all: {..._.mapKeys(payload, "_id")}
 			}
 		default:
 			return state;

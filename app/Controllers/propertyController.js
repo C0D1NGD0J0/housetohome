@@ -4,9 +4,25 @@ const { ObjectId } = require('mongoose').Types;
 
 const propertyCntrl = {
 	index: async (req, res, next) =>{
+		let query;
 		const errors = {};
+		let { country, page, limit } = req.query;
+		page = Number(page) || 1;
+		limit = Number(limit) || 20;
+		const offset = ((limit * page) - limit);
+	
+		if(country){
+			query = {
+				isActive: true,
+				"location.address": { "$regex": country, "$options": "i" }
+			};
+		} else {
+			query = {isActive: true};
+		};
+
 		try {
-			const properties = await Property.find({ isActive: true }).sort({ createdAt: -1});
+			const properties = await Property.find(query).skip(offset).limit(limit).sort({ createdAt: -1});
+			// console.log(properties);
 			return res.status(200).json(properties);
 		} catch(err) {
 			errors.msg = err.message;
