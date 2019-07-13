@@ -4,8 +4,6 @@ import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import Panel from "../../layout/Panel";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import Table from "../../layout/Table";
 
 class AdminDashboard extends Component {
 	componentDidMount(){

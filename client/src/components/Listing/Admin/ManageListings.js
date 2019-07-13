@@ -15,7 +15,7 @@ const ManageListings = ({ currentuser: {isAuthenticated, info}, getAllListings, 
 		if(info.isadmin){
 			getAllListings();
 		};
-	}, []);
+	});
 	
 	if(!isAuthenticated){
 		return <Redirect to="/login" />;

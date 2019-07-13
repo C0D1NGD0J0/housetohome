@@ -1,6 +1,6 @@
 import { UPDATE_CURRENTUSER, DELETE_ACCOUNT } from "./types";
 import axios from "axios";
-import { handleFormError, clearErrors, handleError } from "./utilAction";
+import { handleFormError, clearErrors } from "./utilAction";
 import { setAlertAction } from "./alertAction";
 
 export const updateUserAction = (userdata) => async dispatch =>{

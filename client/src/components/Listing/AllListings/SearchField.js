@@ -1,5 +1,4 @@
 import React from 'react';
-import InputField from "../../../helpers/FormElements/inputField";
 import magnifyingGlassSVG from "../../../assets/img/svg/magnifying-glass.svg";
 
 const SearchField = ({ value, onchange }) => {
@@ -14,7 +13,7 @@ const SearchField = ({ value, onchange }) => {
 				onChange={onchange}
 			/>
 			<button className="search_btn">
-				<img src={magnifyingGlassSVG} />
+				<img src={magnifyingGlassSVG} alt="search-btn"/>
 			</button>
 		</div>
   );

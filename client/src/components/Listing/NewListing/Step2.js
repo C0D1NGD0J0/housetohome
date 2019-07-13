@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react';
-import InputField from "../../../helpers/FormElements/inputField";
-import SelectTag from "../../../helpers/FormElements/selectField";
 import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import TextAreaField from "../../../helpers/FormElements/textAreaField";
-import Panel from "../../layout/Panel";
 
 const StepTwo = ({ currentStep, onchange, value, checkBoxChange, error }) => {
 	if(currentStep !== 2) return null;

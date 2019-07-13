@@ -1,7 +1,5 @@
 import React from 'react';
-import InputField from "../../../helpers/FormElements/inputField";
 import SelectTag from "../../../helpers/FormElements/selectField";
-import CheckboxField from "../../../helpers/FormElements/checkboxField";
 import RangeField from "../../../helpers/FormElements/rangeField";
 import staticData from "../NewListing/staticData";
 

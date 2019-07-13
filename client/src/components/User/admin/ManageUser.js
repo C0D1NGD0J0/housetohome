@@ -80,7 +80,7 @@ class ManageUser extends Component {
   }
 
   render() {
-  	const { firstName, lastName, email, phone, admin } = this.state;
+  	const { firstName, lastName, email, phone } = this.state;
 		const { errors, user, currentuser } = this.props;
 		const tableRow = user && user.properties.map((listing, i) =>{
 			return (

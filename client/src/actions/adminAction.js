@@ -79,7 +79,7 @@ export const updateListingAction = (id, listingData) => async dispatch =>{
 
 export const deleteListingAction = (id) => dispatch =>{
 	try {
-		const res = axios.delete(`/api/admin/properties/${id}`);
+		axios.delete(`/api/admin/properties/${id}`);
 		return dispatch({type: DELETE_LISTING, payload: id });
 	} catch(err) {
 		dispatch(handleError(err.message));

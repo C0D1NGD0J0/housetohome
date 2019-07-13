@@ -1,9 +1,7 @@
 import axios from "axios";
-import store from "../store";
 import history from "../helpers/history";
 import { handleFormError, clearErrors, handleError } from "./utilAction";
-import { GET_LISTING, GET_LISTINGS, ADMIN_LOAD_LISTING, SEARCH_LISTINGS } from "./types";
-import { setAlertAction } from "./alertAction";
+import { GET_LISTING, GET_LISTINGS, ADMIN_LOAD_LISTING } from "./types";
 
 export const getListingsAction = () => async dispatch =>{
 	try {
@@ -21,7 +19,8 @@ export const getListingAction = (id, isadmin = false) => async dispatch =>{
 		if(isadmin) return dispatch({type: ADMIN_LOAD_LISTING, payload: res.data});
 		return dispatch({type: GET_LISTING, payload: res.data});
 	} catch(err) {
-		console.log(err);
+		dispatch(handleError(err.message));
+		return setTimeout(() => dispatch(clearErrors()), 3000);
 	};
 };
 

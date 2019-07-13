@@ -5,7 +5,6 @@ import SidebarWrapper from "../../layout/Sidebar";
 import Filter from "./FilterSidebar";
 import Pagination from "../../layout/Pagination";
 import { getListingsAction, searchListingsAction } from "../../../actions/listingAction";
-import spriteSVG from "../../../assets/img/sprite.svg";
 import SearchField from "./SearchField";
 import Listings from "./Listings";
 import queryStr from 'query-string'
@@ -31,7 +30,7 @@ class ListingsIndex extends Component {
 			return this.props.getListingsAction();
 		};
 
-		this.props.searchListingsAction(q.country);
+		// return this.props.searchListingsAction(q.country);
 	}
 	
 	onInputChange = (e) =>{

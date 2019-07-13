@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import InputField from "../../../helpers/FormElements/inputField";
 import SelectTag from "../../../helpers/FormElements/selectField";
-import Panel from "../../layout/Panel";
 import staticData from "./staticData";
 
 const StepOne = ({onchange, currentStep, value, error, options, isAdmin}) =>{

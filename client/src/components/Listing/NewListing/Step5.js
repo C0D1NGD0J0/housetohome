@@ -1,9 +1,4 @@
-import React, { Fragment } from 'react';
-import InputField from "../../../helpers/FormElements/inputField";
-import SelectTag from "../../../helpers/FormElements/selectField";
-import CheckboxField from "../../../helpers/FormElements/checkboxField";
-import TextAreaField from "../../../helpers/FormElements/textAreaField";
-import Panel from "../../layout/Panel";
+import React, { Fragment } from 'react'
 
 const StepFive = ({ currentStep, values, error }) => {
 	if(currentStep !== 5) return null;

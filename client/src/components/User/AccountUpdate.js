@@ -34,7 +34,7 @@ class AccountUpdate extends Component {
 
   onFormSubmit = (e) =>{
 		e.preventDefault();
-		const { id } = this.props.user.info;
+		// const { id } = this.props.user.info;
 		const { firstName, lastName, email, phone, password, password2 } = this.state;
 		const data = { firstName, lastName, email, phone };
 

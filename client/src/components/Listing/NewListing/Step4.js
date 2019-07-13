@@ -2,9 +2,6 @@ import React, { Fragment } from 'react';
 import InputField from "../../../helpers/FormElements/inputField";
 import SelectTag from "../../../helpers/FormElements/selectField";
 import FileUpload from "../../../helpers/FormElements/fileUploadField";
-import CheckboxField from "../../../helpers/FormElements/checkboxField";
-import TextAreaField from "../../../helpers/FormElements/textAreaField";
-import Panel from "../../layout/Panel";
 import ImagePreview from "./ImgPreview";
 import house_1 from "../../../assets/img/house_1.jpg";
 
