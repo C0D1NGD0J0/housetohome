@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { forgotPasswordAction } from "../../actions/authAction";
 
 const ForgotPassword = (props) => {
-	const { forgotPasswordAction, errors, title, password, password2, onResetFormSubmit, token, onResetInputChange, resetErrors } = props;
+	const { forgotPasswordAction, errors, title, password, password2, onResetPWDFormSubmit, token, onResetPWDInputChange, resetErrors } = props;
 	const [formData, updateFormData] = useState({ email: '' });
 	const { email } = formData;
 
@@ -14,16 +14,11 @@ const ForgotPassword = (props) => {
 
 	const onFormSubmit = e =>{
 		e.preventDefault();
-
-		if(token){
-			// onResetFormSubmit();
-		} else {
-			// forgotPasswordAction(formData);
-		};
+		forgotPasswordAction(formData);
 		return setTimeout(() => updateFormData({ email: '' }), 5000);
 	};
 
-	const resetPwdSubmit = e => onResetFormSubmit(e);
+	const resetPwdSubmit = e => onResetPWDFormSubmit(e);
 
   return (
     <ContentWrapper mainClass="login_bg-img" containerClass="container login">
@@ -56,7 +51,7 @@ const ForgotPassword = (props) => {
 									name="password"
 									label="Password"
 									error={resetErrors.password}
-									onChange={(e) => onResetInputChange(e)} 
+									onChange={(e) => onResetPWDInputChange(e)} 
 								/>
 
 								<InputField
@@ -67,7 +62,7 @@ const ForgotPassword = (props) => {
 									name="password2"
 									label="Password Confirmation"
 									error={resetErrors.password2}
-									onChange={(e) => onResetInputChange(e)} 
+									onChange={(e) => onResetPWDInputChange(e)} 
 								/>
 							</Fragment>
 					}

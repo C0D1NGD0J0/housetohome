@@ -19,12 +19,12 @@ class ResetPassword extends Component {
 		return history.push("/forgot_password");
   }
 
-  onResetInputChange = (e) =>{
+  onResetPWDInputChange = (e) =>{
   	const { name, value } = e.target;
   	this.setState({ [name]: value });
   }
 
-  onResetFormSubmit = (e) =>{
+  onResetPWDFormSubmit = (e) =>{
   	e.preventDefault();
   	const formData = {...this.state}
   	return this.props.resetPasswordAction(formData);
@@ -39,9 +39,9 @@ class ResetPassword extends Component {
     		title="Reset your password" 
     		password={password} 
     		password2={password2} 
-    		onResetFormSubmit={this.onResetFormSubmit} 
+    		onResetPWDFormSubmit={this.onResetPWDFormSubmit} 
     		token={token} 
-    		onResetInputChange={this.onResetInputChange} 
+    		onResetPWDInputChange={this.onResetPWDInputChange} 
     		resetErrors={errors}
     	/>
     );
