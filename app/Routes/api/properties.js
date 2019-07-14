@@ -6,6 +6,8 @@ const propertyCntrl = require("../../Controllers/propertyController");
 
 router.get("/all", propertyCntrl.index);
 
+router.get("/nearby", propertyCntrl.nearByProperties);
+
 router.get("/:propertyId", propertyCntrl.show);
 
 router.post("/", validate.property, isAuthorizedAsStaff, propertyCntrl.create);

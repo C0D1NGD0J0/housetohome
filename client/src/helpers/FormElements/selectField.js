@@ -5,7 +5,7 @@ const SelectTag = ({ label, name, selectChange, value, options, error }) => {
 	let defaultVal;
 
 	if(value.length === 24){
-		defaultVal = `${options[value].firstName} ${options[value].lastName}`;
+		defaultVal = options[value] ? `${options[value].firstName} ${options[value].lastName}` : 'Self';
 	};
 
   return (

@@ -60,14 +60,14 @@ const PropertySchema = new Schema({
 PropertySchema.set('toObject', { virtuals: true });
 PropertySchema.set('toJSON', { virtuals: true });
 
-PropertySchema.index({
-	"location.address": "text"
-});
+PropertySchema.index({"location.address": "text"});
+PropertySchema.index({"location": "2dsphere"});
 
 PropertySchema.plugin(uniqueValidator);
 
 PropertySchema.virtual("formatAddress").get(function(){
-	const address = this.location.address.split(",");
+	const address = this.location.address.split(", ");
+
 	return{
 		street: address[0].trim(),
 		city: address[1] ? address[1].trim() : "",

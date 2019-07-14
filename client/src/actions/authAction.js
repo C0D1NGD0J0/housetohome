@@ -51,7 +51,7 @@ export const loadUserAction = () => async dispatch =>{
 			const decoded = jwtDecode(localStorage.token);
 
 			// const res = await axios.get("/api/users/currentuser");
-			// const info = {...decoded, ...res.data.info};
+			// const info = {...decoded};
 			return dispatch({ type: LOAD_CURRENTUSER, payload: {info: decoded} });
 		};
 	} catch(err) {

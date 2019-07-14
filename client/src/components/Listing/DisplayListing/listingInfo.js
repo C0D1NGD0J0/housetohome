@@ -4,7 +4,6 @@ import classnames from "classnames";
 import GoogleMap from "./googleMap";
 
 const ListingInfo = ({ listing }) => {
-	
   return (
  		<div className="listing">
 			<h1 className="listing_title">

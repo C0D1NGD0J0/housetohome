@@ -35,12 +35,11 @@ const propertyCntrl = {
 		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, is_gym, swimming_pool, is_laundry } = req.body;
 		
 		try {			
-			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {}, features: {}, extras: {} });
+			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {coordinates: [0,0]}, features: {}, extras: {} });
 			
 			property.location.address = address;
-			property.location.coordinates[0] = Number(longitude);
-			property.location.coordinates[1] = Number(latitude);
-			
+			property.location.coordinates[0] = longitude;
+			property.location.coordinates[1] = latitude;
 			property.features = { bedroom, bathroom, maxCapacity, floors, parking };
 			property.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets};
 			
@@ -68,9 +67,27 @@ const propertyCntrl = {
 
 		try {
 			let property = await Property.findById(propertyId).populate("handler", "id fullname firstName lastName email phone").exec();
-			errors.msg = "Property not found!";
-			if(!property) return res.status(400).json(errors);
-			return res.status(200).json(property);
+
+			if(!property) {
+				errors.msg = "Property not found!";
+				return res.status(400).json(errors);
+			};
+			
+			const q = {
+				location: {
+					$near: {
+						$geometry: {
+							type: 'Point',
+							coordinates: [property.location.coordinates[0], property.location.coordinates[1]]
+						},
+						$maxDistance: 10000 //10K meters == 10km
+					}
+				},
+				isActive: true
+			};
+			let properties = await Property.find(q).select("location.address features.bedroom features.bathroom price").limit(5);			
+
+			return res.status(200).json({property, nearByProperties: properties});
 		} catch(e) {
 			errors.msg = e.message;
 			return res.status(404).json(errors);
@@ -131,6 +148,25 @@ const propertyCntrl = {
 			errors.msg = e.message;
 			return res.status(404).json(errors);
 		};
+	},
+
+	nearByProperties: async (req, res, next) =>{
+		const geoPoints = [req.query.lng, req.query.lat].map(parseFloat);
+		const q = {
+			location: {
+				$near: {
+					$geometry: {
+						type: 'Point',
+						coordinates: geoPoints
+					},
+					$maxDistance: 10000 //10K meters == 10km
+				}
+			},
+			isActive: true
+		};
+
+		const properties = await Property.find(q).select("location.address features.bedroom features.bathroom price").limit(5);
+		return res.status(200).json(properties)
 	}
 };
 

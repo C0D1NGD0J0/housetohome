@@ -65,7 +65,7 @@ class NewListing extends Component {
   	};
 
   	if(id && id.length === 24){
-			await this.props.getListingAction(id, true);
+  		await this.props.getListingAction(id, true);
   	};
   }
 	
@@ -94,7 +94,7 @@ class NewListing extends Component {
 		if(id && id.length === 24){
 			return this.props.updateListingAction(id, formData);
   	};
-
+		
 		return this.props.creatLisitngAction(formData);
   }
 

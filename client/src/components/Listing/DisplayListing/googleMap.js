@@ -20,9 +20,9 @@ class MapWrapper extends Component{
     		zoom={14} 
         key={listing.address}
     		style={mapStyle} 
-    		initialCenter={{lat: listing && listing.coordinates[0], lng: listing && listing.coordinates[1]}} 
+    		initialCenter={{lat: listing && listing.coordinates[1], lng: listing && listing.coordinates[0]}} 
     	>
-  			<Marker position={{lat: listing && listing.coordinates[0], lng: listing && listing.coordinates[1]}} />
+  			<Marker position={{lat: listing && listing.coordinates[1], lng: listing && listing.coordinates[0]}} />
     	</Map>
     );
   }

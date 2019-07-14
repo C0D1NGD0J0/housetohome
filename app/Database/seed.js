@@ -25,7 +25,7 @@ if(!isProduction){
 	// 	x++;
 	// };
 	
-	// while(x < 3){
+	// while(x < 4){
 	// 	User.find({role: "employee"}).limit(4).then( async (users) =>{
 	// 		const property = new Property({
 	// 			description: faker.lorem.paragraphs(),
@@ -33,7 +33,7 @@ if(!isProduction){
 	// 			listingType: LISTING_TYPE[Math.floor(Math.random() * Math.floor(LISTING_TYPE.length))],
 	// 			size: faker.random.number(),
 	// 			yearBuilt: 2005,
-	// 			price: faker.commerce.price() * 1000,
+	// 			price: faker.commerce.price() * 100,
 	// 			featured: BOOLEAN_VALUES[Math.floor(Math.random() * Math.floor(BOOLEAN_VALUES.length))],
 	// 			handler: users[Math.floor(Math.random() * Math.floor(users.length))].id,
 	// 			isActive: true,
@@ -41,11 +41,11 @@ if(!isProduction){
 	// 		});
 
 	// 		property.features = {
-	// 			bedroom: Math.floor(Math.random() * Math.floor(7)),
-	// 			bathroom: Math.floor(Math.random() * Math.floor(7)),
-	// 			maxCapacity: Math.floor(Math.random() * Math.floor(7)),
+	// 			bedroom: Math.floor(Math.random() * Math.floor(5)),
+	// 			bathroom: Math.floor(Math.random() * Math.floor(5)),
+	// 			maxCapacity: Math.floor(Math.random() * Math.floor(5)),
 	// 			floors: Math.floor(Math.random() * Math.floor(3)) <= 0 ? Math.floor(Math.random() * Math.floor(3)) + 1 : Math.floor(Math.random() * Math.floor(3)),
-	// 			parking: Math.floor(Math.random() * Math.floor(4)),
+	// 			parking: Math.floor(Math.random() * Math.floor(3)),
 	// 		};
 
 	// 		property.extras = {

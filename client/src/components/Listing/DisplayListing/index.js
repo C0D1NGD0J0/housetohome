@@ -14,22 +14,31 @@ class Listing extends Component {
 		if(id !== "") return this.props.getListingAction(id);
 	}
 
+	componentDidUpdate(prevProps, prevState){
+		const { id: oldListing } = prevProps.match.params;
+		const { id: newListing } = this.props.match.params;
+
+		if (oldListing !== newListing) {
+			return this.props.getListingAction(newListing);
+		}
+	}
+
   render() {
 		const { listing } = this.props;
-
+		
     return(
 			<ContentWrapper containerClass="container">
 				<div id="listing-page">
 					<div className="row">
 						<div className="col-sm-8 col-md-9">
-							<ListingInfo listing={listing}/>
+							<ListingInfo listing={listing && listing.property}/>
 						</div>
 
 						<div className="col-sm-4 col-md-3">
 							<SidebarWrapper>
 								<ReservationSB />
-								<PropertyAgentInfoSB handler={listing && listing.handler} />
-								<NearByListingsSB />
+								<PropertyAgentInfoSB handler={listing && listing.property && listing.property.handler} />
+								<NearByListingsSB listings={listing && listing.nearByProperties} listingId={this.props.match.params.id}/>
 							</SidebarWrapper>
 						</div>
 					</div>
