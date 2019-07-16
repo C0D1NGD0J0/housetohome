@@ -31,9 +31,10 @@ export const loginAction = (userdata) => async dispatch =>{
 
 	try {
 		const res = await axios.post("/api/auth/login", data, config);
-		dispatch(setAlertAction("Login was successful", "success"));
 		dispatch({type: SET_TOKEN, payload: res.data});
-		return dispatch(loadUserAction());
+		setAuthHeaderToken(res.data.token);
+		dispatch(loadUserAction());
+		return dispatch(setAlertAction("Login was successful", "success"));
 	} catch(err) {
 		if(err.response.data.msg){
 			return dispatch(setAlertAction(err.response.data.msg, 'danger'));
@@ -47,12 +48,8 @@ export const loginAction = (userdata) => async dispatch =>{
 export const loadUserAction = () => async dispatch =>{
 	try {
 		if(localStorage.token){
-			setAuthHeaderToken(localStorage.token);
-			const decoded = jwtDecode(localStorage.token);
-
-			// const res = await axios.get("/api/users/currentuser");
-			// const info = {...decoded};
-			return dispatch({ type: LOAD_CURRENTUSER, payload: {info: decoded} });
+			const userInfo = jwtDecode(localStorage.token);
+			return dispatch({ type: LOAD_CURRENTUSER, payload: {info: userInfo} });
 		};
 	} catch(err) {
 		dispatch(handleError(err.message));

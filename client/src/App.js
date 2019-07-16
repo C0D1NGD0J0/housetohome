@@ -30,7 +30,7 @@ import './App.css';
 const App = () =>{
 	useEffect(() =>{
 		validateCurrentUser();
-	}, [validateCurrentUser]);
+	});
 
   return (
   	<Provider store={store}>

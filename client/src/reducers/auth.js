@@ -15,10 +15,9 @@ export default function(state = initialState, action){
 		case LOAD_CURRENTUSER:
 			return {
 				...state,
-				isAuthenticated: true,
 				loading: false,
-				info: {...payload.info},
-				// properties: {...state.properties, ..._.mapKeys(payload.properties, "_id")}
+				isAuthenticated: true,
+				info: {...payload.info}
 			};
 
 		case SET_TOKEN:
@@ -42,12 +41,14 @@ export default function(state = initialState, action){
 			localStorage.removeItem('token');
 			return {
 				...state,
-				token: null,
-				isAuthenticated: false,
+				info: null,
 				loading: false,
-				info: null
+				isAuthenticated: false
 			};
 		default: 
 			return state;
 	};
 };
+
+
+// properties: {...state.properties, ..._.mapKeys(payload.properties, "_id")}

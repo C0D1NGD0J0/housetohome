@@ -145,37 +145,39 @@ class NewListing extends Component {
 
   populateInitialValues = (previousProps) =>{
   	const { id } = this.props.match.params;
-  	const { show: currentLisitng } = this.props.listings;
-  	const { show: previousCurrentListing } = previousProps.listings;
-		
-  	if(id && currentLisitng && JSON.stringify(previousCurrentListing) !== JSON.stringify(currentLisitng)){
+  	let { show: currentListing } = this.props.listings;
+  	let { show: previousCurrentListing } = previousProps.listings;
+		currentListing = currentListing && currentListing.property;
+		previousCurrentListing = previousCurrentListing && previousCurrentListing.property;
+
+		if(id && currentListing && JSON.stringify(previousCurrentListing) !== JSON.stringify(currentListing)){
 			this.setState({
-				description: currentLisitng.description,
-				propertyType: currentLisitng.propertyType, 
-				listingType: currentLisitng.listingType, 
-				size: currentLisitng.size, 
-				featured: currentLisitng.featured,
-				yearBuilt: currentLisitng.yearBuilt,
-				price: currentLisitng.price,
-				handler: currentLisitng.handler._id,
-				bedroom: currentLisitng.features.bedroom,
-				bathroom: currentLisitng.features.bathroom,
-				maxCapacity: currentLisitng.features.maxCapacity,
-				floors: currentLisitng.features.floors,
-				parking: currentLisitng.features.parking,
-				is_tv: currentLisitng.extras.is_tv,
-				is_kitchen: currentLisitng.extras.is_kitchen,
-				is_ac: currentLisitng.extras.is_ac,
-				is_heating: currentLisitng.extras.is_heating,
-				is_internet: currentLisitng.extras.is_internet,
-				pets: currentLisitng.extras.pets,
-				is_gym: currentLisitng.extras.is_gym,
-				is_laundry: currentLisitng.extras.is_laundry,
-				swimming_pool: currentLisitng.extras.swimming_pool,
-				isActive: currentLisitng.isActive,
-				address: currentLisitng.location.address,
-				latitude: currentLisitng.location.coordinates[0],
-				longitude: currentLisitng.location.coordinates[1]
+				description: currentListing.description,
+				propertyType: currentListing.propertyType, 
+				listingType: currentListing.listingType, 
+				size: currentListing.size, 
+				featured: currentListing.featured,
+				yearBuilt: currentListing.yearBuilt,
+				price: currentListing.price,
+				handler: currentListing.handler._id,
+				bedroom: currentListing.features.bedroom,
+				bathroom: currentListing.features.bathroom,
+				maxCapacity: currentListing.features.maxCapacity,
+				floors: currentListing.features.floors,
+				parking: currentListing.features.parking,
+				is_tv: currentListing.extras.is_tv,
+				is_kitchen: currentListing.extras.is_kitchen,
+				is_ac: currentListing.extras.is_ac,
+				is_heating: currentListing.extras.is_heating,
+				is_internet: currentListing.extras.is_internet,
+				pets: currentListing.extras.pets,
+				is_gym: currentListing.extras.is_gym,
+				is_laundry: currentListing.extras.is_laundry,
+				swimming_pool: currentListing.extras.swimming_pool,
+				isActive: currentListing.isActive,
+				address: currentListing.location.address,
+				latitude: currentListing.location.coordinates[0],
+				longitude: currentListing.location.coordinates[1]
 			});
   	};
   }

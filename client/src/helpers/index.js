@@ -5,7 +5,7 @@ export const setAuthHeaderToken = token =>{
 		axios.defaults.headers.common["x-auth-token"] = token;
 	} else {
 		delete axios.defaults.headers.common["x-auth-token"]; 
-	}
+	};
 };
 
 export const truncateText = (str, length = 1000) =>{
