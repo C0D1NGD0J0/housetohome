@@ -21,8 +21,6 @@ const isAuthorized = function(req, res, next){
 const isAuthorizedAsAdmin = function(req, res, next){
 	// Get token from header
 	const token = req.header("x-auth-token");
-	console.log(token);
-	
 	if(!token){
 		return res.status(401).json({msg: "Authorization denied!, token not provided."});
 	};

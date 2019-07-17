@@ -22,7 +22,6 @@ const propertyCntrl = {
 
 		try {
 			const properties = await Property.find(query).skip(offset).limit(limit).sort({ createdAt: -1});
-			// console.log(properties);
 			return res.status(200).json(properties);
 		} catch(err) {
 			errors.msg = err.message;
@@ -104,9 +103,10 @@ const propertyCntrl = {
 			const updateData = { description, propertyType, listingType, size, yearBuilt, price, 
 				location:{ coordinates: []}, features: {}, extras: {}, meta: {} };
 
+			updateData.location.type = "Point";
 			updateData.location.address = address;
-			updateData.location.coordinates[0] = latitude;
-			updateData.location.coordinates[1] = longitude;
+			updateData.location.coordinates[0] = Number(longitude);
+			updateData.location.coordinates[1] = Number(latitude);
 			
 			updateData.features = { bedroom, bathroom, maxCapacity, floors, parking };
 			updateData.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, is_gym, swimming_pool, is_laundry};
@@ -117,6 +117,7 @@ const propertyCntrl = {
 				updateData.isActive = isActive;
 			};			
 			
+			// console.log(updateData)
 			if(property.author._id.equals(req.currentuser.id) || req.currentuser.isadmin){
 				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true }).populate("handler", "id fullname").exec();
 				

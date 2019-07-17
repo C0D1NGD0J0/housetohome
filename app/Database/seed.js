@@ -8,6 +8,13 @@ const PROPERTY_TYPE = ["condominium", "house", "office", "land", "apartment"];
 const LISTING_TYPE = ["sale", "rent", "lease"];
 const USER_ROLES = ['guest', 'employee'];
 const salt = bcrypt.genSaltSync(10);
+const addresses = [
+	"266 euclid ave, peterborough",
+	"244 carlisle ave, peterborough",
+	"737 snelgrove rd, peterborough",
+	"311 margaret ave, peterborough"
+];
+
 let x = 0;
 
 if(!isProduction){
@@ -25,8 +32,8 @@ if(!isProduction){
 	// 	x++;
 	// };
 	
-	// while(x < 4){
-	// 	User.find({role: "employee"}).limit(4).then( async (users) =>{
+	// while(x < addresses.length){
+	// 	User.find({role: "employee"}).limit(3).then( async (users) =>{
 	// 		const property = new Property({
 	// 			description: faker.lorem.paragraphs(),
 	// 			propertyType: PROPERTY_TYPE[Math.floor(Math.random() * Math.floor(PROPERTY_TYPE.length))],
@@ -41,30 +48,30 @@ if(!isProduction){
 	// 		});
 
 	// 		property.features = {
-	// 			bedroom: Math.floor(Math.random() * Math.floor(5)),
-	// 			bathroom: Math.floor(Math.random() * Math.floor(5)),
-	// 			maxCapacity: Math.floor(Math.random() * Math.floor(5)),
-	// 			floors: Math.floor(Math.random() * Math.floor(3)) <= 0 ? Math.floor(Math.random() * Math.floor(3)) + 1 : Math.floor(Math.random() * Math.floor(3)),
-	// 			parking: Math.floor(Math.random() * Math.floor(3)),
+	// 			bedroom: Math.floor((Math.random() * 5) + 1),
+	// 			bathroom: Math.floor((Math.random() * 5) + 1),
+	// 			maxCapacity: Math.floor((Math.random() * 7) + 1),
+	// 			floors: Math.floor((Math.random() * 3) + 1),
+	// 			parking: Math.floor((Math.random() * 3) + 1),
 	// 		};
 
 	// 		property.extras = {
-	// 			is_tv: BOOLEAN_VALUES[Math.floor(Math.random() * Math.floor(BOOLEAN_VALUES.length))],
-	// 			is_kitchen: BOOLEAN_VALUES[Math.floor(Math.random() * Math.floor(BOOLEAN_VALUES.length))],
-	// 			is_ac: BOOLEAN_VALUES[Math.floor(Math.random() * Math.floor(BOOLEAN_VALUES.length))],
-	// 			is_heating: BOOLEAN_VALUES[Math.floor(Math.random() * Math.floor(BOOLEAN_VALUES.length))],
-	// 			is_internet: BOOLEAN_VALUES[Math.floor(Math.random() * Math.floor(BOOLEAN_VALUES.length))],
-	// 			pets: BOOLEAN_VALUES[Math.floor(Math.random() * Math.floor(BOOLEAN_VALUES.length))]
+	// 			is_tv: BOOLEAN_VALUES[Math.floor((Math.random() * BOOLEAN_VALUES.length))],
+	// 			is_kitchen: BOOLEAN_VALUES[Math.floor((Math.random() * BOOLEAN_VALUES.length))],
+	// 			is_ac: BOOLEAN_VALUES[Math.floor((Math.random() * BOOLEAN_VALUES.length))],
+	// 			is_heating:BOOLEAN_VALUES[Math.floor((Math.random() * BOOLEAN_VALUES.length))],
+	// 			is_internet: BOOLEAN_VALUES[Math.floor((Math.random() * BOOLEAN_VALUES.length))],
+	// 			pets:BOOLEAN_VALUES[Math.floor((Math.random() * BOOLEAN_VALUES.length))]
 	// 		};
-
-	// 		property.location.address = faker.address.streetAddress();
+			
+	// 		property.location.address = faker.address.streetAddress()
 	// 		property.location.coordinates[0] = Number(faker.address.longitude());
 	// 		property.location.coordinates[1] = Number(faker.address.latitude());
 			
-	// 		// console.log(property);
+	// 		console.log(property)
 	// 		property.save();
 	// 	}).catch((err) =>{
-	// 		console.log(err);
+	// 		console.log(err.message);
 	// 	});
 
 	// 	x++;

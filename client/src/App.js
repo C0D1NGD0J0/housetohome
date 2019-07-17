@@ -24,13 +24,18 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import AdminPrivateRoute from "./helpers/EmployeePrivateRoute";
 import store from "./store";
 import history from "./helpers/history";
+import { setAuthHeaderToken } from "./helpers";
 import { validateCurrentUser } from "./helpers/validateAuthUser";
 import './App.css';
+
+if(localStorage.token){
+	setAuthHeaderToken(localStorage.token);
+};
 
 const App = () =>{
 	useEffect(() =>{
 		validateCurrentUser();
-	});
+	}, []);
 
   return (
   	<Provider store={store}>
