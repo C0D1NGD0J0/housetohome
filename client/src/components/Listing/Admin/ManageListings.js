@@ -12,10 +12,10 @@ import { truncateText } from "../../../helpers";
 
 const ManageListings = ({ currentuser: {isAuthenticated, info}, getAllListings, listings, deleteListingAction }) => {
 	useEffect(() =>{
-		if(info.isadmin){
+		if(info && info.isadmin){
 			getAllListings();
 		};
-	}, [getAllListings]);
+	}, []);
 	
 	if(!isAuthenticated){
 		return <Redirect to="/login" />;

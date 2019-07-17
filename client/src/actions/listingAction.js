@@ -5,7 +5,7 @@ import { GET_LISTING, GET_LISTINGS, ADMIN_LOAD_LISTING } from "./types";
 
 export const getListingsAction = () => async dispatch =>{
 	try {
-		const res = await axios.get("/api/properties/all");
+		const res = await axios.get("/api/properties/");
 		return dispatch({type: GET_LISTINGS, payload: res.data });
 	} catch(err) {
 		dispatch(handleError(err.message));

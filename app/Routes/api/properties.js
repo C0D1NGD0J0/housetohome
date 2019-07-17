@@ -4,7 +4,9 @@ const { validate } = require("../../Helpers/validations");
 const { isAuthorizedAsStaff } = require("../../Helpers/middlewares");
 const propertyCntrl = require("../../Controllers/propertyController");
 
-router.get("/all", propertyCntrl.index);
+router.get("/", propertyCntrl.index);
+
+router.get("/homepage", propertyCntrl.homepage);
 
 router.get("/nearby", propertyCntrl.nearByProperties);
 

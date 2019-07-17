@@ -11,7 +11,11 @@ class Listings extends Component {
 
   	return (
     	listings.map((listing, i) =>{
-				return <ListingCard listing={listing} key={i}/>
+				return(
+          <div className="col-xs-6 col-sm-6 col-md-4">
+            <ListingCard listing={listing} key={i}/>
+          </div>
+        );
   		})  
     );
   }

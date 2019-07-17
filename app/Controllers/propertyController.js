@@ -3,6 +3,17 @@ const Property = require('../Models/Property');
 const { ObjectId } = require('mongoose').Types;
 
 const propertyCntrl = {
+	homepage: async (req, res, next) =>{
+		const errors = {};
+		try {
+			const properties = await Property.find({featured: true, isActive: true}).select("-author -extras -meta -handler").limit(4).sort({createdAt: -1});
+			return res.status(200).json(properties);
+		} catch(e) {
+			errors.msg = e.message;
+			return res.status(400).json(errors);
+		}
+	},
+
 	index: async (req, res, next) =>{
 		let query;
 		const errors = {};
