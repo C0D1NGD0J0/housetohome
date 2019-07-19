@@ -47,7 +47,7 @@ class NewListing extends Component {
     	address: "",
     	latitude: "",
     	longitude: "",
-    	photos: []
+    	photos: null
     };
     Geocode.setApiKey(process.env.REACT_APP_GOOGLE_APIKEY);
   }
@@ -88,14 +88,26 @@ class NewListing extends Component {
 	
   onFormSubmit = (e) =>{
 		e.preventDefault();
+		const fd = new FormData();
 		const { id } = this.props.match.params;
-		const { currentStep, ...formData } = this.state;
+		const { currentStep, ...listingData } = this.state;
+
+		if(listingData.photos !== null && listingData.photos.length > 0){
+			for(let i = 0; i < listingData.photos.length; i++){
+				fd.append("photos", listingData.photos[i]);
+				this.setState({photos: null});
+			};
+		};
+		
+		for(let item in listingData){
+			fd.append(item, listingData[item]);
+		};
 
 		if(id && id.length === 24){
-			return this.props.updateListingAction(id, formData);
+			return this.props.updateListingAction(id, fd);
   	};
 		
-		return this.props.creatLisitngAction(formData);
+		return this.props.creatLisitngAction(fd);
   }
 
   nextStep = (e) =>{
@@ -201,10 +213,35 @@ class NewListing extends Component {
 			);
   	};
   }
+	
+	fileSelectHandler = (e) =>{
+		if(this._validateFileSize(e)){
+			this.setState({photos: e.target.files});
+		};
+	}
+
+	_validateFileSize = (e) =>{
+  	const files = e.target.files;
+  	const MAXSIZE = 1000000 * 5;
+  	let total = 0;
+		let error = "";
+
+  	for(let i = 0; i < files.length; i++){
+			total += files[i].size;
+  	};
+
+  	if(total > MAXSIZE){
+  		error += "Your files are too large, total max size allowed 5MB";
+  		e.target.value = null;
+  		return false;
+  	}
+
+  	return true;
+	}
 
   render() {
 		const { errors, listings: { all, show }, currentuser: { info }, employees } = this.props;
-		const { photos, currentStep, ...values } = this.state;
+		const { currentStep, ...values } = this.state;
 		
     return(
     	<ContentWrapper containerClass="container">
@@ -270,7 +307,7 @@ class NewListing extends Component {
 												error={errors}
 												deletePreviewImg=""
 												currentStep={currentStep}
-												onchange={this.onFormFieldChange}
+												onchange={this.fileSelectHandler}
 											/>
 										</CSSTransition>
 									</TransitionGroup>

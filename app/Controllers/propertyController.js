@@ -45,11 +45,13 @@ const propertyCntrl = {
 		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, is_gym, swimming_pool, is_laundry } = req.body;
 		
 		try {			
-			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {coordinates: [0,0]}, features: {}, extras: {} });
+			let property = new Property({ description, propertyType, listingType, size, yearBuilt, price, author: req.currentuser.id, location: {coordinates: [0,0]}, features: {}, extras: {}, photos: [] });
 			
+			property.location.type = "Point";
 			property.location.address = address;
-			property.location.coordinates[0] = longitude;
-			property.location.coordinates[1] = latitude;
+			property.location.coordinates[0] = Number(longitude);
+			property.location.coordinates[1] = Number(latitude);
+			
 			property.features = { bedroom, bathroom, maxCapacity, floors, parking };
 			property.extras = { is_tv, is_kitchen, is_ac, is_heating, is_internet, pets};
 			
@@ -63,9 +65,16 @@ const propertyCntrl = {
 				property.handler = handler;
 			};
 			
+			if(req.files){
+				req.files.forEach((img) =>{
+					property.photos.push({filename: img.originalname, id: img.public_id, src: img.url});
+				});
+			};
+
 			property = await property.save();
 			return res.status(200).json(property);
 		} catch(err) {
+			console.log(err);
 			errors.msg = err.message;
 			return res.status(404).json(errors);
 		};
@@ -95,6 +104,7 @@ const propertyCntrl = {
 				},
 				isActive: true
 			};
+
 			let properties = await Property.find(q).select("location.address features.bedroom features.bathroom price").limit(5);			
 
 			return res.status(200).json({property, nearByProperties: properties});
@@ -107,7 +117,7 @@ const propertyCntrl = {
 	update: async (req, res, next) =>{
 		const errors = {};
 		const propertyId = ObjectId(req.params.propertyId);
-		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, is_gym, swimming_pool, is_laundry } = req.body;
+		const { description, propertyType, listingType, size, featured, yearBuilt, price, handler, author, bedroom, bathroom, maxCapacity, floors, parking, is_tv, is_kitchen, is_ac, is_heating, is_internet, pets, isActive, address, latitude, longitude, is_gym, swimming_pool, is_laundry, files } = req.body;
 
 		try {
 			let property = await Property.findById(propertyId).exec();			
@@ -128,7 +138,12 @@ const propertyCntrl = {
 				updateData.isActive = isActive;
 			};			
 			
-			// console.log(updateData)
+			if(req.files && req.files.length > 0){
+				req.files.forEach((img) =>{
+					property.photos.push({filename: img.originalname, id: img.public_id, src: img.url});
+				});
+			};
+
 			if(property.author._id.equals(req.currentuser.id) || req.currentuser.isadmin){
 				property = await Property.findOneAndUpdate({ _id: propertyId }, { $set: updateData }, { new: true }).populate("handler", "id fullname").exec();
 				

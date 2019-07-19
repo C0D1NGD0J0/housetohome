@@ -8,20 +8,13 @@ const StepFour = ({ value, currentStep, onchange }) => {
 
   return (
 		<Fragment>
-			<div className="col-sm-3">
-				{/*<ImagePreview deletePreviewImg="" source={house_1} />*/}
-			</div>
+			<div className="imgPreview-wrapper">
+				<ImagePreview deletePreviewImg="" source={house_1} />
+			</div><br/>
 			
 			<div className="col-sm-12">
-				<FileUpload title="Upload Photos" onChange={onchange} name={value} />
+				<FileUpload title="Upload Photos" onFileChange={onchange} name={value} />
 			</div>
-
-			{/*<div className="col-sm-12">
-				<div className="form-group">
-					<input type="submit" value="Add New Listing" className="btn btn-green pull-right" />
-					<input type="reset" value="Clear Form" className="btn btn-danger" />
-				</div>
-			</div>*/}
 		</Fragment>
   );
 };

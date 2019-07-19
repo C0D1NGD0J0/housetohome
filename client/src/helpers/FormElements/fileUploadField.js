@@ -1,12 +1,12 @@
 import React from 'react';
 
-const FileUpload = ({ onFileUploadChange, title }) => {
+const FileUpload = ({ onFileChange, title }) => {
   return (
     <div className="form-group pull-left">
 			<span className="btn btn-info btn-file">
-				<input type="file" name="photo" multiple={true} onChange={onFileUploadChange}/>{title}
+				<input type="file" name="photos" multiple={true} onChange={onFileChange}/>{title}
 			</span>
-		</div>  
+		</div>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 const StepFive = ({ currentStep, values, error }) => {
 	if(currentStep !== 5) return null;
-	let {description, address, longitude, latitude, handler, ...rest} = values;
+	let {description, address, longitude, latitude, handler, photos, ...rest} = values;
 	
 	const displayErrors = error && Object.values(error).map((err, i) =>(<li key={i}>{err}</li>));
 	const liTag = Object.keys(rest).map((key, i) =>{
@@ -24,6 +24,7 @@ const StepFive = ({ currentStep, values, error }) => {
 							<p><span className="title">Description:</span> {description}</p>
 							<p><span className="title">Address:</span> {address}</p>
 							<p><b>Longitude:</b> {longitude} | <b>Latitude:</b> {latitude}</p>
+							<p><span className="title">Photos:</span> {photos && photos.length} images uploaded.</p>
 						</Fragment>
 				}
 			</div>

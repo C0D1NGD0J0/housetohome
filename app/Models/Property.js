@@ -51,7 +51,7 @@ const PropertySchema = new Schema({
 			lowercase: true
 		}
 	},
-	photos: [{String}],
+	photos: [{src: String, id: String, filename: String}],
 	author: {type: Schema.Types.ObjectId, ref: "User"},
 	reservations: [{id: Schema.Types.ObjectId, start: String, end: String}],
 	meta: {}

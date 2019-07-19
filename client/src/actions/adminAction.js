@@ -49,11 +49,10 @@ export const getAllListings = () => async dispatch =>{
 };
 
 export const creatLisitngAction = (listingData) => async dispatch =>{
-	const config = { headers: { 'Content-Type': 'application/json'} };
-	const data = JSON.stringify(listingData);
-
+	const config = { headers: { 'Content-Type': 'multipart/form-data'} };
+	
 	try {
-		const res = await axios.post("/api/properties/", data, config);
+		const res = await axios.post("/api/properties/", listingData);
 		dispatch(setAlertAction("Property Lisitng Created...", "success"));
 		dispatch({type: CREATE_NEW_LISTNG, payload: res.data});
 		return history.push("/admin/properties");
