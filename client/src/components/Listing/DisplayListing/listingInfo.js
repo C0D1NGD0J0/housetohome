@@ -28,9 +28,16 @@ const ListingInfo = ({ listing }) => {
 			<div className="listing_media">
 				<div className="listing_media-ribbon"><span>{listing && listing.listingType}</span></div>
 				<div className="listing_media-image">
-					<img src="http://www.starafricacorporation.com/wp-content/uploads/2016/12/about_us_001.jpg" alt="" className="img-responsive"/>
+					{
+
+						listing && listing.photos > 0 ?
+							<img src={listing.photos && listing.photos[0].src} alt={listing.photos && listing.photos[0].filename} className="img-responsive"/>
+						:
+							<img src="http://www.starafricacorporation.com/wp-content/uploads/2016/12/about_us_001.jpg" alt="" className="img-responsive"/>
+					}
 				</div>
-			</div><div className="clearfix"></div>
+			</div>
+			<div className="clearfix"></div>
 
 			<div className="listing_short-info">
 				<div style={{width: "100%"}}>

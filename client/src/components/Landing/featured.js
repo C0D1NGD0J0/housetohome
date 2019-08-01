@@ -9,11 +9,10 @@ import house_4 from "../../assets/img/house_4.jpg";
 
 const FeaturedProperty = (props) => {
 	const { properties } = props;
-	console.log(properties);
 
 	const displayListingCard = properties && properties.map((listing) =>{
 		return(
-			<div className="col-xs-6 col-sm-6 col-md-3">
+			<div className="col-xs-6 col-sm-6 col-md-3" key={listing.id}>
 				<div className="property">
 					<Link to={`/properties/${listing.id}`}>
 						<div className="property_img">

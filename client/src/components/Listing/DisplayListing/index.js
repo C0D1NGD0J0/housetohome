@@ -25,7 +25,7 @@ class Listing extends Component {
 
   render() {
 		const { listing } = this.props;
-		
+		console.log(listing)
     return(
 			<ContentWrapper containerClass="container">
 				<div id="listing-page">
@@ -36,7 +36,10 @@ class Listing extends Component {
 
 						<div className="col-sm-4 col-md-3">
 							<SidebarWrapper>
-								<ReservationSB />
+								{
+									listing && listing.property.listingType === 'rent' ? <ReservationSB listingType={listing.property.listingType}/> : null
+								}
+								
 								<PropertyAgentInfoSB handler={listing && listing.property && listing.property.handler} />
 								<NearByListingsSB listings={listing && listing.nearByProperties} listingId={this.props.match.params.id}/>
 							</SidebarWrapper>
