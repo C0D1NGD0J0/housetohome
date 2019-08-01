@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;
 const app = express();
 const path = require("path");
-const cloudinaryConfig = require("./app/config/cloudinary");
+const cloudinaryConfig = require("./app/Config/cloudinary");
 const corsOptions = {
 	origin: '*',
 	optionsSuccessStatus: 200
