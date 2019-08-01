@@ -18,7 +18,7 @@ class MapWrapper extends Component{
     	<Map 
     		google={this.props.google} 
     		zoom={14} 
-        key={listing.address}
+        key={listing && listing.address}
     		style={mapStyle} 
     		initialCenter={{lat: listing && listing.coordinates[1], lng: listing && listing.coordinates[0]}} 
     	>

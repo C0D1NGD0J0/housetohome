@@ -1,8 +1,8 @@
 import React from 'react';
 
-const BookingSidebar = ({ className }) => {
-  return (
-  	<div className="sidebar_box booking">
+const BookingSidebar = ({ listingType }) => {
+	return (
+		<div className="sidebar_box booking">
 			<h4>Reservation</h4><hr/>
 			<form className="form booking_form" action="new_booking.html">
 				<div className="form-group">
@@ -36,7 +36,7 @@ const BookingSidebar = ({ className }) => {
 				<input type="submit" value="Book Now" className="btn btn-danger btn-block"/>
 			</form>
 		</div>
-  );
+	)
 };
 
 BookingSidebar.displayName = 'BookingSidebar';
