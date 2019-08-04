@@ -76,6 +76,13 @@ PropertySchema.virtual("formatAddress").get(function(){
 	};
 });
 
+PropertySchema.statics.getListingCount = function(){
+	return this.aggregate([
+		{ $unwind: "$propertyType"},
+		{ $group: { _id: "$propertyType", count: { $sum: 1 } }}
+	]);
+};
+
 const property = mongoose.model("Property", PropertySchema);
 
 module.exports = property;
