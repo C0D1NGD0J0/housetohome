@@ -2,7 +2,7 @@ import React from 'react';
 
 const Table = ({ children }) => {
 	return (
-  	<table className="table customTable">
+  	<table className="table table-bordered customTable">
 			{children}
 	  </table> 
   );

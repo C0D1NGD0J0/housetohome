@@ -63,7 +63,7 @@ const OtherRoutes = () =>(
 	<Switch>
 		<Fragment>
 			<Navbar />
-			<AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
+			<AdminPrivateRoute exact path="/admin/" component={AdminDashboard} />
 			<AdminPrivateRoute exact path="/admin/employees/new" component={NewEmployee} />
 			<AdminPrivateRoute exact path="/admin/properties" component={ManageListings} />
 			<AdminPrivateRoute exact path="/admin/manage_users/:id" component={ManageUser} />

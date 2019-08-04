@@ -6,7 +6,7 @@ const AdminSidebar = ({ user }) => {
 
   return (
   	<div className="sidebar_box">
-			<NavLink exact activeClassName="active" to="/admin/dashboard"><h4>{user.isadmin ? "Admin Dashboard" : "Employee Dashboard"}</h4></NavLink><hr/>
+			<NavLink exact activeClassName="active" to="/admin/"><h4>{user.isadmin ? "Admin Dashboard" : "Employee Dashboard"}</h4></NavLink><hr/>
 
 			<ul className="sidebar_menu">
 				{

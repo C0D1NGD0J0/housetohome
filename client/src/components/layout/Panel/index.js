@@ -7,7 +7,7 @@ const Panel = ({ title, children }) => {
 				<h3 className="panel-title">{title}</h3>
 			</div>
 
-			<div className="panel-body">
+			<div className="panel-body table-responsive">
 				{children}							
 			</div>
 		</div>

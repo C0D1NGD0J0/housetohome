@@ -3,17 +3,54 @@ import ContentWrapper from "../../layout/ContentWrapper";
 import SidebarWrapper from "../../layout/Sidebar";
 import AdminSidebar from "../../layout/Sidebar/adminSidebar";
 import Panel from "../../layout/Panel";
+import Table from "../../layout/Table";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { truncateText } from "../../../helpers";
+import axios from "axios";
 
 class AdminDashboard extends Component {
-	componentDidMount(){
+	state = {
+		users: [],
+		newListings: [],
+		listingsCount: []
+	}
+
+	async componentDidMount(){
 		if(this.props.currentuser.info && !this.props.currentuser.info.isadmin){
 			return this.props.history.push('/dashboard');
 		}
+
+		const res = await axios.get("/api/admin/dashboard");
+		this.setState({users:[...res.data.newUsers], newListings: [...res.data.newListings], listingsCount: [...res.data.listingsCount]})
 	}
 
 	render() {
 		const { currentuser: { info } } = this.props;
+		const { users, newListings, listingsCount } = this.state;
+		const newListingsRow = newListings && newListings.map((listing, i) =>{
+			return (
+				<tr key={i}>
+					<td>{i+1}</td>
+					<td>{truncateText(listing.location.address, 20)}</td>
+					<td>{listing.propertyType.capitalize()}</td>
+					<td>{listing.listingType.capitalize()}</td>
+					<td>
+						<Link to={`/properties/${listing.id}`} className="actionBtn"><i className="fa fa-eye"></i></Link>
+					</td>
+				</tr> 
+			)
+		});
+
+		const newUsersRow = users && users.map((user, i) =>{
+			return (
+				<tr key={i}>
+					<td>{user.fullname}</td>
+					<td>{user.email}</td>
+					<td>{user.role}</td>
+				</tr> 
+			)
+		});
 		
 		return (
 			<ContentWrapper containerClass="container">
@@ -64,7 +101,20 @@ class AdminDashboard extends Component {
 
 						<div className="col-sm-8 newListings-panel">
 							<Panel title="New Property Listings">
-							
+								<Table>
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Address</th>
+											<th>Property Type</th>
+											<th>Listing Type</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{newListingsRow}
+									</tbody>
+								</Table>
 							</Panel>
 						</div>
 
@@ -76,7 +126,18 @@ class AdminDashboard extends Component {
 
 						<div className="col-sm-6 newListings-panel">
 							<Panel title="Recently Signedup Users">
-							
+								<Table>
+									<thead>
+										<tr>
+											<th>Full Name</th>
+											<th>Email</th>
+											<th>Role</th>
+										</tr>
+									</thead>
+									<tbody>
+										{newUsersRow}
+									</tbody>
+								</Table>
 							</Panel>
 						</div>
 					</div>
