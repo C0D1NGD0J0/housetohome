@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { formatDisplayPrice } from "../../../helpers";
 
 const ListingCard = (props) => {
-	const { listing } = props;
-
+	const { listing, keyProps } = props;
+	
   return (
     <div className="card property">
 			<Link to={`/properties/${listing.id}`}>

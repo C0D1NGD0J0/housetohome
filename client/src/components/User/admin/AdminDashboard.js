@@ -45,6 +45,7 @@ class AdminDashboard extends Component {
 		const newUsersRow = users && users.map((user, i) =>{
 			return (
 				<tr key={i}>
+					<td>{i+1}</td>
 					<td>{user.fullname}</td>
 					<td>{user.email}</td>
 					<td>{user.role}</td>
@@ -124,11 +125,12 @@ class AdminDashboard extends Component {
 							</Panel>
 						</div>
 
-						<div className="col-sm-6 newListings-panel">
+						<div className="col-sm-8 newListings-panel">
 							<Panel title="Recently Signedup Users">
 								<Table>
 									<thead>
 										<tr>
+											<th>#</th>
 											<th>Full Name</th>
 											<th>Email</th>
 											<th>Role</th>

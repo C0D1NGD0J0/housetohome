@@ -6,8 +6,8 @@ const adminCntrl = {
 	dashboard: async (req, res, next) =>{
 		const errors = {};
 		const listingsCount = await Property.getListingCount();
-		const newListings = await Property.find({}).sort({createdAt: 'asc'}).select("listingType propertyType location.address").limit(7);
-		const newUsers = await User.find({}).sort({createdAt: 'asc'}).select("firstName lastName email role").limit(7);
+		const newListings = await Property.find({}).sort({createdAt: 'asc'}).select("listingType propertyType location.address").limit(5);
+		const newUsers = await User.find({}).sort({createdAt: 'asc'}).select("firstName lastName email role").limit(5);
 		return res.json({newUsers, newListings, listingsCount});
 	},
 
