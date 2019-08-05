@@ -26,7 +26,7 @@ export const getListingAction = (id, isadmin = false) => async dispatch =>{
 
 export const searchListingsAction = (searchVal, originPath) => async dispatch =>{
 	try {
-		const res = await axios.get(`/api/properties/all?country=${searchVal}`);
+		const res = await axios.get(`/api/properties?country=${searchVal}`);
 		dispatch({type: GET_LISTINGS, payload: res.data });
 		if(originPath === '/'){
 			return history.push(`/properties?country=${searchVal}`);
