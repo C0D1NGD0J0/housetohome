@@ -9,7 +9,7 @@
     "google-maps-react": "^2.0.2",
     "http-proxy-middleware": "^0.19.1",
     "jwt-decode": "^2.2.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "moment": "2.24.0",
     "query-string": "^6.8.1",
     "react": "^16.8.6",
